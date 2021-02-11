@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:padding="6dp"
                 android:text="@{recipe.name}"
-                android:textColor="@color/black"
+                android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Making Time:"
-                android:textColor="@color/black"
+                android:textColor="#000"
                 android:textSize="18sp" />
 
             <Space
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Difficulty:"
-                android:textColor="@color/black"
+                android:textColor="#000"
                 android:textSize="18sp" />
 
 
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ingredients:"
-                android:textColor="@color/black"
+                android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Steps:"
-                android:textColor="@color/black"
+                android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

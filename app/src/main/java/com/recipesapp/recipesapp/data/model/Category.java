@@ -17,19 +17,19 @@ public class Category {
     public static int getBgById(String id) {
         switch (id){
             case "0":
-                return R.drawable.bg_category_item_red;
-
-            case "1":
                 return R.drawable.bg_category_item_yellow;
 
-            case "2":
-                return R.drawable.bg_category_item_blue;
-
-            case "3":
+            case "1":
                 return R.drawable.bg_category_item_orange;
 
+            case "2":
+                return R.drawable.bg_category_item_red;
+
+            case "3":
+                return R.drawable.bg_category_item_blue;
+
             case "4":
-                return R.drawable.bg_category_item_grey;
+                return R.drawable.bg_category_item_green;
         }
         return -1;
     }
