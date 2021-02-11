@@ -6,10 +6,8 @@
     >
 
     <data>
-
-        <variable
-            name="recipe"
-            type="com.recipesapp.recipesapp.data.model.Recipe" />
+        <variable name="recipe" type="com.recipesapp.recipesapp.data.model.Recipe" />
+        <variable name="isFav" type="Boolean" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -22,110 +20,128 @@
         android:clickable="true"
         android:focusable="true"
         >
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white">
-
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="0dp"
-                android:layout_weight="4"
-                android:textSize="40sp"
-                app:civ_border_color="@android:color/black"
-                app:civ_border_width="3dp"
-                app:civ_circle_background_color="#1E88E5"
-                app:imageUrl="@{recipe.image}"
-                app:placeholder="@{@color/purple_700}" />
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:padding="8dp"
-                android:orientation="vertical">
+                android:background="@android:color/white">
 
 
-                <TextView
-                    android:id="@+id/txt_item_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:hint="Name"
-                    android:textStyle="bold"
-                    android:padding="9dp"
-                    android:text="@{recipe.name}"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    tools:ignore="NestedWeights" />
+                    android:layout_weight="4"
+                    android:textSize="40sp"
+                    app:civ_border_color="@android:color/black"
+                    app:civ_border_width="3dp"
+                    app:civ_circle_background_color="#1E88E5"
+                    app:imageUrl="@{recipe.image}"
+                    app:placeholder="@{@color/purple_700}" />
 
                 <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="8dp" />
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:padding="8dp"
+                    android:orientation="vertical">
+
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_item_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_marginBottom="0dp"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Making Time: "
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="16sp" />
+                        android:hint="Name"
+                        android:textStyle="bold"
+                        android:padding="9dp"
+                        android:text="@{recipe.name}"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        tools:ignore="NestedWeights" />
 
-                    <TextView
-                        android:id="@+id/txt_item_time"
+                    <Space
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="0dp"
-                        android:gravity="center_vertical"
-                        android:hint="30 Minutes"
-                        android:text="@{recipe.makingTimeString}"
-                        android:textSize="16sp" />
+                        android:layout_height="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center_vertical"
+                            android:text="Making Time: "
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/txt_item_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center_vertical"
+                            android:hint="30 Minutes"
+                            android:text="@{recipe.makingTimeString}"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center_vertical"
+                            android:text="Difficulty: "
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/txt_item_difficulty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center_vertical"
+                            android:text="Hard"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="0dp"
-                        android:gravity="center_vertical"
-                        android:text="Difficulty: "
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/txt_item_difficulty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="0dp"
-                        android:gravity="center_vertical"
-                        android:text="Hard"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
 
             </LinearLayout>
 
-        </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_add_to_fav"
+                android:layout_margin="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:src="@{isFav ? @drawable/ic_in_fav : @drawable/ic_not_fav}"
+                />
+
+        </RelativeLayout>
+
+
     </androidx.cardview.widget.CardView>
 
 </layout>

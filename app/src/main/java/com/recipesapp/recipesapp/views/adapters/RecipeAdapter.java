@@ -2,7 +2,6 @@ package com.recipesapp.recipesapp.views.adapters;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,13 +15,18 @@ import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.ItemRecipeLayoutBinding;
 
 import java.util.ArrayList;
+import java.util.function.Function;
+
+import kotlin.jvm.functions.Function2;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHolder>{
 
     private ArrayList<Recipe> mRecipes;
+    private ArrayList<String> mFavIds;
 
-    public RecipeAdapter(ArrayList<Recipe> recipes) {
+    public RecipeAdapter(ArrayList<Recipe> recipes, ArrayList<String> favIds) {
         mRecipes = recipes;
+        mFavIds = favIds;
     }
 
     @NonNull
@@ -59,10 +63,25 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
 
         public void bind(Recipe recipe) {
             mItemBinding.setRecipe(recipe);
+            mItemBinding.setIsFav(mFavIds.contains(recipe.getId()));
+
             mItemBinding.getRoot().setOnClickListener(v -> {
                 Bundle args = new Bundle();
                 args.putParcelable("recipe", recipe);
                 mNavController.navigate(R.id.recipeDetailsFragment, args);
+            });
+
+            mItemBinding.btnAddToFav.setOnClickListener(v -> {
+                // remove if already in favs
+                if(mItemBinding.getIsFav()){
+                    MainActivity.preferencesConfig.removeFavId(recipe.getId());
+                }
+                // if not, add it
+                else{
+                    MainActivity.preferencesConfig.addFavId(recipe.getId());
+                }
+                // update UI
+                mItemBinding.setIsFav(!mItemBinding.getIsFav());
             });
         }
     }

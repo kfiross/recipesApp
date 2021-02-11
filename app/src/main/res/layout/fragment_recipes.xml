@@ -30,7 +30,6 @@
             android:alpha="0.4"
             android:background="@drawable/bg_recipe"
             />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

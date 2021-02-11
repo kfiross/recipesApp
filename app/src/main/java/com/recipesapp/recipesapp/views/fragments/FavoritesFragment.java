@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -110,7 +109,9 @@ public class FavoritesFragment extends BaseFragment {
     }
 
     private void setupRecyclerView(ArrayList<Recipe> recipes){
-        RecipeAdapter categoryAdapter = new RecipeAdapter(recipes);
+        ArrayList<String> favIds = new ArrayList<>(MainActivity.preferencesConfig.readFavsIds());
+
+        RecipeAdapter categoryAdapter = new RecipeAdapter(recipes, favIds);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setHasFixedSize(true);
