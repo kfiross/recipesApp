@@ -22,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.databinding.FragmentLoginBinding;
+import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.LoginData;
 
 public class LoginFragment extends Fragment {
@@ -107,7 +108,7 @@ public class LoginFragment extends Fragment {
                     .addOnCompleteListener(registerTask -> {
                         mBinding.setIsLoading(false);
                         if (registerTask.isSuccessful()) {
-
+                            FirestoreUtils.initUserData(registerTask.getResult().getUser().getUid());
                         } else {
                             // showAlertDialog();
                         }

@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.SharedPreferencesConfig;
 
@@ -150,9 +151,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initializeLocalData() {
-        FirestoreUtils.fetchMyFavs().addOnCompleteListener(task -> {
+        FirestoreUtils.fetchUser().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                preferencesConfig.writeFavsIds((List<String>) task.getResult().get("favourites"));
+                if(task.getResult() == null){
+                    preferencesConfig.writeFavsIds(null);
+                }
+                else {
+                    DocumentSnapshot snapshot = task.getResult();
+                    preferencesConfig.writeFavsIds((List<String>)snapshot.get("favourites"));
+                }
+
             }
         });
     }

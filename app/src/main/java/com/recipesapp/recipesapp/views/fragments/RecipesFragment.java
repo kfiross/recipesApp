@@ -98,9 +98,7 @@ public class RecipesFragment extends BaseFragment {
     }
 
     private void setupRecyclerView(ArrayList<Recipe> recipes){
-        ArrayList<String> favIds = new ArrayList<>(MainActivity.preferencesConfig.readFavsIds());
-
-        RecipeAdapter categoryAdapter = new RecipeAdapter(recipes, favIds);
+        RecipeAdapter categoryAdapter = new RecipeAdapter(recipes);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setHasFixedSize(true);

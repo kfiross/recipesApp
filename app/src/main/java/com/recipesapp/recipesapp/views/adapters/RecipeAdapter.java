@@ -27,9 +27,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
     private ArrayList<Recipe> mRecipes;
     private ArrayList<String> mFavIds;
 
-    public RecipeAdapter(ArrayList<Recipe> recipes, ArrayList<String> favIds) {
+    public RecipeAdapter(ArrayList<Recipe> recipes) {
         mRecipes = recipes;
-        mFavIds = favIds;
+        mFavIds = new ArrayList<>(MainActivity.preferencesConfig.readFavsIds());
     }
 
     @NonNull

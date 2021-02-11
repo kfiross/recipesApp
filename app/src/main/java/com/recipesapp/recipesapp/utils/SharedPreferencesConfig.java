@@ -53,8 +53,14 @@ public class SharedPreferencesConfig {
     }
 
     public void writeFavsIds(List<String> ids){
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet("favs_ids", new HashSet<>(ids));
+        if(ids == null){
+            editor.putStringSet("favs_ids", new HashSet<>());
+        }
+        else{
+            editor.putStringSet("favs_ids", new HashSet<>(ids));
+        }
         editor.apply();
     }
 }
