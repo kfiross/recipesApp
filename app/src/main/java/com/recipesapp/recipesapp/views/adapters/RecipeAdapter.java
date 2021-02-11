@@ -9,10 +9,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.ItemRecipeLayoutBinding;
+import com.recipesapp.recipesapp.utils.FirestoreUtils;
 
 import java.util.ArrayList;
 import java.util.function.Function;
@@ -75,10 +78,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                 // remove if already in favs
                 if(mItemBinding.getIsFav()){
                     MainActivity.preferencesConfig.removeFavId(recipe.getId());
+                    FirestoreUtils.removeFromMyFavs(recipe.getId());
                 }
                 // if not, add it
                 else{
                     MainActivity.preferencesConfig.addFavId(recipe.getId());
+                    FirestoreUtils.addToMyFavs(recipe.getId());
                 }
                 // update UI
                 mItemBinding.setIsFav(!mItemBinding.getIsFav());

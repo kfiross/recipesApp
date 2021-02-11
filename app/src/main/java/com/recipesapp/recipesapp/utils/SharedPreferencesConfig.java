@@ -25,14 +25,12 @@ public class SharedPreferencesConfig {
 
     }
 
+    public void cleanAll(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 
-//    fun readLangStatus() =sharedPreferences.getString("curr_lang","en")!!
-//
-//    fun writeLangStatus(status:String) {
-//        val editor = sharedPreferences.edit()
-//        editor.putString("curr_lang", status)
-//        editor.apply()
-//    }
 
     public Set<String> readFavsIds(){
         return sharedPreferences.getStringSet("favs_ids", new HashSet<>());
@@ -42,7 +40,7 @@ public class SharedPreferencesConfig {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> ids = readFavsIds();
         ids.add(id);
-        editor.putStringSet("favs_id", ids);
+        editor.putStringSet("favs_ids", ids);
         editor.apply();
     }
 
@@ -50,7 +48,13 @@ public class SharedPreferencesConfig {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> ids = readFavsIds();
         ids.remove(id);
-        editor.putStringSet("favs_id", ids);
+        editor.putStringSet("favs_ids", ids);
+        editor.apply();
+    }
+
+    public void writeFavsIds(List<String> ids){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet("favs_ids", new HashSet<>(ids));
         editor.apply();
     }
 }

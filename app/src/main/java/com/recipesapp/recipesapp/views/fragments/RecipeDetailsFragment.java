@@ -6,11 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipeDetailsBinding;
@@ -58,5 +60,7 @@ public class RecipeDetailsFragment extends Fragment {
         mBinding.listSteps.setAdapter(new MyListAdapter(getContext(), new ArrayList<>(), 1));
 
         mBinding.setRecipe(mSelectedRecipe);
+        mBinding.setNavController(
+                Navigation.findNavController((MainActivity) getContext(), R.id.nav_host_fragment));
     }
 }

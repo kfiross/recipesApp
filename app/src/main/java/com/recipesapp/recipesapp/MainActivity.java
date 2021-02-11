@@ -2,25 +2,24 @@ package com.recipesapp.recipesapp;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.SharedPreferencesConfig;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static SharedPreferencesConfig preferencesConfig;
@@ -38,23 +37,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawer_layout);
 
         appFragmentManager = getSupportFragmentManager();
-
         preferencesConfig = new SharedPreferencesConfig(this);
 
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         // listen to changes when user is logged in or sign out
-        FirebaseAuth.getInstance().addAuthStateListener(firebaseAuth -> {
-            NavOptions navOptions = new NavOptions.Builder()
-                    .setLaunchSingleTop(true)
-                    .build();
-
-            // if user isn't logged in yet, or just logged out - mve him into Login screen
-            // otherwise, he already logged in, so we move him immediately into Home screen
-            int screenId = firebaseAuth.getCurrentUser() == null ? R.id.loginFragment : R.id.homeFragment;
-
-            mNavController.navigate(screenId, null, navOptions);
-        });
+        FirebaseAuth.getInstance().addAuthStateListener(this::handleAuth);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -80,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                switch (mNavController.getCurrentDestination().getId()){
+                switch (mNavController.getCurrentDestination().getId()) {
                     case R.id.homeFragment:
                     case R.id.favoritesFragment2:
                     case R.id.addRecipeFragment:
@@ -110,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             // navigate to home
             case R.id.nav_home:
                 mNavController.navigate(R.id.homeFragment);
@@ -138,5 +126,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    private void handleAuth(FirebaseAuth firebaseAuth) {
+        NavOptions navOptions = new NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .build();
+
+        // if user isn't logged in yet, or just logged out - mve him into Login screen
+        // otherwise, he already logged in, so we move him immediately into Home screen
+        int screenId = firebaseAuth.getCurrentUser() == null ? R.id.loginFragment : R.id.homeFragment;
+
+        // update cached data
+        if (firebaseAuth.getCurrentUser() != null) {
+            initializeLocalData();
+        }
+        // clean cached data
+        else {
+            preferencesConfig.cleanAll();
+        }
+
+        mNavController.navigate(screenId, null, navOptions);
+    }
+
+    private void initializeLocalData() {
+        FirestoreUtils.fetchMyFavs().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                preferencesConfig.writeFavsIds((List<String>) task.getResult().get("favourites"));
+            }
+        });
     }
 }
