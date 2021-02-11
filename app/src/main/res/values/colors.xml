@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
 
     <color name="drawer_backgroud">#ffe8e8e8</color>
+    <color name="placeholder">#545454</color>
 
     <color name="colorPrimary">#ffc107</color>
     <color name="colorPrimaryDark">#ffa000</color>

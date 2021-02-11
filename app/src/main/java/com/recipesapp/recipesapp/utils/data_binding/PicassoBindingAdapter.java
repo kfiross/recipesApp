@@ -1,6 +1,8 @@
 package com.recipesapp.recipesapp.utils.data_binding;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -31,9 +33,9 @@ public class PicassoBindingAdapter {
 //    }
 
     @BindingAdapter(value = {"imageUrl", "placeholder", "error"}, requireAll = false)
-    public static void setImageUrl(ImageView view, String url, @Nullable Integer placeholderRes, @Nullable Integer errorRes) {
+    public static void setImageUrl(ImageView view, String url, @Nullable Drawable placeholderRes, @Nullable Drawable errorRes) {
         if(url==null || url.isEmpty()){
-            return;
+            url = "?";
         }
 
         RequestCreator requestCreator = Picasso.with(view.getContext()).load(url);
@@ -53,10 +55,10 @@ public class PicassoBindingAdapter {
         }
 
         try {
-            requestCreator.fit().into(view);
+            requestCreator.centerCrop().fit().into(view);
         }
         catch (Exception ignored){
-            Picasso.with(view.getContext()).load(url).fit().into(view);
+            Picasso.with(view.getContext()).load(url).centerCrop().fit().into(view);
         }
 
     }
