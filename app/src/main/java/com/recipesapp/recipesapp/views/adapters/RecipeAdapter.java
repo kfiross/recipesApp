@@ -3,6 +3,7 @@ package com.recipesapp.recipesapp.views.adapters;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -75,15 +76,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
             });
 
             mItemBinding.btnAddToFav.setOnClickListener(v -> {
-                // remove if already in favs
+                // remove if already in favourites
                 if(mItemBinding.getIsFav()){
                     MainActivity.preferencesConfig.removeFavId(recipe.getId());
                     FirestoreUtils.removeFromMyFavs(recipe.getId());
+                    Toast.makeText(itemView.getContext(), "Removed from Favourites", Toast.LENGTH_LONG).show();
                 }
                 // if not, add it
                 else{
                     MainActivity.preferencesConfig.addFavId(recipe.getId());
                     FirestoreUtils.addToMyFavs(recipe.getId());
+                    Toast.makeText(itemView.getContext(), "Added To Favourites", Toast.LENGTH_LONG).show();
                 }
                 // update UI
                 mItemBinding.setIsFav(!mItemBinding.getIsFav());
