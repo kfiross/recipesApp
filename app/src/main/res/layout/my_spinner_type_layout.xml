@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_marginEnd="40dp"
+    android:layout_marginStart="40dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:gravity="center"
+
+
+    android:ellipsize="marquee"
+    android:textColor="@android:color/black"
+    android:textStyle="bold"
+    android:padding="10dp"
+    android:text="[PLACEHOLDER]"
+    android:backgroundTint="@android:color/transparent"
+    android:textSize="24sp"
+    >
+
+
+
+
+</CheckedTextView>
+

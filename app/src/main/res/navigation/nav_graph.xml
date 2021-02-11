@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.recipesapp.recipesapp.views.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.recipesapp.recipesapp.views.fragments.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.recipesapp.recipesapp.views.fragments.RecipesFragment"
+        android:label="fragment_recipes"
+        tools:layout="@layout/fragment_recipes" />
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.recipesapp.recipesapp.views.fragments.RecipeDetailsFragment"
+        android:label="RecipeDetailsFragment" />
+    <fragment
+        android:id="@+id/favoritesFragment2"
+        android:name="com.recipesapp.recipesapp.views.fragments.FavoritesFragment"
+        android:label="FavoritesFragment" />
+    <fragment
+        android:id="@+id/addRecipeFragment"
+        android:name="com.recipesapp.recipesapp.views.fragments.AddRecipeFragment"
+        android:label="fragment_add_recipe"
+        tools:layout="@layout/fragment_add_recipe" />
+    <fragment
+        android:id="@+id/myRecipesFragment"
+        android:name="com.recipesapp.recipesapp.views.fragments.MyRecipesFragment"
+        android:label="MyRecipesFragment" />
+</navigation>

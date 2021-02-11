@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="recipe"
+            type="com.recipesapp.recipesapp.data.model.Recipe" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_recipe2"
+            android:scaleX="-1"
+            />
+
+<!--        <include-->
+<!--            layout="@layout/toolbar"-->
+<!--            />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="22dp"
+            android:layout_marginLeft="20dp"
+            tools:context=".views.fragments.RecipeDetailsFragment">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                imageUrl="@{recipe.image}"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:padding="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{recipe.name}"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:background="#272727"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Making Time:"
+                android:textSize="18sp"
+                android:textColor="@color/black" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Difficulty:"
+                android:textSize="18sp"
+                android:textColor="@color/black" />
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingredients:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+
+            <ListView
+                android:id="@+id/list_ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                items="@{recipe.ingredients}"
+                tools:layout_height="100dip"
+                tools:listitem="@layout/list_item_content"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Steps:"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"/>
+            <ListView
+                android:id="@+id/list_steps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                items="@{recipe.steps}"
+                tools:layout_height="150dip"
+                tools:listitem="@layout/list_item_content"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</layout>

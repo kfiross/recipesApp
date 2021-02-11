@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="login"
+            type="com.recipesapp.recipesapp.utils.LoginData" />
+        <variable name="isLoading" type="Boolean" />
+        <variable name="loginMode" type="Boolean" />
+        <variable name="fragment" type="com.recipesapp.recipesapp.views.fragments.LoginFragment" />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.fragments.LoginFragment">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FEF1D8"
+            >
+        </View>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-100dp"
+            android:scaleX="1.7"
+            android:scaleY="0.9"
+            android:rotation="12"
+            android:alpha="0.4"
+            android:background="@drawable/bg_recipe"
+            />
+
+        <LinearLayout
+            android:id="@+id/layout_details"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="96dp"
+                android:layout_marginEnd="24dp"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true"
+                android:text="@={login.email}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@={login.password}"
+                android:hint="@string/prompt_password"
+                android:imeActionLabel="@string/sign_in"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+
+
+            <ProgressBar
+                android:layout_weight="8"
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                style="?android:progressBarStyleLarge"
+                android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:width="200dp"
+            android:layout_marginTop="0dp"
+            android:id="@+id/btn_loginRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:enabled="@{login.correct}"
+            android:onClick="@{() -> fragment.loginOrRegister()}"
+            android:text="@string/sign_in"
+            android:textColor="#fff"
+            android:layout_below="@+id/layout_details"
+             />
+
+        <Button
+            android:width="200dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btnChangeLoginMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:text="@{loginMode ? @string/goto_register : @string/goto_sign_in}"
+            android:onClick="@{() -> fragment.changeMode()}"
+            android:layout_below="@+id/btn_loginRegister"
+            />
+
+
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="title" type="String" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="320dp"
+        android:layout_height="220dp"
+        android:padding="24dp"
+        tools:context=".views.fragments.dialogs.DialogFragment">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:text="@{title}"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/edit_text_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </EditText>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"/>
+
+            <Button
+                android:id="@+id/btn_add"
+                android:text="Add"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>
