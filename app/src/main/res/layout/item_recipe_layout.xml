@@ -96,10 +96,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
                             android:gravity="center_vertical"
-                            android:hint="30 Minutes"
-                            android:text="@{recipe.makingTimeString}"
+                            android:text="@{@plurals/numberMinutes(recipe.makingTime, recipe.makingTime)}"
                             android:textSize="16sp" />
-
                     </LinearLayout>
 
                     <LinearLayout

@@ -32,5 +32,13 @@
     <string name="ingredients">Ingredients:</string>
     <string name="steps">Steps:</string>
 
+    <plurals name="numberMinutes">
+        <item quantity="one">One minute</item>
+        <item quantity="two">2 minutes</item>
+        <item quantity="many">%d minutes</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+
+
 
 </resources>

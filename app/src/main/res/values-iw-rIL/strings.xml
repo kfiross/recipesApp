@@ -13,4 +13,11 @@
     <string name="difficulty">דרגת קושי:</string>
     <string name="ingredients">מצרכים:</string>
     <string name="steps">אופן הכנה:</string>
+
+    <plurals name="numberMinutes">
+        <item quantity="one">דקה אחת</item>
+        <item quantity="two">2 דקות</item>
+        <item quantity="many">%d דקות</item>
+        <item quantity="other">%d דקות</item>
+    </plurals>
 </resources>

@@ -7,11 +7,11 @@ import java.util.HashMap;
 
 public class Category {
     private String mId;
-    private String mEn;
+    private HashMap<String,String> mName;
 
-    public Category(String id, String en){
+    public Category(String id,  HashMap<String,String> name){
         this.mId = id;
-        this.mEn = en;
+        this.mName = name;
     }
 
     public static int getBgById(String id) {
@@ -42,18 +42,19 @@ public class Category {
         this.mId = mId;
     }
 
-    public String getEn() {
-        return mEn;
-    }
-
-    public void setEn(String mEn) {
-        this.mEn = mEn;
-    }
 
     public static Category fromDocument(DocumentSnapshot snapshot){
         return new Category(
                 snapshot.getId(),
-                (String) snapshot.get("en")
+                (HashMap<String,String>) snapshot.get("name")
         );
+    }
+
+    public HashMap<String, String> getName() {
+        return mName;
+    }
+
+    public void setName(HashMap<String, String> mName) {
+        this.mName = mName;
     }
 }

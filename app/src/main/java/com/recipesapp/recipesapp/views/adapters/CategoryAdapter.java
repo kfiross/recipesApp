@@ -61,7 +61,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
         }
 
         public void bind(Category category) {
-            itemBinding.setName(category.getEn());
+            itemBinding.setName(category.getName().get("he"));
 
             int resId = Category.getBgById(category.getId());
             itemBinding.setBackground(
@@ -72,7 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
             itemBinding.getRoot().setOnClickListener(v -> {
                 Bundle args = new Bundle();
                 args.putInt("category_id", Integer.parseInt(category.getId()));
-                args.putString("category_name", category.getEn());
+                args.putString("category_name", category.getName().get("he"));
                 mNavController.navigate(R.id.recipesFragment, args);
             });
         }

@@ -7,5 +7,6 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <!--  font for the app -->
+        <item name="fontFamily">@font/rubik_regular</item>-->
     </style>
 </resources>
