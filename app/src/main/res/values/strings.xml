@@ -17,4 +17,20 @@
     <string name="invalid_password">Password must be >6 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="login_preferences">kuku</string>
+
+    <string name="favourites">Favs</string>
+    <string name="add_recipe">Add Your Recipe</string>
+    <string name="my_recipes">My Recipes</string>
+
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+
+    <string name="all_recipes">All Recipes</string>
+    <string name="options">Options</string>
+    <string name="making_time">Making Time:</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="steps">Steps:</string>
+
+
 </resources>

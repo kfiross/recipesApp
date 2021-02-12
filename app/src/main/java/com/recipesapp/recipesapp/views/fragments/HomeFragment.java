@@ -21,10 +21,12 @@ import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Category;
 import com.recipesapp.recipesapp.databinding.FragmentHomeBinding;
+import com.recipesapp.recipesapp.utils.StringUtils;
 import com.recipesapp.recipesapp.views.adapters.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -56,7 +58,9 @@ public class HomeFragment extends BaseFragment {
 
         mRecyclerView = mBinding.recyclerViewCategories;
         ((MainActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        mBinding.setName("All Recipes");
+        mBinding.setName(StringUtils.getLocaleString(R.string.all_recipes, getContext()
+        //        new Locale("he")
+        ));
 
 
         setupRecyclerView(new ArrayList<>());

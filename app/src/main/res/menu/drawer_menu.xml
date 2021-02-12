@@ -22,7 +22,7 @@
 
 
     </group>
-    <item android:title="Options">
+    <item android:title="@string/options">
         <menu>
             <item
                 android:id="@+id/nav_settings"

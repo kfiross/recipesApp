@@ -25,6 +25,7 @@ import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipesBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
+import com.recipesapp.recipesapp.utils.StringUtils;
 import com.recipesapp.recipesapp.views.adapters.RecipeAdapter;
 
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +66,7 @@ public class FavoritesFragment extends BaseFragment {
         mRecyclerView = mBinding.recyclerViewRecipes;
         ((MainActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        mBinding.setName("My Favourites");
+        mBinding.setName(StringUtils.getLocaleString(R.string.favourites, getContext()));
 
         setupRecyclerView(new ArrayList<>());
 

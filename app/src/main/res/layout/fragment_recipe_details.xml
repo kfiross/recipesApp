@@ -5,6 +5,7 @@
 
     <data>
 
+        <variable name="isRTL" type="Boolean" />
         <variable
             name="navController"
             type="androidx.navigation.NavController" />
@@ -16,17 +17,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layoutDirection="locale"
+
+        >
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_recipe2"
-            android:scaleX="-1.1"
+            android:scaleX="@{isRTL ? 1.1f : -1.1f}"
             android:scaleY="1.2" />
 
         <LinearLayout
             android:id="@+id/layout_bar"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -34,7 +40,7 @@
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@android:color/transparent"
                 android:onClick="@{(v)-> navController.popBackStack()}"
                 android:src="@drawable/ic_back" />
@@ -44,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
+                android:textAlignment="textStart"
                 android:text="@{recipe.name}"
                 android:textColor="#000"
                 android:textSize="24sp"
@@ -57,11 +64,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/layout_bar"
-            android:layout_marginStart="10dp"
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            tools:context=".views.fragments.RecipeDetailsFragment">
+            tools:context=".views.fragments.RecipeDetailsFragment"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:layout_marginRight="20dp"
+            tools:ignore="RtlHardcoded">
 
             <ImageView
                 android:background="@color/placeholder"
@@ -75,7 +85,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Making Time:"
+                android:text="@string/making_time"
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -86,7 +96,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Difficulty:"
+                android:text="@string/difficulty"
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -98,7 +108,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ingredients:"
+                android:text="@string/ingredients"
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -107,12 +117,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_ingredients"
                 items="@{recipe.ingredients}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:divider="@null"
+                android:textDirection="rtl"
                 tools:layout_height="170dip"
                 tools:listitem="@layout/list_item_content" />
 
@@ -120,7 +131,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Steps:"
+                android:text="@string/steps"
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -130,13 +141,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_steps"
                 items="@{recipe.steps}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:divider="@null"
                 tools:layout_height="150dip"
+                android:textDirection="rtl"
                 tools:listitem="@layout/list_item_content" />
 
         </LinearLayout>

@@ -17,6 +17,7 @@ import com.recipesapp.recipesapp.databinding.ListEditItemContentBinding;
 import com.recipesapp.recipesapp.databinding.ListItemContentBinding;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 
 public class MyListAdapter extends ArrayAdapter<String> {
@@ -44,24 +45,20 @@ public class MyListAdapter extends ArrayAdapter<String> {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    @SuppressLint("DefaultLocale")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewDataBinding binding;
 
-        Function<Integer, Boolean> x = this.onDelete;
-
-
         String item = this.items.get(position);
         if(mType != null){
             switch (mType){
                 case 0:
-                    item = String.format("• %s", item);
+                    item = String.format(new Locale("he"),"• %s", item);
                     break;
 
                 case 1:
-                    item = String.format("%d. %s", position+1, item);
+                    item = String.format(new Locale("he"), "%d. %s", position+1, item);
                     break;
             }
         }

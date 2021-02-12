@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_home">@string/all_recipes</string>
+    <string name="menu_favourites">@string/favourites</string>
+    <string name="menu_add_recipe">@string/add_recipe</string>
+    <string name="menu_my_recipes">@string/my_recipes</string>
+
+    <string name="menu_settings">@string/settings</string>
+    <string name="menu_logout">@string/logout</string>
+</resources>

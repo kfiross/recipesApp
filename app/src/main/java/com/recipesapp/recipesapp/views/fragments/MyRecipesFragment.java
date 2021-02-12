@@ -22,6 +22,7 @@ import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentMyRecipesBinding;
 import com.recipesapp.recipesapp.databinding.FragmentRecipesBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
+import com.recipesapp.recipesapp.utils.StringUtils;
 import com.recipesapp.recipesapp.views.adapters.RecipeAdapter;
 
 import java.util.ArrayList;
@@ -58,8 +59,7 @@ public class MyRecipesFragment extends BaseFragment {
         mRecyclerView = mBinding.recyclerViewRecipes;
         ((MainActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        mBinding.setName("My Recipes");
-
+        mBinding.setName(StringUtils.getLocaleString(R.string.my_recipes, getContext()));
         setupRecyclerView(new ArrayList<>());
 
         fetchDocs();

@@ -136,7 +136,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_add_white"
-                    >
+                    android:drawableStart="@drawable/ic_add_white">
                 </Button>
 
             </LinearLayout>
@@ -183,7 +183,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_add_white"
-                    >
+                    android:drawableStart="@drawable/ic_add_white">
                 </Button>
 
             </LinearLayout>

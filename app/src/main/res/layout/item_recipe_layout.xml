@@ -58,19 +58,20 @@
 
 
                     <TextView
+                        android:paddingEnd="20dp"
+
                         android:id="@+id/txt_item_name"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginBottom="0dp"
                         android:layout_weight="1"
-                        android:gravity="top"
-                        android:hint="Name"
+                        android:hint="ללא שם"
                         android:textStyle="bold"
                         android:padding="9dp"
                         android:text="@{recipe.name}"
                         android:textColor="#000"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="NestedWeights,RtlCompat" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -85,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
                             android:gravity="center_vertical"
-                            android:text="Making Time: "
+                            android:text="@string/making_time"
                             android:textColor="@android:color/holo_blue_dark"
                             android:textSize="16sp" />
 
@@ -110,7 +111,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
                             android:gravity="center_vertical"
-                            android:text="Difficulty: "
+                            android:text="@string/difficulty"
                             android:textColor="@android:color/holo_blue_dark"
                             android:textSize="16sp" />
 

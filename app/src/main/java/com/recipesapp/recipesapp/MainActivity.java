@@ -1,6 +1,7 @@
 package com.recipesapp.recipesapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -47,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        preferencesConfig.setLocal("he",this);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.drawer_menu);
         navigationView.setCheckedItem(R.id.nav_home);
 
 //        mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {

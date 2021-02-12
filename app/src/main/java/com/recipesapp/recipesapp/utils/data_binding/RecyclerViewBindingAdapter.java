@@ -6,13 +6,14 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
+import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
 
 import java.util.List;
 
-public class ListViewBindingAdapter {
+public class RecyclerViewBindingAdapter {
     @BindingAdapter("items")
-    public static void setItems(ListView listView, List<String> items) {
+    public static void setItems(RecyclerView recyclerView, List<String> items) {
 
-        ((MyListAdapter) listView.getAdapter()).submitList(items);
+        ((MyListAdapter2) recyclerView.getAdapter()).submitList(items);
     }
 }

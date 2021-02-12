@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,9 @@ import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipeDetailsBinding;
+import com.recipesapp.recipesapp.views.adapters.CategoryAdapter;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
+import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
 
 import java.util.ArrayList;
 
@@ -56,10 +59,16 @@ public class RecipeDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mBinding.listIngredients.setAdapter(new MyListAdapter(getContext(), new ArrayList<>(), 0));
-        mBinding.listSteps.setAdapter(new MyListAdapter(getContext(), new ArrayList<>(), 1));
+        mBinding.listIngredients.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBinding.listIngredients.setHasFixedSize(true);
+        mBinding.listIngredients.setAdapter(new MyListAdapter2(getContext(), new ArrayList<>(), 0));
+
+        mBinding.listSteps.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBinding.listSteps.setHasFixedSize(true);
+        mBinding.listSteps.setAdapter(new MyListAdapter2(getContext(), new ArrayList<>(), 1));
 
         mBinding.setRecipe(mSelectedRecipe);
+        mBinding.setIsRTL(true);
         mBinding.setNavController(
                 Navigation.findNavController((MainActivity) getContext(), R.id.nav_host_fragment));
     }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="all_recipes">כל המתכונים</string>
+    <string name="favourites">מועדפים</string>
+    <string name="add_recipe">הוספת מתכון</string>
+    <string name="my_recipes">המתכונים שלי</string>
+
+    <string name="settings">הגדרות</string>
+    <string name="logout">להתנתקות</string>
+
+    <string name="options">אפשרויות</string>
+    <string name="making_time">זמן הכנה:</string>
+    <string name="difficulty">דרגת קושי:</string>
+    <string name="ingredients">מצרכים:</string>
+    <string name="steps">אופן הכנה:</string>
+</resources>

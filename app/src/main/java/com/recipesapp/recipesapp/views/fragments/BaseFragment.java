@@ -21,5 +21,6 @@ public class BaseFragment extends Fragment {
         ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((MainActivity)getActivity()).getSupportActionBar().setTitle("");
+        MainActivity.preferencesConfig.loadLocal(getActivity());
     }
 }
