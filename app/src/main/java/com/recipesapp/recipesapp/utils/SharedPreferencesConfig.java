@@ -63,4 +63,38 @@ public class SharedPreferencesConfig {
         }
         editor.apply();
     }
+
+    /// ///////////////////////////
+
+    public Set<String> readMyRecipesIds(){
+        return sharedPreferences.getStringSet("my_recipes_ids", new HashSet<>());
+    }
+
+    public void addIdToMyRecipes(String id){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Set<String> ids = readFavsIds();
+        ids.add(id);
+        editor.putStringSet("my_recipes_ids", ids);
+        editor.apply();
+    }
+
+    public void removeIdFromMyRecipes(String id){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Set<String> ids = readFavsIds();
+        ids.remove(id);
+        editor.putStringSet("my_recipes_ids", ids);
+        editor.apply();
+    }
+
+    public void writeMyRecipesIds(List<String> ids){
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(ids == null){
+            editor.putStringSet("my_recipes_ids", new HashSet<>());
+        }
+        else{
+            editor.putStringSet("my_recipes_ids", new HashSet<>(ids));
+        }
+        editor.apply();
+    }
 }

@@ -12,13 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentAddRecipeBinding;
+import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.TextChangedListener;
+import com.recipesapp.recipesapp.utils.UiUtils;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
 import com.recipesapp.recipesapp.views.fragments.dialogs.MyDialogFragment;
@@ -168,10 +173,29 @@ public class AddRecipeFragment extends BaseFragment {
 
     private void addRecipe(){
         // add to recipes
-        FirebaseFirestore.getInstance().collection("recipes").add(
-//                mBinding.getRecipe()
-                mBinding.getRecipe().toJson()
-        );
+        FirestoreUtils.addRecipe(mBinding.getRecipe()).addOnCompleteListener(task1 -> {
+            if(task1.isSuccessful()) {
+                final String newRecipeId = task1.getResult().getId();
+                FirestoreUtils.addToMyRecipes(newRecipeId).addOnCompleteListener(task2 -> {
+                    if(task2.isSuccessful()){
+                        UiUtils.showAlertOk(
+                                getContext(),
+                                "Hooray!",
+                                "We added your Recipe!",
+                                (dialog, which) -> {}
+                        );
+                    }
+                    else{
+                        UiUtils.showAlertOk(
+                                getContext(),
+                                "Oops! something went wrong",
+                                "We couldn't add your Recipe...",
+                                (dialog, which) -> {}
+                        );
+                    }
+                });
+            }
+        });
         resetForm();
     }
 

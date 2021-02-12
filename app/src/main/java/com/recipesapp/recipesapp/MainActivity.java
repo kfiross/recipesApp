@@ -155,12 +155,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (task.isSuccessful()) {
                 if(task.getResult() == null){
                     preferencesConfig.writeFavsIds(null);
+                    preferencesConfig.writeMyRecipesIds(null);
                 }
                 else {
                     DocumentSnapshot snapshot = task.getResult();
                     preferencesConfig.writeFavsIds((List<String>)snapshot.get("favourites"));
+                    preferencesConfig.writeMyRecipesIds((List<String>)snapshot.get("my"));
                 }
-
             }
         });
     }

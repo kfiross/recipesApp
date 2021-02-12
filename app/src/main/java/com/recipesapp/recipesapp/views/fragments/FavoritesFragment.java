@@ -43,18 +43,9 @@ public class FavoritesFragment extends BaseFragment {
 
     private FragmentRecipesBinding mBinding;
     private RecyclerView mRecyclerView;
-    private List<String> mFavsIds;
 
     public FavoritesFragment() {
         // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mFavsIds = new ArrayList<>();
     }
 
     @Override
@@ -79,22 +70,6 @@ public class FavoritesFragment extends BaseFragment {
         setupRecyclerView(new ArrayList<>());
 
         fetchDocs();
-
-//        String uid = FirebaseAuth.getInstance().getUid();
-//        Task<DocumentSnapshot> task = FirebaseFirestore.getInstance().document("user/" + uid).get();
-//        task.addOnCompleteListener(it -> {
-//            if (it.isSuccessful()) {
-//
-//                List<String> ids = (List<String>) it.getResult().get("favourites");
-//                if (ids != null) {
-//                    mFavsIds.clear();
-//                    mFavsIds.addAll(ids);
-//                }
-//                fetchDocs();
-//            } else {
-//                //error
-//            }
-//        });
     }
 
     private void fetchDocs() {
@@ -128,30 +103,7 @@ public class FavoritesFragment extends BaseFragment {
                 setupRecyclerView(recipes);
             });
         });
-
-
-
     }
-
-//        FirebaseFirestore.getInstance().collection("recipes").addSnapshotListener(
-//                (documentSnapshots, error) -> {
-//
-//                    List<DocumentSnapshot> docs = documentSnapshots.getDocuments();
-//                    ArrayList<Recipe> recipes = new ArrayList<>();
-//                    for (int i = 0; i < docs.size(); i++) {
-//                        DocumentSnapshot documentSnapshot = docs.get(i);
-//                        // documentSnapshot.toObject(Recipe.class);
-//
-//                        Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
-//
-//                        if(isIncluded(newRecipe)) {
-//                            recipes.add(newRecipe);
-//                        }
-//                    }
-//                    setupRecyclerView(recipes);
-//
-//                });
-//    }
 
     private void setupRecyclerView(ArrayList<Recipe> recipes){
         RecipeAdapter categoryAdapter = new RecipeAdapter(recipes);

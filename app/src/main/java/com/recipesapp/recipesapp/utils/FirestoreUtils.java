@@ -5,13 +5,14 @@ import androidx.annotation.Nullable;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.recipesapp.recipesapp.data.model.Recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class FirestoreUtils {
@@ -49,5 +50,20 @@ public class FirestoreUtils {
                 .collection("users")
                 .document(uid)
                 .set(map);
+    }
+
+    public static Task<DocumentReference> addRecipe(Recipe recipe) {
+        return FirebaseFirestore.getInstance().collection("recipes").add(
+//                recipe
+                recipe.toJson()
+        );
+    }
+
+    public static Task<Void> addToMyRecipes(String recipeId){
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        return FirebaseFirestore.getInstance().collection("users").document(uid).update(
+                "my", FieldValue.arrayUnion(recipeId)
+        );
     }
 }
