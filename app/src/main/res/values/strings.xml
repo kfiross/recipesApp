@@ -39,6 +39,27 @@
         <item quantity="other">%d minutes</item>
     </plurals>
 
+    <!--    -->
+    <string name="sweets">Sweets</string>
+    <string name="chicken">Chicken</string>
+    <string name="meat">Meat</string>
+    <string name="fish">Fish</string>
+    <string name="vegan">Vegan</string>
+
+    <!--  Ingredients  -->
+    <string name="ml">ml</string>
+    <string name="g">g</string>
+    <plurals name="numberSpoons">
+        <item quantity="one">One spoon</item>
+        <item quantity="many">%d spoons</item>
+        <item quantity="other">%d spoons</item>
+    </plurals>
+
+    <plurals name="numberTeaspoons">
+        <item quantity="one">One teaspoon</item>
+        <item quantity="many">%d teaspoons</item>
+        <item quantity="other">%d teaspoons</item>
+    </plurals>
 
 
 </resources>

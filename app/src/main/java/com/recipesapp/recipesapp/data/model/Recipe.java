@@ -1,5 +1,6 @@
 package com.recipesapp.recipesapp.data.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,6 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Recipe implements Parcelable {
     private String mId;
@@ -24,18 +26,49 @@ public class Recipe implements Parcelable {
     @Nullable
     private Integer mMakingTime;
     @Nullable
-    private List<String> mIngredients;
+    private List<Ingredient> mIngredients;
     @Nullable
     private List<String> mSteps;
     @Nullable
     private String mImage;
 
+    public Recipe(){
+        mIngredients = new ArrayList<>();
+        mSteps = new ArrayList<>();
+    }
+
+    public Recipe(
+            String id,
+            @Nullable Integer category,
+            @Nullable  String name,
+            @Nullable  Integer time,
+            @Nullable  List<Ingredient> ingredients,
+            @Nullable  List<String> steps,
+            @Nullable  String image
+    ) {
+        mId = id;
+        mCategory = category;
+        mName = name;
+        mMakingTime = time;
+        mIngredients = ingredients;
+        mSteps = steps;
+        mImage = image;
+    }
+
     protected Recipe(Parcel in) {
         mId = in.readString();
-        mCategory = in.readInt();
+        if (in.readByte() == 0) {
+            mCategory = null;
+        } else {
+            mCategory = in.readInt();
+        }
         mName = in.readString();
-        mMakingTime = in.readInt();
-        mIngredients = in.createStringArrayList();
+        if (in.readByte() == 0) {
+            mMakingTime = null;
+        } else {
+            mMakingTime = in.readInt();
+        }
+        mIngredients = in.createTypedArrayList(Ingredient.CREATOR);
         mSteps = in.createStringArrayList();
         mImage = in.readString();
     }
@@ -52,28 +85,20 @@ public class Recipe implements Parcelable {
         }
     };
 
-    public Recipe(){
-        mIngredients = new ArrayList<>();
-        mSteps = new ArrayList<>();
-    }
-
-    public Recipe(String id, @Nullable Integer category,@Nullable  String name,@Nullable  Integer time,@Nullable  List<String> ingredients,@Nullable  List<String> steps,@Nullable  String image) {
-        mId = id;
-        mCategory = category;
-        mName = name;
-        mMakingTime = time;
-        mIngredients = ingredients;
-        mSteps = steps;
-        mImage = image;
-    }
-
     public static Recipe fromDocument(DocumentSnapshot snapshot) {
+        List<Map<String, Object>> ingredientsListMap = (List<Map<String, Object>>) snapshot.get("ingredients");
+        List<Ingredient> ingredientsList = new ArrayList<>();
+        if(ingredientsListMap instanceof Map){
+            for(Map<String,Object> map : ingredientsListMap){
+                ingredientsList.add(Ingredient.fromMap(map));
+            }
+        }
         return new Recipe(
                 snapshot.getId(),
                 snapshot.get("category", Integer.class),
                 snapshot.get("name", String.class),
                 snapshot.get("time", Integer.class),
-                (List<String>) snapshot.get("ingredients"),
+                ingredientsList,
                 (List<String>) snapshot.get("steps"),
                 (String) snapshot.get("image")
         );
@@ -88,11 +113,11 @@ public class Recipe implements Parcelable {
         this.mId = mId;
     }
 
-    public List<String> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return mIngredients;
     }
 
-    public void setIngredients(List<String> mIngredients) {
+    public void setIngredients(List<Ingredient> mIngredients) {
         this.mIngredients = mIngredients;
     }
 
@@ -129,32 +154,12 @@ public class Recipe implements Parcelable {
         this.mMakingTime = mMakingTime;
     }
 
-    public String getMakingTimeString(){
-        return this.mMakingTime + " Minutes";
-    }
-
     public String getImage() {
         return mImage;
     }
 
     public void setImage(String mImage) {
         this.mImage = mImage;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mId);
-        dest.writeInt(mCategory);
-        dest.writeString(mName);
-        dest.writeInt(mMakingTime);
-        dest.writeStringList(mIngredients);
-        dest.writeStringList(mSteps);
-        dest.writeString(mImage);
     }
 
     public HashMap<String,Object> toJson() {
@@ -167,5 +172,41 @@ public class Recipe implements Parcelable {
         map.put("image", mImage);
 
         return map;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mId);
+        if (mCategory == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(mCategory);
+        }
+        dest.writeString(mName);
+        if (mMakingTime == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(mMakingTime);
+        }
+        dest.writeTypedList(mIngredients);
+        dest.writeStringList(mSteps);
+        dest.writeString(mImage);
+    }
+
+    public List<String> getIngredientsStrings(Context context){
+        List<String> items = new ArrayList<>();
+        if(mIngredients != null) {
+            for (Ingredient ingredient : mIngredients) {
+                items.add(ingredient.toString2(context));
+            }
+        }
+        return items;
     }
 }

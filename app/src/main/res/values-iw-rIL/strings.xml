@@ -20,4 +20,29 @@
         <item quantity="many">%d דקות</item>
         <item quantity="other">%d דקות</item>
     </plurals>
+
+    <!--    -->
+    <string name="sweets">מתוקים</string>
+    <string name="chicken">עוף</string>
+    <string name="meat">בשר</string>
+    <string name="fish">דגים</string>
+    <string name="vegan">צמחוני</string>
+
+    <!-- -->
+    <string name="ml">מ"ל</string>
+    <string name="g">גרם</string>
+
+    <plurals name="numberSpoons">
+        <item quantity="one">כף אחת</item>
+        <item quantity="two">2 כפות</item>
+        <item quantity="many">%d כפות</item>
+        <item quantity="other">%d כפות</item>
+    </plurals>
+
+    <plurals name="numberTeaspoons">
+        <item quantity="one">כפית אחת</item>
+        <item quantity="two">2 כפיות</item>
+        <item quantity="many">%d כפיות</item>
+        <item quantity="other">%d כפיות</item>
+    </plurals>
 </resources>

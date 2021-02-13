@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.recipesapp.recipesapp.R;
+import com.recipesapp.recipesapp.data.model.Ingredient;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.MyDialogFragmentBinding;
 import com.recipesapp.recipesapp.utils.ScreenSize;
@@ -71,7 +72,8 @@ public class MyDialogFragment extends DialogFragment {
         String data = mBinding.editTextData.getText().toString();
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
         if (mType == 0) {
-            editedRecipe.getIngredients().add(data);
+            // todo: fix this
+            editedRecipe.getIngredients().add(new Ingredient(data, 0 ,0));
         } else if (mType == 1) {
             editedRecipe.getSteps().add(data);
         }
