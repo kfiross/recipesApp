@@ -50,66 +50,106 @@
             android:layout_height="match_parent">
 
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
             <TextView
-                android:text="Recipe's Name"
+                android:gravity="center"
+                android:text="@string/recipe_name"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="90dp"
+                android:layout_height="match_parent">
             </TextView>
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/et_name"
-                android:hint="Enter Name..."
-                android:layout_width="match_parent"
+                android:hint="@string/hint_enter_name"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content">
             </EditText>
+
+        </LinearLayout>
 
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="4dp"/>
 
-            <TextView
-                android:text="Making Time"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:textSize="20sp"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </TextView>
+                android:layout_height="50dp">
 
-            <EditText
-                android:id="@+id/et_time"
-                android:hint="Time in minutes..."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </EditText>
+                <TextView
+                    android:text="@string/making_time"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <Space
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/et_time"
+                    android:hint="@string/hint_time_in_minutes"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                </EditText>
+
+            </LinearLayout>
 
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="4dp"/>
 
-            <TextView
-                android:text="Category"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </TextView>
 
-            <Spinner
-                android:id="@+id/spinnerCategory"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:items="@{@stringArray/categories}"
-                app:itemLayout="@{@layout/my_spinner_item_layout}"
-                app:dropDownLayout="@{@layout/my_spinner_item_dropdown_layout}"
-                tools:listitem="@layout/my_spinner_item_layout"
-                />
+                android:layout_height="40dp">
+
+                <TextView
+                    android:text="@string/category"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <Space
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content"/>
+
+                <Spinner
+                    android:id="@+id/spinnerCategory"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:items="@{@stringArray/categories}"
+                    app:itemLayout="@{@layout/my_spinner_item_layout}"
+                    app:dropDownLayout="@{@layout/my_spinner_item_dropdown_layout}"
+
+                    tools:listitem="@layout/my_spinner_item_layout"
+                    />
+
+
+
+            </LinearLayout>
+
 
 
             <LinearLayout
@@ -118,7 +158,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Ingredients"
+                    android:text="@string/ingredients"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -130,7 +170,7 @@
 
                 <Button
                     android:id="@+id/btn_add_ingredient"
-                    android:text="Add"
+                    android:text="@string/add"
                     android:textColor="#fff"
                     android:layout_width="100dp"
                     android:layout_gravity="center"
@@ -165,7 +205,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Steps"
+                    android:text="@string/steps"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -177,7 +217,7 @@
 
                 <Button
                     android:id="@+id/btn_add_step"
-                    android:text="Add"
+                    android:text="@string/add"
                     android:textColor="#fff"
                     android:layout_width="100dp"
                     android:layout_gravity="center"
@@ -206,7 +246,7 @@
 
         <Button
             android:id="@+id/btnAddRecipe"
-            android:text="Add Recipe!"
+            android:text="@string/add_recipe"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="-6dp"

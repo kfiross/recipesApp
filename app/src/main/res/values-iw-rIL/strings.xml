@@ -21,6 +21,16 @@
         <item quantity="other">%d דקות</item>
     </plurals>
 
+    <string name="category">קטגוריה</string>
+    <string name="add">להוספה</string>
+    <string name="recipe_name">שם המתכון</string>
+    <string name="add_new_recipe">הוספת מתכון חדש</string>
+    <string name="hint_enter_name">הזן שם…</string>
+    <string name="hint_time_in_minutes">זמן בדקות…</string>
+    <string name="ingredient_name">שם המצרך</string>
+    <string name="quantity">כמות</string>
+    <string name="add_ingredient">הוספת מצרך</string>
+
     <!--    -->
     <string name="sweets">מתוקים</string>
     <string name="chicken">עוף</string>
@@ -31,6 +41,7 @@
     <!-- -->
     <string name="ml">מ"ל</string>
     <string name="g">גרם</string>
+
 
     <plurals name="numberSpoons">
         <item quantity="one">כף אחת</item>

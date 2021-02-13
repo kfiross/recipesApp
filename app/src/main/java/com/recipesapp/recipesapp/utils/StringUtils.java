@@ -31,8 +31,20 @@ public class StringUtils {
 
             case 3:
                 return context.getResources().getQuantityString(R.plurals.numberTeaspoons, count);
+
+//            case 4:
+//                return context.getResources().getQuantityString(R.plurals.numberTeaspoons, count);
         }
 
         return "";
+    }
+
+    public static String[] getIngredientsTypesName(Context context) {
+        return new String[]{
+                getIngredientTypeName(context, 0, 0).split(" ")[1],
+                getIngredientTypeName(context, 1, 0).split(" ")[1],
+                getIngredientTypeName(context, 2, 10).split(" ")[1],
+                getIngredientTypeName(context, 3, 10).split(" ")[1],
+        };
     }
 }

@@ -32,6 +32,13 @@
     <string name="ingredients">Ingredients:</string>
     <string name="steps">Steps:</string>
 
+    <string name="category">Category</string>
+    <string name="recipe_name">Recipe\'s Name</string>
+    <string name="add">Add</string>
+    <string name="add_new_recipe">Add New Recipe</string>
+    <string name="hint_enter_name">Enter Name…</string>
+    <string name="hint_time_in_minutes">Time in minutes…</string>
+
     <plurals name="numberMinutes">
         <item quantity="one">One minute</item>
         <item quantity="two">2 minutes</item>
@@ -49,6 +56,10 @@
     <!--  Ingredients  -->
     <string name="ml">ml</string>
     <string name="g">g</string>
+    <string name="ingredient_name">Ingredient Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="add_ingredient">Add New Ingredient</string>
+
     <plurals name="numberSpoons">
         <item quantity="one">One spoon</item>
         <item quantity="many">%d spoons</item>

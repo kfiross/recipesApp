@@ -12,21 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentAddRecipeBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
+import com.recipesapp.recipesapp.utils.StringUtils;
 import com.recipesapp.recipesapp.utils.TextChangedListener;
 import com.recipesapp.recipesapp.utils.UiUtils;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
 import com.recipesapp.recipesapp.views.fragments.dialogs.MyDialogFragment;
+import com.recipesapp.recipesapp.views.fragments.dialogs.IngredientEditDialogFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -66,7 +64,9 @@ public class AddRecipeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         // initialize binding variables
-        mBinding.setName("Add New Recipe");
+        mBinding.setName(StringUtils.getLocaleString(R.string.add_new_recipe, getContext()));
+
+
         mBinding.setRecipe(new Recipe());
 
         ((MainActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -107,7 +107,7 @@ public class AddRecipeFragment extends BaseFragment {
                         0,
                         (index) -> {
                             //openDialog(0, index);
-                            vmRecipe.getSelected().getValue().getSteps().remove(index);
+                            vmRecipe.getSelected().getValue().getIngredients().remove(index);
                             return true;
                         },
                         (index) -> {
@@ -151,24 +151,40 @@ public class AddRecipeFragment extends BaseFragment {
                 }
             }
         });
-    }
 
-    private void openDialog(int type, @Nullable Integer index) {
-        MyDialogFragment editDialog = new MyDialogFragment();
-        Bundle args = new Bundle();
-        args.putInt("type", type);
-        args.putParcelable("recipe", mBinding.getRecipe());
-        if(index != null) {
-            args.putInt("index", index);
-        }
-        editDialog.setArguments(args);
-        editDialog.show(MainActivity.appFragmentManager, "Dialog");
 
         vmRecipe.getSelected().observe(getActivity(), recipe -> {
-          mBinding.setRecipe(recipe);
+            mBinding.setRecipe(recipe);
 //            mBinding.getFormData().setIngredientList(recipe.getIngredients());
 //            mBinding.getFormData().setStepsList(recipe.getSteps());
         });
+    }
+
+    private void openDialog(int type, @Nullable Integer index) {
+        if(type == 0){
+            IngredientEditDialogFragment editIngredientDialog = new IngredientEditDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("type", type);
+            args.putParcelable("recipe", mBinding.getRecipe());
+            if(index != null) {
+                args.putInt("index", index);
+            }
+            editIngredientDialog.setArguments(args);
+            editIngredientDialog.show(MainActivity.appFragmentManager, "editIngredientDialog");
+        }
+        else if (type == 1){
+            MyDialogFragment editDialog = new MyDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("type", 1);
+            args.putParcelable("recipe", mBinding.getRecipe());
+            if(index != null) {
+                args.putInt("index", index);
+            }
+            editDialog.setArguments(args);
+            editDialog.show(MainActivity.appFragmentManager, "Dialog");
+        }
+
+
     }
 
     private void addRecipe(){
