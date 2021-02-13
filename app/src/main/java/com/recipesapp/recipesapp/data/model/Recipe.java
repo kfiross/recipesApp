@@ -88,9 +88,11 @@ public class Recipe implements Parcelable {
     public static Recipe fromDocument(DocumentSnapshot snapshot) {
         List<Map<String, Object>> ingredientsListMap = (List<Map<String, Object>>) snapshot.get("ingredients");
         List<Ingredient> ingredientsList = new ArrayList<>();
-        if(ingredientsListMap instanceof Map){
-            for(Map<String,Object> map : ingredientsListMap){
-                ingredientsList.add(Ingredient.fromMap(map));
+        if(ingredientsListMap != null){
+            for(Object map : ingredientsListMap){
+                if (map instanceof Map) {
+                    ingredientsList.add(Ingredient.fromMap((Map<String,Object>)map));
+                }
             }
         }
         return new Recipe(

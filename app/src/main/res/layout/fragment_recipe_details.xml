@@ -15,145 +15,157 @@
             type="com.recipesapp.recipesapp.data.model.Recipe" />
     </data>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layoutDirection="locale"
-
+        android:background="@drawable/bg_recipe4"
         >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_recipe2"
-            android:scaleX="@{isRTL ? 1.1f : -1.1f}"
-            android:scaleY="1.2" />
-
-        <LinearLayout
-            android:id="@+id/layout_bar"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="30dp"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="10dp"
-                android:background="@android:color/transparent"
-                android:onClick="@{(v)-> navController.popBackStack()}"
-                android:src="@drawable/ic_back" />
+            android:layoutDirection="locale"
+            >
 
 
-            <TextView
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                -->
+<!--                android:scaleX="@{isRTL ? 1.2f : -1.2f}"-->
+<!--                android:scaleY="2" />-->
+
+            <LinearLayout
+                android:id="@+id/layout_bar"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:textAlignment="textStart"
-                android:text="@{recipe.name}"
-                android:textColor="#000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{(v)-> navController.popBackStack()}"
+                    android:src="@drawable/ic_back" />
 
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:textAlignment="textStart"
+                    android:text="@{recipe.name}"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/layout_bar"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            tools:context=".views.fragments.RecipeDetailsFragment"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:layout_marginRight="20dp"
-            tools:ignore="RtlHardcoded">
+            </LinearLayout>
 
-            <ImageView
-                android:background="@color/placeholder"
-                app:imageUrl="@{recipe.image}"
-                app:error="@{@drawable/not_found}"
-                app:placeholder="@{@color/purple_700}"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_bar"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                tools:context=".views.fragments.RecipeDetailsFragment"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:layout_marginRight="20dp"
+                tools:ignore="RtlHardcoded">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/making_time"
-                android:textColor="#000"
-                android:textSize="18sp" />
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="6dp"/>
+                <ImageView
+                    android:background="@color/placeholder"
+                    app:imageUrl="@{recipe.image}"
+                    app:error="@{@drawable/not_found}"
+                    app:placeholder="@{@color/purple_700}"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/making_time"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/difficulty"
-                android:textColor="#000"
-                android:textSize="18sp" />
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
 
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="12dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ingredients"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_ingredients"
-                items="@{recipe.getIngredientsStrings(context)}"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:divider="@null"
-                android:textDirection="rtl"
-                tools:layout_height="170dip"
-                tools:listitem="@layout/list_item_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/difficulty"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/steps"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredients"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_ingredients"
+                    items="@{recipe.getIngredientsStrings(context)}"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:textDirection="rtl"
+                    tools:layout_height="170dip"
+                    tools:listitem="@layout/list_item_content" />
 
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/steps"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_steps"
-                items="@{recipe.steps}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:divider="@null"
-                tools:layout_height="150dip"
-                android:textDirection="rtl"
-                tools:listitem="@layout/list_item_content" />
 
-        </LinearLayout>
-    </RelativeLayout>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_steps"
+                    items="@{recipe.steps}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    tools:layout_height="150dip"
+                    android:textDirection="rtl"
+                    tools:listitem="@layout/list_item_content" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
 
 
 </layout>
