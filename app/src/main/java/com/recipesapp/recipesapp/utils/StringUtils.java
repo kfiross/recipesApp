@@ -22,9 +22,9 @@ public class StringUtils {
     public static String getIngredientTypeName(Context context, int type, double count){
         switch (type){
             case 0:
-                return count + " " + getLocaleString(R.string.ml, context);
+                return (int)count + " " + getLocaleString(R.string.ml, context);
             case 1:
-                return count + " " + getLocaleString(R.string.g, context);
+                return (int)count + " " + getLocaleString(R.string.g, context);
 
                 // todo: fix .5f units
             case 2:

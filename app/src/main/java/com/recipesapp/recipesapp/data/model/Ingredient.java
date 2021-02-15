@@ -1,5 +1,6 @@
 package com.recipesapp.recipesapp.data.model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
@@ -18,9 +19,10 @@ import java.util.Map;
 public class Ingredient implements Parcelable {
     private String mName;
     private double mCount;
-    private int mType;
+    @Nullable
+    private Integer mType;
 
-    public Ingredient(String name, double count, int type){
+    public Ingredient(String name, double count, @Nullable Integer type){
         mName = name;
         mCount = count;
         mType = type;
@@ -56,8 +58,8 @@ public class Ingredient implements Parcelable {
         }
         return new Ingredient(
                 (String) map.get("name"),
-                ((Long)map.get("count")).doubleValue(),
-                ((Long)map.get("type")).intValue()
+                map.get("count") == null ? 0 : ((Long)(map.get("count"))).doubleValue(),
+                map.get("type") == null ? null : ((Long)map.get("type")).intValue()
         );
     }
 
@@ -70,15 +72,15 @@ public class Ingredient implements Parcelable {
         this.mName = mName;
     }
 
-    public double getQuantity() {
+    public double getCount() {
         return mCount;
     }
 
-    public void setQuantity(double mQuantity) {
-        this.mCount = mQuantity;
+    public void setCount(double mCount) {
+        this.mCount = mCount;
     }
 
-    public int getType() {
+    public @Nullable Integer getType() {
         return mType;
     }
 
@@ -92,8 +94,12 @@ public class Ingredient implements Parcelable {
         return String.format("%d %d %s", mCount, mType, mName);
     }
 
+    @SuppressLint("DefaultLocale")
     @NonNull
     public String toString2(Context context) {
+        if(mType == null) {
+            return mCount == 0 ? mName : String.format("%d %s", (int)mCount, mName);
+        }
         String typeName = StringUtils.getIngredientTypeName(context, mType, mCount);
         return String.format("%s %s", typeName, mName);
     }
