@@ -32,6 +32,7 @@
     <string name="add_ingredient">הוספת מצרך</string>
     <string name="and">ו-</string>
 
+    <string name="search_recipe">חיפוש מתכון לפי רכיבים</string>
 
     <!--    -->
     <string name="sweets">מתוקים</string>

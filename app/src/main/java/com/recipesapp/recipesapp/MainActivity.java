@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.favoritesFragment2:
                     case R.id.addRecipeFragment:
                     case R.id.myRecipesFragment:
+                    case R.id.searchFragment:
                         drawer.open();
                         break;
 
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -123,6 +125,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_my_recipes:
                 mNavController.navigate(R.id.myRecipesFragment);
                 break;
+
+            case R.id.nav_search_recipe:
+                mNavController.navigate(R.id.searchFragment);
+                break;
+
 
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();

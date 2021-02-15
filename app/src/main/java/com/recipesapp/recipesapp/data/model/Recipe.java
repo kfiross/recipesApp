@@ -211,4 +211,13 @@ public class Recipe implements Parcelable {
         }
         return items;
     }
+
+    public boolean hasIngredientsWithName(String name){
+        for (Ingredient ingredient : mIngredients){
+            if(ingredient.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

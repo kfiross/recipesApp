@@ -9,10 +9,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.recipesapp.recipesapp.data.model.Recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class FirestoreUtils {
@@ -65,5 +67,30 @@ public class FirestoreUtils {
         return FirebaseFirestore.getInstance().collection("users").document(uid).update(
                 "my", FieldValue.arrayUnion(recipeId)
         );
+    }
+
+    public static ArrayList<Recipe> searchRecipes(ArrayList<String> queries) throws ExecutionException, InterruptedException {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+
+        Task<QuerySnapshot> task = FirebaseFirestore.getInstance().collection("recipes").get();
+        Tasks.await(task);
+        if(task.isSuccessful()){
+            List<DocumentSnapshot> docs = task.getResult().getDocuments();
+            for (DocumentSnapshot doc: docs){
+                Recipe recipe = Recipe.fromDocument(doc);
+                for(String q : queries){
+
+                    if(recipe.hasIngredientsWithName(q)){
+                        recipes.add(recipe);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        return recipes;
+
+
     }
 }

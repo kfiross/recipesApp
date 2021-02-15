@@ -54,6 +54,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
         return mRecipes.size();
     }
 
+    public void setItems(ArrayList<Recipe> newList) {
+        mRecipes = newList;
+        notifyDataSetChanged();
+    }
+
     public class ItemViewHolder extends RecyclerView.ViewHolder{
 
         private final NavController mNavController;

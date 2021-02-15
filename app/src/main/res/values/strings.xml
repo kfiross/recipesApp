@@ -38,6 +38,7 @@
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="hint_enter_name">Enter Name…</string>
     <string name="hint_time_in_minutes">Time in minutes…</string>
+    <string name="search_recipe">Search Recipe By Ingredients</string>
 
     <plurals name="numberMinutes">
         <item quantity="one">One minute</item>
