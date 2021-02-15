@@ -80,17 +80,15 @@ public class FirestoreUtils {
                 Recipe recipe = Recipe.fromDocument(doc);
                 for(String q : queries){
 
+                    // add this recipe
                     if(recipe.hasIngredientsWithName(q)){
                         recipes.add(recipe);
                         break;
                     }
                 }
             }
-
         }
 
         return recipes;
-
-
     }
 }

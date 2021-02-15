@@ -57,11 +57,6 @@ public class HomeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = mBinding.recyclerViewCategories;
-        ((MainActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        mBinding.setName(StringUtils.getLocaleString(R.string.all_recipes, getContext()
-        //        new Locale("he")
-        ));
-
 
         setupRecyclerView(new ArrayList<>());
 
@@ -78,8 +73,6 @@ public class HomeFragment extends BaseFragment {
                     setupRecyclerView(categories);
 
         });
-
-
     }
 
     private void setupRecyclerView(ArrayList<Category> categories){

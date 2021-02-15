@@ -13,7 +13,7 @@
     <androidx.cardview.widget.CardView
         android:layout_height="150dp"
         android:layout_width="match_parent"
-        android:elevation="15dp"
+        app:cardElevation="8dp"
         android:layout_margin="8dp"
         app:cardCornerRadius="12dp"
         android:foreground="?android:attr/selectableItemBackground"
@@ -53,12 +53,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
-                    android:padding="8dp"
+                    android:padding="6dp"
                     android:orientation="vertical">
 
 
                     <TextView
-                        android:paddingEnd="20dp"
+                        android:paddingEnd="24dp"
 
                         android:id="@+id/txt_item_name"
                         android:layout_width="match_parent"
@@ -96,11 +96,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
                             android:gravity="center_vertical"
-                            android:text="@{@plurals/numberMinutes(recipe.makingTime, recipe.makingTime)}"
+                            android:text="@{` `+@plurals/numberMinutes(recipe.makingTime, recipe.makingTime)}"
                             android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="invisible"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -132,7 +133,7 @@
 
             <ImageButton
                 android:id="@+id/btn_add_to_fav"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_alignParentEnd="true"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

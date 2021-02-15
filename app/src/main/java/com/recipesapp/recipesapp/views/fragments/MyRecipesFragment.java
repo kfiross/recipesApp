@@ -57,9 +57,7 @@ public class MyRecipesFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = mBinding.recyclerViewRecipes;
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        mBinding.setName(StringUtils.getLocaleString(R.string.my_recipes, getContext()));
         setupRecyclerView(new ArrayList<>());
 
         fetchDocs();

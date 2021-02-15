@@ -4,9 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="name"
-            type="String" />
     </data>
 
     <RelativeLayout
@@ -38,7 +35,7 @@
             tools:context=".views.fragments.RecipesFragment">
 
             <include
-                app:name="@{name}"
+                app:name="@{@string/my_recipes}"
                 layout="@layout/appbar"
                 />
 
