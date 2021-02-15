@@ -18,6 +18,7 @@ import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Ingredient;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.DialogEditIngredientFragmentBinding;
+import com.recipesapp.recipesapp.utils.Constants;
 import com.recipesapp.recipesapp.utils.ScreenSize;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 
@@ -73,7 +74,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
 
 //        ingredient = new Ingredient("", 0 , 0);
 //        mBinding.setIngredient(ingredient);
-        mBinding.setQuantity(100);
+     ///   mBinding.setQuantity(100.0);
         mBinding.setType(1);
 
 
@@ -82,6 +83,18 @@ public class IngredientEditDialogFragment extends DialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mBinding.setType(position);
+                switch (mBinding.getType()){
+                    case 0:
+                    case 1:
+                        mBinding.setQuantity(100.0);
+                        break;
+
+                    case 2:
+                    case 3:
+                    case 4:
+                        mBinding.setQuantity(1.0);
+                        break;
+                }
             }
 
             @Override
@@ -90,16 +103,61 @@ public class IngredientEditDialogFragment extends DialogFragment {
         });
 
         mBinding.btnAddQuantity.setOnClickListener(v -> {
-            int prevQuantity = mBinding.getQuantity();
-            mBinding.setQuantity(prevQuantity+10);
+            double prevQuantity = mBinding.getQuantity();
+
+            switch (mBinding.getType()){
+                case 0:
+                case 1:
+                    mBinding.setQuantity(prevQuantity+10);
+                    break;
+
+                case 2:
+                case 3:
+                    mBinding.setQuantity(prevQuantity+0.5);
+                    break;
+
+                case 4:
+                    int prevPos = 0;
+                    while(prevQuantity > Constants.SPOON_UNITS[prevPos])
+                        prevPos++;
+
+                    mBinding.setQuantity(Constants.SPOON_UNITS[prevPos + 1]);
+                    break;
+            }
+
+
 
         });
 
         mBinding.btnSubstructQuantity.setOnClickListener(v -> {
-            int prevQuantity = mBinding.getQuantity();
-            // minimum is 10 grams
-            if(prevQuantity >= 20) {
-                mBinding.setQuantity(prevQuantity - 10);
+            double prevQuantity = mBinding.getQuantity();
+
+
+            switch (mBinding.getType()){
+                case 0:
+                case 1:
+                    if(prevQuantity >= 20) {
+                        mBinding.setQuantity(prevQuantity - 10);
+                    }
+                    break;
+
+                case 2:
+                case 3:
+                    if(prevQuantity > 0) {
+                        mBinding.setQuantity(prevQuantity-0.5);
+
+                    }
+                    break;
+
+                case 4:
+                    int prevPos = 0;
+                    while(prevQuantity > Constants.SPOON_UNITS[prevPos])
+                        prevPos++;
+
+                    if(prevPos > 1){
+                        mBinding.setQuantity(Constants.SPOON_UNITS[prevPos - 1]);
+                    }
+                    break;
             }
 
         });
@@ -108,7 +166,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
 
     private void add() {
         String name = mBinding.editTextData.getText().toString();
-        int count = mBinding.getQuantity();
+        double count = mBinding.getQuantity();
         int type = mBinding.getType();
 
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
@@ -125,7 +183,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
         super.onResume();
         WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
 
-        params.width = ScreenSize.wp(getContext(), 90);
+        params.width = ScreenSize.wp(getContext(), 92);
         params.height = ScreenSize.hp(getContext(), 50);
 
         getDialog().getWindow().setAttributes(params);

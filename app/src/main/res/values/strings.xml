@@ -59,17 +59,24 @@
     <string name="ingredient_name">Ingredient Name</string>
     <string name="quantity">Quantity</string>
     <string name="add_ingredient">Add New Ingredient</string>
+    <string name="and">and</string>
 
     <plurals name="numberSpoons">
         <item quantity="one">One spoon</item>
         <item quantity="many">%d spoons</item>
-        <item quantity="other">%d spoons</item>
+        <item quantity="other">%f spoons</item>
     </plurals>
 
     <plurals name="numberTeaspoons">
         <item quantity="one">One teaspoon</item>
         <item quantity="many">%d teaspoons</item>
-        <item quantity="other">%d teaspoons</item>
+        <item quantity="other">%f teaspoons</item>
+    </plurals>
+
+    <plurals name="numberGlasses">
+        <item quantity="one">One glass</item>
+        <item quantity="many">%d glasses</item>
+        <item quantity="other">%f glasses</item>
     </plurals>
 
 

@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <array name="ingredients">-->
-<!--        <item>@string/ml</item>-->
-<!--        <item>@string/g</item>-->
-<!--        <item>@string/spoon</item>-->
-<!--        <item>@string/fish</item>-->
-<!--        <item>@string/vegan</item>-->
-<!--    </array>-->
-<!--    -->
     <array name="categories">
         <item>@string/sweets</item>
         <item>@string/chicken</item>

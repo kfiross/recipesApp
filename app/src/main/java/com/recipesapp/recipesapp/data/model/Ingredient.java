@@ -17,32 +17,20 @@ import java.util.Map;
 
 public class Ingredient implements Parcelable {
     private String mName;
-    private int mCount;
+    private double mCount;
     private int mType;
 
-    public Ingredient(String name, int count, int type){
+    public Ingredient(String name, double count, int type){
         mName = name;
         mCount = count;
         mType = type;
     }
 
+
     protected Ingredient(Parcel in) {
         mName = in.readString();
-        mCount = in.readInt();
+        mCount = in.readDouble();
         mType = in.readInt();
-    }
-
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mName);
-        dest.writeInt(mCount);
-        dest.writeInt(mType);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
@@ -68,7 +56,7 @@ public class Ingredient implements Parcelable {
         }
         return new Ingredient(
                 (String) map.get("name"),
-                ((Long)map.get("count")).intValue(),
+                ((Long)map.get("count")).doubleValue(),
                 ((Long)map.get("type")).intValue()
         );
     }
@@ -82,11 +70,11 @@ public class Ingredient implements Parcelable {
         this.mName = mName;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return mCount;
     }
 
-    public void setQuantity(int mQuantity) {
+    public void setQuantity(double mQuantity) {
         this.mCount = mQuantity;
     }
 
@@ -108,5 +96,17 @@ public class Ingredient implements Parcelable {
     public String toString2(Context context) {
         String typeName = StringUtils.getIngredientTypeName(context, mType, mCount);
         return String.format("%s %s", typeName, mName);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+        dest.writeDouble(mCount);
+        dest.writeInt(mType);
     }
 }

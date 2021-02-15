@@ -30,6 +30,8 @@
     <string name="ingredient_name">שם המצרך</string>
     <string name="quantity">כמות</string>
     <string name="add_ingredient">הוספת מצרך</string>
+    <string name="and">ו-</string>
+
 
     <!--    -->
     <string name="sweets">מתוקים</string>
@@ -44,16 +46,23 @@
 
 
     <plurals name="numberSpoons">
-        <item quantity="one">כף אחת</item>
+        <item quantity="one">כף</item>
         <item quantity="two">2 כפות</item>
         <item quantity="many">%d כפות</item>
         <item quantity="other">%d כפות</item>
     </plurals>
 
     <plurals name="numberTeaspoons">
-        <item quantity="one">כפית אחת</item>
+        <item quantity="one">כפית</item>
         <item quantity="two">2 כפיות</item>
         <item quantity="many">%d כפיות</item>
         <item quantity="other">%d כפיות</item>
+    </plurals>
+
+    <plurals name="numberGlasses">
+        <item quantity="one">כוס</item>
+        <item quantity="two">2 כוסות</item>
+        <item quantity="many">%d כוסות</item>
+        <item quantity="other">%f כוסות</item>
     </plurals>
 </resources>
