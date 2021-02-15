@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,7 +77,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
 //        mBinding.setIngredient(ingredient);
      ///   mBinding.setQuantity(100.0);
         mBinding.setType(1);
-
+        mBinding.setIsWithCount(true);
 
 
         mBinding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -161,13 +162,21 @@ public class IngredientEditDialogFragment extends DialogFragment {
             }
 
         });
+
         mBinding.btnAdd.setOnClickListener(v -> add());
+
+        mBinding.checkWithCount.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mBinding.setType(isChecked ? 0 : -1);
+            mBinding.setQuantity(isChecked ? 100D : 0);
+            mBinding.setIsWithCount(isChecked);
+
+        });
     }
 
     private void add() {
         String name = mBinding.editTextData.getText().toString();
         double count = mBinding.getQuantity();
-        int type = mBinding.getType();
+        Integer type = mBinding.getType() == -1 ? null : mBinding.getType();
 
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
 

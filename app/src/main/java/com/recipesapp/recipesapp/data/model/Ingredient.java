@@ -18,11 +18,13 @@ import java.util.Map;
 
 public class Ingredient implements Parcelable {
     private String mName;
-    private double mCount;
+
+    private Number mCount;
+
     @Nullable
     private Integer mType;
 
-    public Ingredient(String name, double count, @Nullable Integer type){
+    public Ingredient(String name, Number count, @Nullable Integer type){
         mName = name;
         mCount = count;
         mType = type;
@@ -31,8 +33,27 @@ public class Ingredient implements Parcelable {
 
     protected Ingredient(Parcel in) {
         mName = in.readString();
-        mCount = in.readDouble();
-        mType = in.readInt();
+        if (in.readByte() == 0) {
+            mType = null;
+        } else {
+            mType = in.readInt();
+        }
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+        if (mType == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(mType);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
@@ -58,7 +79,7 @@ public class Ingredient implements Parcelable {
         }
         return new Ingredient(
                 (String) map.get("name"),
-                map.get("count") == null ? 0 : ((Long)(map.get("count"))).doubleValue(),
+                map.get("count") == null ? 0 : ((Number)(map.get("count"))),
                 map.get("type") == null ? null : ((Long)map.get("type")).intValue()
         );
     }
@@ -72,11 +93,11 @@ public class Ingredient implements Parcelable {
         this.mName = mName;
     }
 
-    public double getCount() {
+    public Number getCount() {
         return mCount;
     }
 
-    public void setCount(double mCount) {
+    public void setCount(Number mCount) {
         this.mCount = mCount;
     }
 
@@ -98,21 +119,10 @@ public class Ingredient implements Parcelable {
     @NonNull
     public String toString2(Context context) {
         if(mType == null) {
-            return mCount == 0 ? mName : String.format("%d %s", (int)mCount, mName);
+            return mCount.intValue() == 0 ? mName : String.format("%d %s", mCount, mName);
         }
-        String typeName = StringUtils.getIngredientTypeName(context, mType, mCount);
+        String typeName = StringUtils.getIngredientTypeName(context, mType, mCount.doubleValue());
         return String.format("%s %s", typeName, mName);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mName);
-        dest.writeDouble(mCount);
-        dest.writeInt(mType);
-    }
 }

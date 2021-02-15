@@ -5,12 +5,14 @@
 
     <data>
         <import type="com.recipesapp.recipesapp.utils.StringUtils"/>
+        <import type="android.view.View"/>
 <!--        <variable name="ingredient" type="com.recipesapp.recipesapp.data.model.Ingredient" />-->
         <variable name="title" type="String" />
 
         <variable name="name" type="String" />
         <variable name="quantity" type="Double" />
         <variable name="type" type="int" />
+        <variable name="isWithCount" type="Boolean" />
     </data>
 
     <FrameLayout
@@ -56,20 +58,37 @@
 
             </EditText>
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/quantity"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_width="90dp"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </TextView>
+
+                <CheckBox
+                    android:id="@+id/check_with_count"
+                    android:checked="@{isWithCount}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="@string/quantity"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+
+
+             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:visibility="@{isWithCount ? View.VISIBLE : View.INVISIBLE}"
+                >
 
                 <ImageButton
                     android:id="@+id/btn_add_quantity"
