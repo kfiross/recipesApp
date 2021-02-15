@@ -192,7 +192,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
         super.onResume();
         WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
 
-        params.width = ScreenSize.wp(getContext(), 92);
+        params.width = ScreenSize.wp(getContext(), 93);
         params.height = ScreenSize.hp(getContext(), 50);
 
         getDialog().getWindow().setAttributes(params);

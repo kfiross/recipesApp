@@ -72,17 +72,16 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/layout_bar"
                 android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 tools:context=".views.fragments.RecipeDetailsFragment"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="30dp"
                 android:layout_marginRight="20dp"
                 tools:ignore="RtlHardcoded">
 
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="6dp"/>
+
                 <ImageView
                     android:background="@color/placeholder"
                     app:imageUrl="@{recipe.image}"

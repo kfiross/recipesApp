@@ -61,6 +61,7 @@
     <string name="quantity">Quantity</string>
     <string name="add_ingredient">Add New Ingredient</string>
     <string name="and">and</string>
+    <string name="search_recipes">Find me recipes</string>
 
     <plurals name="numberSpoons">
         <item quantity="one">One spoon</item>

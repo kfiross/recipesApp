@@ -4,22 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+        <variable name="canSearch" type="Boolean" />
         <variable name="tags" type="java.util.ArrayList&lt;String>" />
+        <variable name="isLoading" type="Boolean" />
+<!--        <variable name="onTextChanged" type="androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged" />-->
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="#FEF1D8"
         android:layout_height="match_parent">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             tools:context=".views.fragments.SearchFragment">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FEF1D8"/>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -28,10 +30,11 @@
                 android:scaleX="1.7"
                 android:scaleY="0.9"
                 android:rotation="12"
-                android:alpha="0.4"
+                android:alpha="0.2"
                 android:background="@drawable/bg_recipe" />
 
             <LinearLayout
+                android:id="@+id/header"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -47,8 +50,11 @@
                     android:padding="8dp"
                     android:layout_height="60dp">
 
+<!--
+       android:onTextChanged="@{onTextChanged}"
+ -->
                     <EditText
-                        android:id="@+id/et_searchTag"
+                        android:id="@+id/etSearchTag"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
@@ -58,10 +64,11 @@
                         android:layout_height="wrap_content"/>
 
                     <Button
+                        android:enabled="@{canSearch}"
                         android:id="@+id/btnAddTag"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Add"
+                        android:text="@string/add_ingredient"
                         />
 
                 </LinearLayout>
@@ -69,6 +76,8 @@
 
 
                 <com.google.android.material.chip.ChipGroup
+                    android:padding="8dp"
+                    android:minHeight="50dp"
                     android:id="@+id/chip_group_ingredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,40 +109,53 @@
                     android:id="@+id/btnSearch"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="Search"
-                    android:backgroundTint="@android:color/black"
+                    android:text="@string/search_recipes"
                     android:layout_gravity="center"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:drawableTint="#fff"
+                    android:drawableEnd="@drawable/ic_search_white"
+                    android:enabled="false"
 
                     />
 
-                <!--        <androidx.recyclerview.widget.RecyclerView-->
-                <!--            android:layout_width="match_parent"-->
-                <!--            android:layout_height="wrap_content"-->
-                <!--            tools:listitem="@layout/item_ingredient_chip"-->
-                <!--            tools:scrollbars="horizontal"-->
-                <!--            tools:itemCount="5"-->
-                <!--            app:spanCount="2"-->
-                <!--            tools:orientation="horizontal"-->
-                <!--            tools:layoutManager="GridLayoutManager"-->
-                <!--            />-->
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recipesRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_recipe_layout" />
 
             </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/header"
+                android:id="@+id/recipesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_recipe_layout"
+                android:visibility="@{(isLoading!=null &amp;&amp; !isLoading) ? View.VISIBLE : View.GONE}"
+                />
+
+            <LinearLayout
+                android:layout_below="@+id/header"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:layout_marginTop="120dp"
+                    android:layout_weight="1"
+                    android:id="@+id/loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    style="?android:progressBarStyleLarge"
+                    android:visibility="@{(isLoading!=null &amp;&amp; isLoading) ? View.VISIBLE : View.GONE}"
+                    />
+
+            </LinearLayout>
+
+
+
 
         </RelativeLayout>
 
     </ScrollView>
-
-
-
-
 </layout>

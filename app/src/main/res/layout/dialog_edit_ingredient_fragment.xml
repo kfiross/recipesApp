@@ -16,8 +16,8 @@
     </data>
 
     <FrameLayout
-        android:layout_width="360dp"
-        android:layout_height="320dp"
+        android:layout_width="370dp"
+        android:layout_height="310dp"
         android:padding="20dp"
         tools:context=".views.fragments.dialogs.DialogFragment">
 

@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.adapters.TextViewBindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -19,6 +21,7 @@ import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentSearchBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
+import com.recipesapp.recipesapp.utils.TextChangedListener;
 import com.recipesapp.recipesapp.views.adapters.RecipeAdapter;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +39,7 @@ public class SearchFragment extends BaseFragment {
     private FragmentSearchBinding mBinding;
 
     private ArrayList<String> mTags;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -64,6 +68,7 @@ public class SearchFragment extends BaseFragment {
 
         mBinding.chipGroupIngredients.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             updateClickListeners();
+            mBinding.btnSearch.setEnabled(!mTags.isEmpty());
         });
     }
 
@@ -74,6 +79,21 @@ public class SearchFragment extends BaseFragment {
         mBinding.recipesRecyclerView.setAdapter(categoryAdapter);
 
         mBinding.setTags(mTags);
+        mBinding.setCanSearch(false);
+        mBinding.setIsLoading(null);
+
+//        mBinding.setOnTextChanged((s, start, before, count) -> {
+//            mBinding.setCanSearch(!s.toString().isEmpty());
+//        });
+
+        mBinding.etSearchTag.addTextChangedListener(new TextChangedListener() {
+            @Override
+            protected void onTextChanged(String before, String old, String aNew, String after) {
+                mBinding.setCanSearch(!aNew.isEmpty());
+            }
+        });
+
+
     }
 
     private void setButtonsClickListeners(){
@@ -97,6 +117,7 @@ public class SearchFragment extends BaseFragment {
     }
 
     private void searchResult(){
+        mBinding.setIsLoading(true);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
 
@@ -108,13 +129,16 @@ public class SearchFragment extends BaseFragment {
                 recipes.addAll(FirestoreUtils.searchRecipes(mTags));
             } catch (ExecutionException e) {
                 e.printStackTrace();
+                mBinding.setIsLoading(false);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                mBinding.setIsLoading(false);
             }
 
             handler.post(() -> {
                 //UI Thread work here
                 ((RecipeAdapter)mBinding.recipesRecyclerView.getAdapter()).setItems(recipes);
+                mBinding.setIsLoading(false);
             });
         });
     }

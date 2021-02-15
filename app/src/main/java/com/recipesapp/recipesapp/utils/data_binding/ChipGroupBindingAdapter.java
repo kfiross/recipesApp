@@ -26,12 +26,12 @@ public class ChipGroupBindingAdapter {
 
             Chip chip = new Chip(context);
             chip.setElevation(4.f);
-            chip.setChipBackgroundColor(ColorStateList.valueOf(
-                    context.getColor(R.color.colorPrimary)
-            ));
+            chip.setChipBackgroundColorResource(R.color.colorPrimary);
+            chip.setTextColor(Color.WHITE);
             chip.setEnabled(true);
             chip.setText(item);
             chip.setMinWidth(220);
+            chip.setPadding(8,8,8,8);
             chip.setCloseIcon(context.getDrawable(R.drawable.ic_remove_circle));
 
             int finalI = i;
