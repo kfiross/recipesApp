@@ -5,12 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +13,16 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,8 +36,8 @@ import com.recipesapp.recipesapp.utils.TextChangedListener;
 import com.recipesapp.recipesapp.utils.UiUtils;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
-import com.recipesapp.recipesapp.views.fragments.dialogs.IngredientEditDialogFragment;
 import com.recipesapp.recipesapp.views.fragments.dialogs.MyDialogFragment;
+import com.recipesapp.recipesapp.views.fragments.dialogs.IngredientEditDialogFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -45,13 +48,15 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddRecipeFragment extends BaseFragment {
+public class RecipeEditFragment extends BaseFragment {
 
     private FragmentAddRecipeBinding mBinding;
     private RecipeSharedViewModel vmRecipe;
+    private Recipe mRecipeData;
     private Observer<Recipe> observer;
+    private NavController mNavController;
 
-    public AddRecipeFragment() {
+    public RecipeEditFragment() {
         // Required empty public constructor
     }
 
@@ -59,7 +64,15 @@ public class AddRecipeFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mNavController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+
         vmRecipe = ViewModelProviders.of(getActivity()).get(RecipeSharedViewModel.class);
+        vmRecipe.select(new Recipe());
+
+        Bundle args = getArguments();
+        if(args != null){
+            mRecipeData = args.getParcelable("recipe");
+        }
     }
 
     @Override
@@ -78,14 +91,14 @@ public class AddRecipeFragment extends BaseFragment {
 
         // initialize binding variables
 
-        mBinding.setRecipe(new Recipe());
-        mBinding.setEditMode(false);
+        mBinding.setRecipe(mRecipeData == null ? new Recipe() : mRecipeData);
+        mBinding.setEditMode(true);
 
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
         setUpViews();
-        vmRecipe.select(mBinding.getRecipe());
 
+        vmRecipe.select(mRecipeData);
         observer = (Observer<Recipe>) recipe -> {
             mBinding.setRecipe(recipe);
             mBinding.setCanAddRecipe(checkForm());
@@ -94,6 +107,8 @@ public class AddRecipeFragment extends BaseFragment {
 
         };
         vmRecipe.getSelected().observe(getActivity(), observer);
+
+
 
     }
 
@@ -119,7 +134,7 @@ public class AddRecipeFragment extends BaseFragment {
     private void setupButtons() {
         mBinding.formLayout.btnAddIngredient.setOnClickListener(v -> openDialog(0, null));
         mBinding.formLayout.btnAddStep.setOnClickListener(v -> openDialog(1, null));
-        mBinding.btnAddRecipe.setOnClickListener(v -> addRecipe());
+        mBinding.btnAddRecipe.setOnClickListener(v -> updateRecipe());
         mBinding.formLayout.btnAddPhoto.setOnClickListener(v -> addPhoto());
     }
 
@@ -214,55 +229,53 @@ public class AddRecipeFragment extends BaseFragment {
         }
     }
 
-    private void addRecipe(){
+    private void updateRecipe(){
         // add to recipes
-        FirestoreUtils.addRecipe(mBinding.getRecipe())
+        FirestoreUtils.updateRecipe(mBinding.getRecipe())
+                .addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                UiUtils.showAlertOk(
+                        getContext(),
+                        "Hooray!",
+                        "We Updated your Recipe!",
+                        (dialog, which) -> {}
+                );
+            }
+            else{
+                UiUtils.showAlertOk(
+                        getContext(),
+                        "Oops! something went wrong",
+                        "We couldn't update your Recipe...",
+                        (dialog, which) -> {}
+                );
+            }
+        });
+        resetForm();
+    }
 
-                .addOnCompleteListener(task1 -> {
-            if(task1.isSuccessful()) {
-                final String newRecipeId = task1.getResult().getId();
-
-                // upload an image in case user added one
-                if(mBinding.getImageUri() != null){
-                    final String imagePath = String.format("images/%s.jpg", newRecipeId);
-                    FirestoreUtils.uploadPhoto(mBinding.getImageUri(), imagePath)
-                            .addOnCompleteListener(task -> {
-                                StorageReference imageStorageRef =
-                                        FirebaseStorage.getInstance().getReference(imagePath);
-                                imageStorageRef.getDownloadUrl().addOnCompleteListener(taskUrl -> {
-                                    if(taskUrl.isSuccessful()){
-                                        FirebaseFirestore.getInstance().collection("recipes").document(newRecipeId)
-                                                .update("image", taskUrl.getResult().toString());
-                                    }
-                                });
-                            });
-                }
-
-                // keep cached updated
-                MainActivity.preferencesConfig.addIdToMyRecipes(newRecipeId);
-
-                // also update the user's document
-                FirestoreUtils.addToMyRecipes(newRecipeId).addOnCompleteListener(task2 -> {
-                    if(task2.isSuccessful()){
+    private void deleteRecipe(){
+        // add to recipes
+        FirestoreUtils.deleteRecipe(mBinding.getRecipe().getId())
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
                         UiUtils.showAlertOk(
                                 getContext(),
-                                "Hooray!",
-                                "We added your Recipe!",
-                                (dialog, which) -> {}
+                                "Action completed successfully",
+                                "Your recipe is deleted!",
+                                (dialog, which) -> {
+                                    mNavController.popBackStack();
+                                }
                         );
                     }
                     else{
                         UiUtils.showAlertOk(
                                 getContext(),
                                 "Oops! something went wrong",
-                                "We couldn't add your Recipe...",
+                                "We couldn't delete your Recipe...",
                                 (dialog, which) -> {}
                         );
                     }
-
                 });
-            }
-        });
         resetForm();
     }
 

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="list" type="java.util.ArrayList&lt;String>" />
+        <variable name="recipe" type="com.recipesapp.recipesapp.data.model.Recipe" />
+        <variable name="imageUri" type="android.net.Uri" />
+        <variable name="editMode" type="Boolean" />
+    </data>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/recipe_name"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+                <Space
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:text="@{recipe.name}"
+                    android:hint="@string/hint_enter_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="4dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:text="@string/making_time"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"/>
+
+                <Space
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_time"
+                    android:hint="@string/hint_time_in_minutes"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="4dp" />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:text="@string/category"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"/>
+
+                <Space
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:spinnerMode="dialog"
+                    android:id="@+id/spinnerCategory"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:items="@{@stringArray/categories}"
+                    app:itemLayout="@{@layout/my_spinner_item_layout}"
+                    app:dropDownLayout="@{@layout/my_spinner_item_dropdown_layout}"
+                    tools:listitem="@layout/my_spinner_item_layout" />
+
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/ingredients"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_add_ingredient"
+                    android:text="@string/add_ingredient"
+                    android:textColor="#fff"
+                    android:layout_width="130dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_add_white"
+                    android:drawableStart="@drawable/ic_add_white"/>
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="visible"
+                android:id="@+id/list_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                items="@{recipe.getIngredientsStrings(context)}"
+
+                tools:itemCount="4"
+                tools:listitem="@layout/list_edit_item_content"
+
+                />
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="4dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/steps"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_add_step"
+                    android:text="@string/add_step"
+                    android:textColor="#fff"
+                    android:layout_width="130dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_add_white"
+                    android:drawableStart="@drawable/ic_add_white"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_steps"
+                android:layout_width="match_parent"
+                tools:listitem="@layout/list_edit_item_content"
+                android:scrollbarSize="3dp"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                android:scrollingCache="true"
+                android:smoothScrollbar="true"
+                android:layout_height="250dp"
+                items="@{recipe.steps}"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/photo"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_add_photo"
+                    android:text="@string/add_photo"
+                    android:textColor="#fff"
+                    android:layout_width="130dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_add_white"
+                    android:drawableStart="@drawable/ic_add_white"/>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="6dp" />
+
+
+            <!--                    <ListView-->
+            <!--                        android:id="@+id/list_photos"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        tools:listitem="@layout/list_photo_item"-->
+            <!--                        android:layout_height="200dp"-->
+            <!--                        items="@{recipe.photos}"-->
+            <!--                        />-->
+
+            <RelativeLayout
+                android:visibility="@{imageUri == null ? View.GONE : View.VISIBLE}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="260dp"
+                    android:layout_height="200dp"
+                    imageSrc="@{imageUri}" />
+
+                <ImageButton
+                    android:id="@+id/btn_remove_image"
+                    android:src="@drawable/ic_delete"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

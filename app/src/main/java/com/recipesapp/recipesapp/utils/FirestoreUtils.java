@@ -101,4 +101,16 @@ public class FirestoreUtils {
         StorageReference imageRef = FirebaseStorage.getInstance().getReference(path);
         return imageRef.putFile(imageUri);
     }
+
+    public static Task<Void> updateRecipe(Recipe recipe){
+        return FirebaseFirestore.getInstance().collection("recipes")
+                .document(recipe.getId())
+                .update(recipe.toJson());
+    }
+
+    public static Task<Void> deleteRecipe(String recipeId){
+        return FirebaseFirestore.getInstance().collection("recipes")
+                .document(recipeId)
+                .delete();
+    }
 }

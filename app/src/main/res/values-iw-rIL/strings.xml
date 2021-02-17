@@ -3,6 +3,7 @@
     <string name="all_recipes">כל המתכונים</string>
     <string name="favourites">מועדפים</string>
     <string name="add_recipe">הוספת מתכון</string>
+    <string name="edit_recipe">עדכון מתכון</string>
     <string name="my_recipes">המתכונים שלי</string>
 
     <string name="settings">הגדרות</string>
@@ -41,6 +42,10 @@
     <string name="sorry">מצטערים</string>
     <string name="error_one_photo_only">לא ניתן להוסיף יותר מתמונה אחת</string>
 
+    <string name="add_step">הוספת צעד</string>
+    <string name="add_photo">הוספת תמונה</string>
+    <string name="delete_recipe">מחיקת מתכון</string>
+
     <!--    -->
     <string name="sweets">מתוקים</string>
     <string name="chicken">עוף</string>
@@ -51,8 +56,6 @@
     <!-- -->
     <string name="ml">מ"ל</string>
     <string name="g">גרם</string>
-    <string name="add_step">הוספת צעד</string>
-    <string name="add_photo">הוספת תמונה</string>
 
 
 

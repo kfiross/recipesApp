@@ -5,7 +5,9 @@
 
     <data>
 
+        <import type="android.view.View"/>
         <variable name="isRTL" type="Boolean" />
+        <variable name="isMy" type="boolean" />
         <variable
             name="navController"
             type="androidx.navigation.NavController" />
@@ -38,7 +40,7 @@
             <LinearLayout
                 android:id="@+id/layout_bar"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center">
@@ -51,6 +53,14 @@
                     android:onClick="@{(v)-> navController.popBackStack()}"
                     android:src="@drawable/ic_back" />
 
+                <ImageButton
+                    android:id="@+id/btn_goto_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit"
+                    android:visibility="@{isMy ? View.VISIBLE : View.GONE}"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
                 <TextView
                     android:layout_width="match_parent"

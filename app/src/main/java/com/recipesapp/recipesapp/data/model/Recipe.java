@@ -164,8 +164,8 @@ public class Recipe implements Parcelable {
         this.mImage = mImage;
     }
 
-    public HashMap<String,Object> toJson() {
-        HashMap<String,Object> map = new HashMap<>();
+    public Map<String,Object> toJson() {
+        Map<String,Object> map = new HashMap<>();
         map.put("category", mCategory);
         map.put("name", mName);
         map.put("time", mMakingTime);

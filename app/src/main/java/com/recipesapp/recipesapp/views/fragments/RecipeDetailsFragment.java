@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -67,9 +68,16 @@ public class RecipeDetailsFragment extends Fragment {
         mBinding.listSteps.setHasFixedSize(true);
         mBinding.listSteps.setAdapter(new MyListAdapter2(getContext(), new ArrayList<>(), 1));
 
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         mBinding.setRecipe(mSelectedRecipe);
         mBinding.setIsRTL(true);
-        mBinding.setNavController(
-                Navigation.findNavController((MainActivity) getContext(), R.id.nav_host_fragment));
+        mBinding.setIsMy(MainActivity.preferencesConfig.readMyRecipesIds().contains(mSelectedRecipe.getId()));
+        mBinding.setNavController(navController);
+
+        mBinding.btnGotoEdit.setOnClickListener(v -> {
+            Bundle args = new Bundle();
+            args.putParcelable("recipe", mSelectedRecipe);
+            navController.navigate(R.id.recipeEditFragment, args);
+        });
     }
 }

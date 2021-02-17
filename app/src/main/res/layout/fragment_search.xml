@@ -30,7 +30,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="8dp"
             tools:context=".views.fragments.SearchFragment">
 
 
@@ -44,89 +43,98 @@
                 android:scaleX="1.7"
                 android:scaleY="0.9" />
 
-            <LinearLayout
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <include
+                layout="@layout/appbar"
+                app:name="@{@string/search_recipe}" />
 
-                <include
-                    layout="@layout/appbar"
-                    app:name="@{@string/search_recipe}" />
+            <RelativeLayout
+                android:layout_below="@+id/toolbar"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:id="@+id/header"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <!--
-                           android:onTextChanged="@{onTextChanged}"
-                     -->
-                    <EditText
-                        android:id="@+id/etSearchTag"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
 
-                    <Space
-                        android:layout_width="12dp"
-                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <!--
+                               android:onTextChanged="@{onTextChanged}"
+                         -->
+                        <EditText
+                            android:id="@+id/etSearchTag"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <Space
+                            android:layout_width="12dp"
+                            android:layout_height="wrap_content" />
+
+                        <Button
+                            android:id="@+id/btnAddTag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:enabled="@{canSearch}"
+                            android:text="@string/add_ingredient" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#000"
+                        android:text="@string/selected_ingredients"
+                        />
+
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:padding="8dp"
+                        app:chipsList="@{tags}"
+                        app:context="@{context}">
+
+                    </com.google.android.material.chip.ChipGroup>
+
 
                     <Button
-                        android:id="@+id/btnAddTag"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/btnSearch"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableEnd="@drawable/ic_search_white"
+                        android:enabled="false"
+                        android:text="@string/search_recipes"
+
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recipesRecyclerView"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:enabled="@{canSearch}"
-                        android:text="@string/add_ingredient" />
+                        android:visibility="@{(isLoading!=null &amp;&amp; !isLoading) ? View.VISIBLE : View.GONE}"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_recipe_layout" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#000"
-                    android:text="@string/selected_ingredients"
-                    />
+            </RelativeLayout>
 
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chip_group_ingredients"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="50dp"
-                    android:padding="8dp"
-                    app:chipsList="@{tags}"
-                    app:context="@{context}">
 
-                </com.google.android.material.chip.ChipGroup>
-
-
-                <Button
-                    android:id="@+id/btnSearch"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableEnd="@drawable/ic_search_white"
-                    android:enabled="false"
-                    android:text="@string/search_recipes"
-
-                    />
-
-
-            </LinearLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recipesRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/header"
-                android:visibility="@{(isLoading!=null &amp;&amp; !isLoading) ? View.VISIBLE : View.GONE}"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_recipe_layout" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -141,7 +149,7 @@
                     android:id="@+id/loading"
                     style="?android:progressBarStyleLarge"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="120dp"
                     android:layout_weight="1"
