@@ -1,6 +1,9 @@
 package com.recipesapp.recipesapp.views.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,16 +13,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.data.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipeDetailsBinding;
-import com.recipesapp.recipesapp.views.adapters.CategoryAdapter;
-import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
 
 import java.util.ArrayList;

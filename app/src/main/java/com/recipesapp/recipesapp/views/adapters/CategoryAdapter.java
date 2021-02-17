@@ -1,10 +1,7 @@
 package com.recipesapp.recipesapp.views.adapters;
 
-import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -19,7 +16,6 @@ import com.recipesapp.recipesapp.data.model.Category;
 import com.recipesapp.recipesapp.databinding.ItemCategoryLayoutBinding;
 
 import java.util.ArrayList;
-
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemViewHolder>{
 

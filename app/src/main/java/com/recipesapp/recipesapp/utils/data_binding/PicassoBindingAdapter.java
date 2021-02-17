@@ -1,20 +1,14 @@
 package com.recipesapp.recipesapp.utils.data_binding;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Request;
 import com.squareup.picasso.RequestCreator;
-
-import java.io.File;
-import java.net.URI;
 
 public class PicassoBindingAdapter {
     @BindingAdapter(value = {"imageUrl", "placeholder", "error"}, requireAll = false)

@@ -3,7 +3,6 @@ package com.recipesapp.recipesapp.utils.data_binding;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 
 import java.util.ArrayList;

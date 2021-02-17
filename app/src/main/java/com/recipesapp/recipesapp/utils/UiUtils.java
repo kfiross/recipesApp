@@ -3,7 +3,6 @@ package com.recipesapp.recipesapp.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.view.View;
 import android.widget.Toast;
 
 public class UiUtils {

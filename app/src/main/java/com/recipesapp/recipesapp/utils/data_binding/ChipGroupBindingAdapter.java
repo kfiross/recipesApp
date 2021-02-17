@@ -1,7 +1,6 @@
 package com.recipesapp.recipesapp.utils.data_binding;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 
 import androidx.databinding.BindingAdapter;

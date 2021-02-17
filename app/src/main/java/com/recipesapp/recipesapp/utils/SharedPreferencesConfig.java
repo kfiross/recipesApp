@@ -6,8 +6,6 @@ import android.content.res.Configuration;
 
 import com.recipesapp.recipesapp.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;

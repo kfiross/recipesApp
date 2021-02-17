@@ -1,15 +1,10 @@
 package com.recipesapp.recipesapp.utils.data_binding;
 
-import android.widget.ListView;
-
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.recipesapp.recipesapp.data.model.Ingredient;
-import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewBindingAdapter {

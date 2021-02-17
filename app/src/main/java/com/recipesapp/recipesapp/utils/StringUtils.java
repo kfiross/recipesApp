@@ -1,11 +1,8 @@
 package com.recipesapp.recipesapp.utils;
 
 import android.content.Context;
-import android.content.res.Configuration;
 
 import com.recipesapp.recipesapp.R;
-
-import java.util.Locale;
 
 public class StringUtils {
     public static String getLocaleString(

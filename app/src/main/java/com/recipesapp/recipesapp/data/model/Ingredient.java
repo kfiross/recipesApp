@@ -2,7 +2,6 @@ package com.recipesapp.recipesapp.data.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,9 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.utils.StringUtils;
-
 
 import java.util.Map;
 
