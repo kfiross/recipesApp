@@ -21,9 +21,9 @@
         <item quantity="other">%d דקות</item>
     </plurals>
 
-    <string name="category">קטגוריה</string>
+    <string name="category">קטגוריה:</string>
     <string name="add">להוספה</string>
-    <string name="recipe_name">שם המתכון</string>
+    <string name="recipe_name">שם המתכון:</string>
     <string name="add_new_recipe">הוספת מתכון חדש</string>
     <string name="hint_enter_name">הזן שם…</string>
     <string name="hint_time_in_minutes">זמן בדקות…</string>
@@ -34,7 +34,12 @@
 
     <string name="search_recipe">חיפוש מתכון לפי רכיבים</string>
     <string name="search_recipes">חפשו לי מתכונים</string>
+    <string name="selected_ingredients">מצרכים שנבחרו:</string>
+    <string name="photo">תמונה:</string>
+    <string name="photos">תמונות:</string>
 
+    <string name="sorry">מצטערים</string>
+    <string name="error_one_photo_only">לא ניתן להוסיף יותר מתמונה אחת</string>
 
     <!--    -->
     <string name="sweets">מתוקים</string>
@@ -46,6 +51,9 @@
     <!-- -->
     <string name="ml">מ"ל</string>
     <string name="g">גרם</string>
+    <string name="add_step">הוספת צעד</string>
+    <string name="add_photo">הוספת תמונה</string>
+
 
 
     <plurals name="numberSpoons">

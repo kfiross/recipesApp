@@ -4,7 +4,7 @@
     android:id="@android:id/text1"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     style="@style/Base.ThemeOverlay.AppCompat.Dark"
-    android:background="@android:color/black"
+    android:background="@android:color/white"
     android:singleLine="true"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
@@ -16,7 +16,7 @@
     android:layout_marginStart="40dp"
     android:layout_height="?attr/actionBarSize"
     android:ellipsize="marquee"
-    android:textColor="@android:color/white"
+    android:textColor="@android:color/black"
     android:textSize="20sp"
     android:layout_centerInParent="true"
 

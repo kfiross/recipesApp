@@ -1,5 +1,7 @@
 package com.recipesapp.recipesapp.utils;
 
+import android.net.Uri;
+
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.Task;
@@ -10,6 +12,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.recipesapp.recipesapp.data.model.Recipe;
 
 import java.util.ArrayList;
@@ -90,5 +95,10 @@ public class FirestoreUtils {
         }
 
         return recipes;
+    }
+
+    public static UploadTask uploadPhoto(Uri imageUri, String path) {
+        StorageReference imageRef = FirebaseStorage.getInstance().getReference(path);
+        return imageRef.putFile(imageUri);
     }
 }

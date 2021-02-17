@@ -78,6 +78,8 @@ public class MyDialogFragment extends DialogFragment {
             editedRecipe.getSteps().add(data);
         }
 
+        vmRecipe.select(editedRecipe);
+
         this.dismiss();
     }
 

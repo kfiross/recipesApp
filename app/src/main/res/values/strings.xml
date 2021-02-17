@@ -40,6 +40,19 @@
     <string name="hint_time_in_minutes">Time in minutes…</string>
     <string name="search_recipe">Search Recipe By Ingredients</string>
 
+    <string name="ingredient_name">Ingredient Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="add_ingredient">Add Ingredient</string>
+    <string name="and">and</string>
+    <string name="search_recipes">Find me recipes</string>
+    <string name="selected_ingredients">Selected Ingredients</string>
+    <string name="photo">Photo:</string>
+    <string name="photos">Photos:</string>
+    <string name="add_step">Add Step</string>
+
+    <string name="sorry">Sorry</string>
+    <string name="error_one_photo_only">You can\'t add more than one photo</string>
+
     <plurals name="numberMinutes">
         <item quantity="one">One minute</item>
         <item quantity="two">2 minutes</item>
@@ -57,11 +70,8 @@
     <!--  Ingredients  -->
     <string name="ml">ml</string>
     <string name="g">g</string>
-    <string name="ingredient_name">Ingredient Name</string>
-    <string name="quantity">Quantity</string>
-    <string name="add_ingredient">Add New Ingredient</string>
-    <string name="and">and</string>
-    <string name="search_recipes">Find me recipes</string>
+    <string name="add_photo">Add Photo</string>
+
 
     <plurals name="numberSpoons">
         <item quantity="one">One spoon</item>

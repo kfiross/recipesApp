@@ -220,4 +220,8 @@ public class Recipe implements Parcelable {
         }
         return false;
     }
+
+    public List<String> getPhotos(){
+        return List.of(mImage);
+    }
 }
