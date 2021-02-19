@@ -6,7 +6,7 @@
     <data>
         <import type="com.recipesapp.recipesapp.utils.StringUtils"/>
         <import type="android.view.View"/>
-<!--        <variable name="ingredient" type="com.recipesapp.recipesapp.data.model.Ingredient" />-->
+<!--        <variable name="ingredient" type="com.recipesapp.recipesapp.model.Ingredient" />-->
         <variable name="title" type="String" />
 
         <variable name="name" type="String" />

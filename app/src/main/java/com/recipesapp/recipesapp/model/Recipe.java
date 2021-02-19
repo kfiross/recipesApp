@@ -1,4 +1,4 @@
-package com.recipesapp.recipesapp.data.model;
+package com.recipesapp.recipesapp.model;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class represents a recipe
+ */
 public class Recipe implements Parcelable {
     private String mId;
 

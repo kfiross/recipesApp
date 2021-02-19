@@ -6,7 +6,7 @@
     >
 
     <data>
-        <variable name="recipe" type="com.recipesapp.recipesapp.data.model.Recipe" />
+        <variable name="recipe" type="com.recipesapp.recipesapp.model.Recipe" />
         <variable name="isFav" type="Boolean" />
     </data>
 

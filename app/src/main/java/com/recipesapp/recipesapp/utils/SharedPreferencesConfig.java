@@ -25,17 +25,25 @@ public class SharedPreferencesConfig {
 
     }
 
+    /**
+     * clears all saved preferences
+     */
     public void cleanAll(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
     }
 
-
+    /**
+     * return the list of ids of the user's favourites recipes
+     */
     public Set<String> readFavsIds(){
         return sharedPreferences.getStringSet("favs_ids", new HashSet<>());
     }
 
+    /**
+     * adds a new favourite recipe id
+     */
     public void addFavId(String id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> ids = readFavsIds();
@@ -44,6 +52,9 @@ public class SharedPreferencesConfig {
         editor.apply();
     }
 
+    /**
+     * removes a favourite (assume exist) recipe id
+     */
     public void removeFavId(String id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> ids = readFavsIds();
@@ -52,6 +63,9 @@ public class SharedPreferencesConfig {
         editor.apply();
     }
 
+    /**
+     * updates the user's favourites recipes ids list
+     */
     public void writeFavsIds(List<String> ids){
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -64,12 +78,16 @@ public class SharedPreferencesConfig {
         editor.apply();
     }
 
-    /// ///////////////////////////
-
+    /**
+     * return the list of ids of the recipes user created
+     */
     public Set<String> readMyRecipesIds(){
         return sharedPreferences.getStringSet("my_recipes_ids", new HashSet<>());
     }
 
+    /**
+     * adds a new user-created recipe id
+     */
     public void addIdToMyRecipes(String id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> ids = readFavsIds();
@@ -78,6 +96,9 @@ public class SharedPreferencesConfig {
         editor.apply();
     }
 
+    /**
+     * remove a new user-created recipe id
+     */
     public void removeIdFromMyRecipes(String id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> ids = readFavsIds();
@@ -86,6 +107,10 @@ public class SharedPreferencesConfig {
         editor.apply();
     }
 
+
+    /**
+     * updates the user-created recipes ids list
+     */
     public void writeMyRecipesIds(List<String> ids){
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -100,16 +125,25 @@ public class SharedPreferencesConfig {
 
     ///////
 
+    /**
+     * return the current used language (code)
+     */
     public String readLangStatus() {
         return sharedPreferences.getString("curr_lang", "he");
     }
 
+    /**
+     * updates the current used language (code)
+     */
     public void writeLangStatus(String status) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("curr_lang", status);
         editor.apply();
     }
 
+    /**
+     * set the locale of the app
+     */
     public void setLocal(String lang, Context context) {
         String localString = localFromLang(lang);
         Locale local = new Locale(localString);
@@ -121,11 +155,17 @@ public class SharedPreferencesConfig {
         writeLangStatus(lang);
     }
 
+    /**
+     * update the locale of the app
+     */
     public void loadLocal(Context context){
         String lang = readLangStatus();
         setLocal("he", context);
     }
 
+    /**
+     * converting the locale of from a language Code
+     */
     public String localFromLang(String lang) {
         if (lang.equals("he"))
             return "iw";

@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View"/>
         <variable name="list" type="java.util.ArrayList&lt;String>" />
-        <variable name="recipe" type="com.recipesapp.recipesapp.data.model.Recipe" />
+        <variable name="recipe" type="com.recipesapp.recipesapp.model.Recipe" />
         <variable name="canAddRecipe" type="boolean" />
         <variable name="imageUri" type="android.net.Uri" />
         <variable name="editMode" type="Boolean" />

@@ -47,6 +47,9 @@ public class StringUtils {
         };
     }
 
+    /**
+     * return a number (with fractions) of an item in a clear way as a string,
+     */
     public static String beautifyNum(Context context, double num){
         if(num % 1f == 0.0){
             return String.valueOf((int)num);

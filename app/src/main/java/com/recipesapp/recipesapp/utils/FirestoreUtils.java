@@ -15,7 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.recipesapp.recipesapp.data.model.Recipe;
+import com.recipesapp.recipesapp.model.Recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;

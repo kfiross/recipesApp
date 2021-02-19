@@ -14,7 +14,7 @@
 
         <variable
             name="recipe"
-            type="com.recipesapp.recipesapp.data.model.Recipe" />
+            type="com.recipesapp.recipesapp.model.Recipe" />
     </data>
 
     <ScrollView

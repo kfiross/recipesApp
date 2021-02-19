@@ -18,6 +18,8 @@ import com.recipesapp.recipesapp.databinding.FragmentLoginBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.LoginData;
 
+import org.jetbrains.annotations.NotNull;
+
 public class LoginFragment extends Fragment {
 
     private NavController mNavController;
@@ -37,7 +39,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         // Inflate the layout for this fragment
@@ -53,29 +55,8 @@ public class LoginFragment extends Fragment {
         mBinding.setLoginMode(true);
         mNavController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
 
-        mBinding.setLogin(new LoginData("1@1.com", "123456"));
+        mBinding.setLogin(new LoginData("", ""));
     }
-
-
-//    private boolean checkAllFields() {
-//        if (mBinding.etUsername.length() == 0) {
-//            mBinding.etUsername.setError("This field is required");
-//            return false;
-//        }
-//
-//        if (mBinding.etPassword.length() == 0) {
-//            mBinding.etPassword.setError("This field is required");
-//            return false;
-//        }
-//
-//        if (mBinding.etPassword.length() < 6) {
-//            mBinding.etPassword.setError("Password must be minimum 6 characters");
-//            return false;
-//        }
-//
-//        // after all validation return true.
-//        return true;
-//    }
 
     public void loginOrRegister() {
         final String email = mBinding.getLogin().getEmail();

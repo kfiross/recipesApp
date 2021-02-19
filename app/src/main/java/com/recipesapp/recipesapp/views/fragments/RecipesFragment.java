@@ -16,7 +16,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.data.model.Recipe;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipesBinding;
 import com.recipesapp.recipesapp.views.adapters.RecipeAdapter;
 

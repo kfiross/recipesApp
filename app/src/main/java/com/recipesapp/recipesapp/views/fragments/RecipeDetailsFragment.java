@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.data.model.Recipe;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipeDetailsBinding;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
 

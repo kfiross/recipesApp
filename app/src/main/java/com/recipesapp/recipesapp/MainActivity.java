@@ -22,7 +22,8 @@ import com.recipesapp.recipesapp.utils.SharedPreferencesConfig;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     public static SharedPreferencesConfig preferencesConfig;
     public static FragmentManager appFragmentManager;
 
@@ -52,20 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.drawer_menu);
         navigationView.setCheckedItem(R.id.nav_home);
-
-//        mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-//            switch (destination.getId()){
-//                case R.id.homeFragment:
-//                case R.id.favoritesFragment2:
-//                case R.id.addRecipeFragment:
-//
-//                    break;
-//
-//                default:
-//                    break;
-//            }
-//
-//        });
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -140,6 +127,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * Function to handle auth events:
+     * When user logged in, handles login process: reading data and saving to cache an
+     * moving user to home screen.
+     * When user logged out, handles logout procees: cleans cache and moving user to login screen
+     */
     private void handleAuth(FirebaseAuth firebaseAuth) {
         NavOptions navOptions = new NavOptions.Builder()
                 .setLaunchSingleTop(true)

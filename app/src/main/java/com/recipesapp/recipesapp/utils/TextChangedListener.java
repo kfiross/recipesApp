@@ -11,7 +11,6 @@ import android.text.TextWatcher;
  *     <li>The <b>new</b> text in the updated part.</li>
  *     <li>The text placed <b>after</b> the updated part.</li>
  * </ul>
- * Created by Jeremy B.
  */
 
 public abstract class TextChangedListener implements TextWatcher {

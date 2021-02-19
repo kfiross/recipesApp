@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.data.model.Ingredient;
-import com.recipesapp.recipesapp.data.model.Recipe;
+import com.recipesapp.recipesapp.model.Ingredient;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.DialogEditIngredientFragmentBinding;
 import com.recipesapp.recipesapp.utils.Constants;
 import com.recipesapp.recipesapp.utils.ScreenSize;

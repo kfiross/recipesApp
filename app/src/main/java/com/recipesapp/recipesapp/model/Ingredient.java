@@ -1,4 +1,4 @@
-package com.recipesapp.recipesapp.data.model;
+package com.recipesapp.recipesapp.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +13,9 @@ import com.recipesapp.recipesapp.utils.StringUtils;
 
 import java.util.Map;
 
+/**
+ * Class represents a recipe's ingredient
+ */
 public class Ingredient implements Parcelable {
     private String mName;
 

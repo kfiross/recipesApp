@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.data.model.Category;
+import com.recipesapp.recipesapp.model.Category;
 import com.recipesapp.recipesapp.databinding.FragmentHomeBinding;
 import com.recipesapp.recipesapp.views.adapters.CategoryAdapter;
 

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.data.model.Recipe;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentMyRecipesBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.views.adapters.RecipeAdapter;
@@ -53,7 +53,6 @@ public class MyRecipesFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = mBinding.recyclerViewRecipes;
-
         setupRecyclerView(new ArrayList<>());
 
         fetchDocs();
@@ -68,13 +67,12 @@ public class MyRecipesFragment extends BaseFragment {
 
         executor.execute(() -> {
 
-            //Background work here
+            // Background work here
             ArrayList<Recipe> recipes = new ArrayList<>();
             for (String id : favsIds) {
                 try {
                     DocumentSnapshot documentSnapshot = FirestoreUtils.getRecipe(id);
-//                        // documentSnapshot.toObject(Recipe.class);
-//
+
                     Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
                     recipes.add(newRecipe);
                 } catch (ExecutionException e) {

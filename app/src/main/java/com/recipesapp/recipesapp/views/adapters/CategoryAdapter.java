@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.data.model.Category;
+import com.recipesapp.recipesapp.model.Category;
 import com.recipesapp.recipesapp.databinding.ItemCategoryLayoutBinding;
 
 import java.util.ArrayList;

@@ -1,10 +1,14 @@
-package com.recipesapp.recipesapp.data.model;
+package com.recipesapp.recipesapp.model;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.recipesapp.recipesapp.R;
 
 import java.util.HashMap;
 
+/**
+ * Class represents a recipe's category such
+ * ex.: 'Meat', 'Fish'
+ */
 public class Category {
     private String mId;
     private HashMap<String,String> mName;
@@ -14,6 +18,9 @@ public class Category {
         this.mName = name;
     }
 
+    /**
+     * return the right background color for the category
+     */
     public static int getBgById(String id) {
         switch (id){
             case "0":
@@ -43,6 +50,9 @@ public class Category {
     }
 
 
+    /**
+     * Constructing a category from a snapshot of document
+     */
     public static Category fromDocument(DocumentSnapshot snapshot){
         return new Category(
                 snapshot.getId(),

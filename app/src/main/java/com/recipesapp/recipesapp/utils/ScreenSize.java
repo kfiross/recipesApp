@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
+/**
+ * Helper class to get percentage of sizes easily (used as MediaQuery)
+ */
 public class ScreenSize {
     /**
      * @param context the app context

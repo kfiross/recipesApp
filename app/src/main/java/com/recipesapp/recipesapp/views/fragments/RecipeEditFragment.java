@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.data.model.Recipe;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentAddRecipeBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.TextChangedListener;
@@ -98,14 +98,9 @@ public class RecipeEditFragment extends BaseFragment {
         observer = (Observer<Recipe>) recipe -> {
             mBinding.setRecipe(recipe);
             mBinding.setCanAddRecipe(checkForm());
-//            mBinding.getFormData().setIngredientList(recipe.getIngredients());
-//            mBinding.getFormData().setStepsList(recipe.getSteps());
 
         };
         vmRecipe.getSelected().observe(getActivity(), observer);
-
-
-
     }
 
     private void setUpViews() {
@@ -195,9 +190,6 @@ public class RecipeEditFragment extends BaseFragment {
                 mBinding.setCanAddRecipe(checkForm());
             }
         });
-
-
-
     }
 
     private void openDialog(int type, @Nullable Integer index) {

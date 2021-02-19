@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.recipesapp.recipesapp.data.model.Recipe;
+import com.recipesapp.recipesapp.model.Recipe;
 
 public class RecipeSharedViewModel extends ViewModel {
     private final MutableLiveData<Recipe> selected = new MutableLiveData<>();
