@@ -314,6 +314,9 @@ public class AddRecipeFragment extends BaseFragment {
         }
     }
 
+    /**
+     * returns if the form is correct
+     */
     private boolean checkForm(){
         boolean result = true;
         if(mBinding.formLayout.etName.length() == 0)
