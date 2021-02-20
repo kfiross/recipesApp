@@ -18,6 +18,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="4dp"
         tools:context=".views.fragments.LoginFragment">
 
 
@@ -42,20 +43,39 @@
         <LinearLayout
             android:id="@+id/layout_details"
             android:padding="16dp"
+            android:layout_margin="24dp"
             android:orientation="vertical"
             android:layout_centerInParent="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{loginMode ? @string/sign_in_ : @string/register_}"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prompt_email"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="#000"
+                />
+
             <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="96dp"
-                android:layout_marginEnd="24dp"
-                android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:selectAllOnFocus="true"
                 android:text="@={login.email}"
@@ -63,24 +83,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="#000"
+                android:text="@string/prompt_password"
+
+                />
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
                 android:text="@={login.password}"
-                android:hint="@string/prompt_password"
+                android:inputType="textPassword"
+
                 android:imeActionLabel="@string/sign_in"
                 android:imeOptions="actionDone"
-                android:inputType="textPassword"
                 android:selectAllOnFocus="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"/>
             <ProgressBar
                 android:layout_weight="8"
                 android:id="@+id/loading"

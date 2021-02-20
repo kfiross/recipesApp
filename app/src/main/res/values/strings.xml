@@ -12,6 +12,9 @@
     <string name="goto_sign_in">Sign in instead</string>
     <string name="goto_register">Register instead</string>
 
+    <string name="sign_in_">Sign in</string>
+    <string name="register_">Register</string>
+
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >6 characters</string>

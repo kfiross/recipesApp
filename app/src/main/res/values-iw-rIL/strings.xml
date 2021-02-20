@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="prompt_email">מייל</string>
+    <string name="prompt_password">סיסמא</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="sign_in">לכניסה</string>
+    <string name="register">לרישום</string>
+
+    <string name="goto_sign_in">משתמש קיים? לכניסה כאן</string>
+    <string name="goto_register">משתמש קיים? להרשמה כאן</string>
+
+    <string name="sign_in_">כניסה</string>
+    <string name="register_">הרשמה</string>
+
     <string name="all_recipes">כל המתכונים</string>
     <string name="favourites">מועדפים</string>
     <string name="add_recipe">הוספת מתכון</string>
