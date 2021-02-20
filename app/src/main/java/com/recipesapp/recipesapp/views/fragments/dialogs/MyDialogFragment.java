@@ -14,9 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.model.Ingredient;
-import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.MyDialogFragmentBinding;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.utils.ScreenSize;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 
@@ -37,10 +36,6 @@ public class MyDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         vmRecipe = ViewModelProviders.of(getActivity()).get(RecipeSharedViewModel.class);
-        Bundle args = getArguments();
-        if (args != null) {
-            mType = args.getInt("type");
-        }
     }
 
     @Override
@@ -57,24 +52,13 @@ public class MyDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(mType == 0){
-            mBinding.setTitle("Enter Ingredient");
-        }
-        else if(mType == 1){
-            mBinding.setTitle("Enter Step");
-        }
         mBinding.btnAdd.setOnClickListener(v -> add());
     }
 
     private void add() {
         String data = mBinding.editTextData.getText().toString();
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
-        if (mType == 0) {
-            // todo: fix this
-            editedRecipe.getIngredients().add(new Ingredient(data, 0 ,0));
-        } else if (mType == 1) {
-            editedRecipe.getSteps().add(data);
-        }
+        editedRecipe.getSteps().add(data);
 
         vmRecipe.select(editedRecipe);
 
@@ -88,7 +72,7 @@ public class MyDialogFragment extends DialogFragment {
         WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
 
         params.width = ScreenSize.wp(getContext(), 90);
-        params.height = ScreenSize.hp(getContext(), 30);
+        params.height = ScreenSize.hp(getContext(), 40);
 
         getDialog().getWindow().setAttributes(params);
     }

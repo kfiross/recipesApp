@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="title" type="String" />
     </data>
 
     <FrameLayout
         android:layout_width="320dp"
-        android:layout_height="220dp"
+        android:layout_height="250dp"
         android:padding="24dp"
         tools:context=".views.fragments.dialogs.DialogFragment">
 
@@ -20,15 +19,16 @@
 
 
             <TextView
-                android:text="@{title}"
+                android:text="@string/enter_step"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/edit_text_data"
+                android:lines="4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -40,7 +40,7 @@
 
             <Button
                 android:id="@+id/btn_add"
-                android:text="Add"
+                android:text="@string/add"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

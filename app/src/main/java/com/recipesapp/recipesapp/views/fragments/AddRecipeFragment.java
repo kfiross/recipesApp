@@ -193,7 +193,6 @@ public class AddRecipeFragment extends BaseFragment {
         if(type == 0){
             IngredientEditDialogFragment editIngredientDialog = new IngredientEditDialogFragment();
             Bundle args = new Bundle();
-            args.putInt("type", type);
             args.putParcelable("recipe", mBinding.getRecipe());
             if(index != null) {
                 args.putInt("index", index);

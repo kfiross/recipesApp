@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
@@ -17,6 +18,8 @@ import androidx.navigation.Navigation;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.recipesapp.recipesapp.databinding.ActivityMainBinding;
+import com.recipesapp.recipesapp.databinding.NavHeaderMainBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.SharedPreferencesConfig;
 
@@ -29,14 +32,17 @@ public class MainActivity extends AppCompatActivity
 
     private NavController mNavController;
     private DrawerLayout drawer;
+    private ActivityMainBinding binding;
+
+    private  NavHeaderMainBinding navHeaderMainBinding;
 
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        drawer = findViewById(R.id.drawer_layout);
+        drawer = binding.appDrawer.drawerLayout;
 
         appFragmentManager = getSupportFragmentManager();
         preferencesConfig = new SharedPreferencesConfig(this);
@@ -46,13 +52,20 @@ public class MainActivity extends AppCompatActivity
         // listen to changes when user is logged in or sign out
         FirebaseAuth.getInstance().addAuthStateListener(this::handleAuth);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
+         navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header_main,
+                binding.appDrawer.navView, false);
+        binding.appDrawer.navView.addHeaderView(navHeaderMainBinding.getRoot());
+
+        NavigationView navigationView = binding.appDrawer.navView;
         navigationView.setNavigationItemSelectedListener(this);
 
         preferencesConfig.setLocal("he",this);
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.drawer_menu);
         navigationView.setCheckedItem(R.id.nav_home);
+
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -145,6 +158,9 @@ public class MainActivity extends AppCompatActivity
         // update cached data
         if (firebaseAuth.getCurrentUser() != null) {
             initializeLocalData();
+
+            navHeaderMainBinding.setName(firebaseAuth.getCurrentUser().getDisplayName());
+            navHeaderMainBinding.setEmail(firebaseAuth.getCurrentUser().getEmail());
         }
         // clean cached data
         else {

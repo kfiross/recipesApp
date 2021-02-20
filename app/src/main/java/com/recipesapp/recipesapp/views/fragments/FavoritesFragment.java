@@ -82,6 +82,7 @@ public class FavoritesFragment extends BaseFragment {
                         DocumentSnapshot documentSnapshot = FirestoreUtils.getRecipe(id);
 //                        // documentSnapshot.toObject(Recipe.class);
 //
+
                         Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
                         recipes.add(newRecipe);
                     } catch (ExecutionException e) {

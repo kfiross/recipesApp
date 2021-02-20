@@ -45,10 +45,6 @@ public class IngredientEditDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         vmRecipe = ViewModelProviders.of(getActivity()).get(RecipeSharedViewModel.class);
-        Bundle args = getArguments();
-        if (args != null) {
-            mType = args.getInt("type");
-        }
     }
 
     @Override
@@ -64,13 +60,6 @@ public class IngredientEditDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        if(mType == 0){
-            mBinding.setTitle("Enter Ingredient");
-        }
-        else if(mType == 1){
-            mBinding.setTitle("Enter Step");
-        }
 
 //        ingredient = new Ingredient("", 0 , 0);
 //        mBinding.setIngredient(ingredient);

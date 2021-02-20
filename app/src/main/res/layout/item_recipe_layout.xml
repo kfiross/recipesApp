@@ -65,7 +65,6 @@
                         android:layout_height="0dp"
                         android:layout_marginBottom="0dp"
                         android:layout_weight="1"
-                        android:hint="ללא שם"
                         android:textStyle="bold"
                         android:padding="9dp"
                         android:text="@{recipe.name}"
