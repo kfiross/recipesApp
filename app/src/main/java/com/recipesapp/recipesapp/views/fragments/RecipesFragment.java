@@ -49,7 +49,6 @@ public class RecipesFragment extends BaseFragment {
             mSelectedCategoryId = args.getInt("category_id", -1);
             mSelectedCategoryName = args.getString("category_name", "");
         }
-
     }
 
     @Override
@@ -78,7 +77,9 @@ public class RecipesFragment extends BaseFragment {
     }
 
     private void fetchDocs(){
-        FirebaseFirestore.getInstance().collection("recipes").addSnapshotListener(
+        FirebaseFirestore.getInstance().collection("recipes")
+                .whereEqualTo("category", mSelectedCategoryId)
+                .addSnapshotListener(
                 (documentSnapshots, error) -> {
 
                     List<DocumentSnapshot> docs = documentSnapshots.getDocuments();
@@ -89,9 +90,7 @@ public class RecipesFragment extends BaseFragment {
 
                         Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
 
-                        if(isIncluded(newRecipe)) {
-                            recipes.add(newRecipe);
-                        }
+                        recipes.add(newRecipe);
                     }
                     setupRecyclerView(recipes);
 
@@ -104,9 +103,5 @@ public class RecipesFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(categoryAdapter);
-    }
-
-    private boolean isIncluded(Recipe recipe){
-        return recipe.getCategory() == mSelectedCategoryId;
     }
 }
