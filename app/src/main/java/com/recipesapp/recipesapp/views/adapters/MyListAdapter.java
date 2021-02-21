@@ -3,7 +3,6 @@ package com.recipesapp.recipesapp.views.adapters;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.annotation.RequiresApi;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.recipesapp.recipesapp.databinding.ItemCategoryLayoutBinding;
 import com.recipesapp.recipesapp.databinding.ListEditItemContentBinding;
 import com.recipesapp.recipesapp.databinding.ListItemContentBinding;
 
@@ -20,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
 
-public class MyListAdapter2 extends RecyclerView.Adapter<MyListAdapter2.ViewHolder> {
+public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder> {
 
     private List<String> items;
     private @Nullable
@@ -29,13 +27,13 @@ public class MyListAdapter2 extends RecyclerView.Adapter<MyListAdapter2.ViewHold
     private Function<Integer, Boolean> onDelete;
     private Function<Integer, Boolean> onEdit;
 
-    public MyListAdapter2(@NonNull Context context, List<String> items, @Nullable Integer type) {
+    public MyListAdapter(@NonNull Context context, List<String> items, @Nullable Integer type) {
         this.items = items;
         mType = type;
         this.inEditMode = false;
     }
 
-    public MyListAdapter2(@NonNull Context context, List<String> items, @Nullable Integer type, Function<Integer, Boolean> onDelete, Function<Integer, Boolean> onEdit) {
+    public MyListAdapter(@NonNull Context context, List<String> items, @Nullable Integer type, Function<Integer, Boolean> onDelete, Function<Integer, Boolean> onEdit) {
         this.items = items;
         mType = type;
         this.inEditMode = true;
@@ -46,7 +44,7 @@ public class MyListAdapter2 extends RecyclerView.Adapter<MyListAdapter2.ViewHold
     @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override
-    public MyListAdapter2.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
         ViewDataBinding binding;
@@ -72,7 +70,7 @@ public class MyListAdapter2 extends RecyclerView.Adapter<MyListAdapter2.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyListAdapter2.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyListAdapter.ViewHolder holder, int position) {
         holder.bind(position);
     }
 

@@ -57,7 +57,10 @@
     <string name="add_step">הוספת צעד</string>
     <string name="add_photo">הוספת תמונה</string>
     <string name="delete_recipe">מחיקת מתכון</string>
-    <string name="enter_step">הזנת צעד</string>
+    <string name="enter_step">הזן צעד</string>
+
+    <string name="add_to_fav">המתכון הוסף למועדפים</string>
+    <string name="removed_from_fav">המתכון הוסר מהמועדפים</string>
 
     <!--    -->
     <string name="sweets">מתוקים</string>

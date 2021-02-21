@@ -17,7 +17,7 @@ import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipeDetailsBinding;
-import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
+import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
 
 import java.util.ArrayList;
 
@@ -59,11 +59,11 @@ public class RecipeDetailsFragment extends Fragment {
 
         mBinding.listIngredients.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.listIngredients.setHasFixedSize(true);
-        mBinding.listIngredients.setAdapter(new MyListAdapter2(getContext(), new ArrayList<>(), 0));
+        mBinding.listIngredients.setAdapter(new MyListAdapter(getContext(), new ArrayList<>(), 0));
 
         mBinding.listSteps.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.listSteps.setHasFixedSize(true);
-        mBinding.listSteps.setAdapter(new MyListAdapter2(getContext(), new ArrayList<>(), 1));
+        mBinding.listSteps.setAdapter(new MyListAdapter(getContext(), new ArrayList<>(), 1));
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         mBinding.setRecipe(mSelectedRecipe);

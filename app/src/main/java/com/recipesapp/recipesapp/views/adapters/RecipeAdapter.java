@@ -14,6 +14,7 @@ import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.ItemRecipeLayoutBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
+import com.recipesapp.recipesapp.utils.StringUtils;
 import com.recipesapp.recipesapp.utils.UiUtils;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHolder>{
 
     private ArrayList<Recipe> mRecipes;
-    private ArrayList<String> mFavIds;
+    private final ArrayList<String> mFavIds;
 
     public RecipeAdapter(ArrayList<Recipe> recipes) {
         mRecipes = recipes;
@@ -81,14 +82,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                     MainActivity.preferencesConfig.removeFavId(recipe.getId());
                     FirestoreUtils.removeFromMyFavs(recipe.getId());
 
-                    UiUtils.showToastLong(itemView.getContext(), "Removed from Favourites");
+                    UiUtils.showToastLong(
+                            itemView.getContext(),
+                            StringUtils.getLocaleString(R.string.removed_from_fav, itemView.getContext())
+                    );
                 }
                 // if not, add it
                 else{
                     MainActivity.preferencesConfig.addFavId(recipe.getId());
                     FirestoreUtils.addToMyFavs(recipe.getId());
 
-                    UiUtils.showToastLong(itemView.getContext(), "Added To Favourites");
+                    UiUtils.showToastLong(
+                            itemView.getContext(),
+                            StringUtils.getLocaleString(R.string.add_to_fav, itemView.getContext())
+                    );
 
                 }
                 // update UI
