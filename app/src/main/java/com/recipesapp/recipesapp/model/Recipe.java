@@ -221,7 +221,17 @@ public class Recipe implements Parcelable {
         return false;
     }
 
+
     public List<String> getPhotos(){
         return List.of(mImage);
+    }
+
+
+    public void removeIngredient(int index){
+        mIngredients.remove(index);
+    }
+
+    public void removeStep(int index){
+        mSteps.remove(index);
     }
 }

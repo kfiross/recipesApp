@@ -32,7 +32,7 @@ import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.TextChangedListener;
 import com.recipesapp.recipesapp.utils.UiUtils;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
-import com.recipesapp.recipesapp.views.adapters.MyListAdapter2;
+import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
 import com.recipesapp.recipesapp.views.fragments.dialogs.IngredientEditDialogFragment;
 import com.recipesapp.recipesapp.views.fragments.dialogs.MyDialogFragment;
 
@@ -127,13 +127,13 @@ public class AddRecipeFragment extends BaseFragment {
         mBinding.formLayout.listIngredients.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.formLayout.listIngredients.setHasFixedSize(true);
 
-        mBinding.formLayout.listIngredients.setAdapter(new MyListAdapter2(
+        mBinding.formLayout.listIngredients.setAdapter(new MyListAdapter(
                         getContext(),
                         new ArrayList<>(),
                         0,
                         (index) -> {
                             //openDialog(0, index);
-                            vmRecipe.getSelected().getValue().getIngredients().remove(index);
+                                vmRecipe.getSelected().getValue().removeIngredient(index);
                             return true;
                         },
                         (index) -> {
@@ -146,12 +146,12 @@ public class AddRecipeFragment extends BaseFragment {
         mBinding.formLayout.listSteps.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.formLayout.listSteps.setHasFixedSize(true);
 
-        mBinding.formLayout.listSteps.setAdapter(new MyListAdapter2(
+        mBinding.formLayout.listSteps.setAdapter(new MyListAdapter(
                         getContext(),
                         new ArrayList<>(),
                         1,
                         (index) -> {
-                            vmRecipe.getSelected().getValue().getSteps().remove(index);
+                            vmRecipe.getSelected().getValue().removeStep(index);
                             return true;
                         },
                         (index) -> {
