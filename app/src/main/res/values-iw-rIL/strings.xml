@@ -7,7 +7,7 @@
     <string name="register">לרישום</string>
 
     <string name="goto_sign_in">משתמש קיים? לכניסה כאן</string>
-    <string name="goto_register">משתמש קיים? להרשמה כאן</string>
+    <string name="goto_register">אין לך חשבון? להרשמה</string>
 
     <string name="sign_in_">כניסה</string>
     <string name="register_">הרשמה</string>
@@ -72,6 +72,7 @@
     <!-- -->
     <string name="ml">מ"ל</string>
     <string name="g">גרם</string>
+    <string name="prompt_name">שם</string>
 
 
     <plurals name="numberSpoons">

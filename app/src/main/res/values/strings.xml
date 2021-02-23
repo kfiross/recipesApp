@@ -79,6 +79,7 @@
     <string name="enter_step">Enter Step</string>
     <string name="add_to_fav">Added To Favourites</string>
     <string name="removed_from_fav">Removed From Favourites</string>
+    <string name="prompt_name">Name</string>
 
 
     <plurals name="numberSpoons">

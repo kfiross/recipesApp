@@ -1,6 +1,7 @@
 package com.recipesapp.recipesapp.views.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.databinding.FragmentLoginBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
@@ -22,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LoginFragment extends Fragment {
 
+    private static final String TAG = "LoginFragment";
     private NavController mNavController;
     private FirebaseAuth mAuth;
     private FragmentLoginBinding mBinding;
@@ -55,7 +59,7 @@ public class LoginFragment extends Fragment {
         mBinding.setLoginMode(true);
         mNavController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
 
-        mBinding.setLogin(new LoginData("", ""));
+        mBinding.setLogin(new LoginData("", "", ""));
     }
 
     public void loginOrRegister() {
@@ -80,6 +84,7 @@ public class LoginFragment extends Fragment {
         else {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(registerTask -> {
+                        updateName();
                         mBinding.setIsLoading(false);
                         if (registerTask.isSuccessful()) {
                             FirestoreUtils.initUserData(registerTask.getResult().getUser().getUid());
@@ -92,6 +97,25 @@ public class LoginFragment extends Fragment {
 
     public void changeMode(){
         mBinding.setLoginMode(!mBinding.getLoginMode());
+    }
+
+    private void updateName(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String name = mBinding.getLogin().getName();
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .build();
+
+        assert user != null;
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "User profile updated.");
+                    }
+                });
+
     }
 }
 

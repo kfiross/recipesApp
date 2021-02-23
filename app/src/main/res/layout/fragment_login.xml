@@ -59,6 +59,39 @@
                 android:textSize="40sp"
                 />
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{loginMode ? View.GONE : View.VISIBLE}"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prompt_name"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="#000"
+                    />
+
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:selectAllOnFocus="true"
+                    android:text="@={login.name}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"/>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="12dp"/>
@@ -137,19 +170,22 @@
             android:layout_gravity="center_horizontal"
             android:enabled="@{login.correct}"
             android:onClick="@{() -> fragment.loginOrRegister()}"
-            android:text="@string/sign_in"
+            android:text="@{loginMode ? @string/sign_in : @string/register}"
             android:textColor="#fff"
             android:layout_below="@+id/layout_details"
              />
 
         <Button
-            android:width="200dp"
             android:layout_marginTop="20dp"
             android:id="@+id/btnChangeLoginMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:rippleColor="#999"
+            app:backgroundTint="#eeffffff"
             android:layout_centerHorizontal="true"
+
             android:layout_gravity="center_horizontal"
             android:text="@{loginMode ? @string/goto_register : @string/goto_sign_in}"
             android:onClick="@{() -> fragment.changeMode()}"
