@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <!--  font for the app -->
-        <item name="fontFamily">@font/rubik_regular</item>
+        <item name="fontFamily">@font/varela_round_regular</item>
         <item name="textAllCaps">false</item>
         <item name="android:positiveButtonText">#fff</item>
     </style>
