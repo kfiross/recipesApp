@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyRecipesFragment extends BaseFragment {
+public class MyRecipesFragment extends Fragment {
 
     private FragmentMyRecipesBinding mBinding;
     private RecyclerView mRecyclerView;

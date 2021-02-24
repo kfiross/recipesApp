@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends BaseFragment {
+public class SearchFragment extends Fragment {
     private FragmentSearchBinding mBinding;
 
     private ArrayList<String> mTags;

@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoritesFragment extends BaseFragment {
+public class FavoritesFragment extends Fragment {
 
     private FragmentRecipesBinding mBinding;
     private RecyclerView mRecyclerView;
@@ -57,7 +57,6 @@ public class FavoritesFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = mBinding.recyclerViewRecipes;
-        ((MainActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
         mBinding.setName(StringUtils.getLocaleString(R.string.favourites, getContext()));
 

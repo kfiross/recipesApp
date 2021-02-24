@@ -32,30 +32,9 @@
             android:layout_height="0dp"
             tools:context=".views.fragments.SearchFragment">
 
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/bg_search2"
-                android:layout_marginTop="-100dp"
-                android:alpha="0.7"
-                />
-
-<!--            <ImageView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_marginTop="-100dp"-->
-<!--                android:alpha="0.2"-->
-<!--                android:background="@drawable/bg_recipe"-->
-<!--                android:rotation="12"-->
-<!--                android:scaleX="1.7"-->
-<!--                android:scaleY="0.9" />-->
-
             <include
                 layout="@layout/appbar"
                 app:name="@{@string/search_recipe}" />
-
-
 
 
             <RelativeLayout

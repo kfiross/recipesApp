@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private FragmentHomeBinding mBinding;

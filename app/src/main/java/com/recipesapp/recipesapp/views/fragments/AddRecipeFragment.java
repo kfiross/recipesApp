@@ -45,7 +45,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddRecipeFragment extends BaseFragment {
+public class AddRecipeFragment extends Fragment {
 
     private FragmentAddRecipeBinding mBinding;
     private RecipeSharedViewModel vmRecipe;
@@ -80,8 +80,6 @@ public class AddRecipeFragment extends BaseFragment {
 
         mBinding.setRecipe(new Recipe());
         mBinding.setEditMode(false);
-
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
         setUpViews();
         vmRecipe.select(mBinding.getRecipe());

@@ -7,35 +7,27 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.recipesapp.recipesapp.databinding.ActivityMainBinding;
-import com.recipesapp.recipesapp.databinding.NavHeaderMainBinding;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.SharedPreferencesConfig;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
     public static SharedPreferencesConfig preferencesConfig;
     public static FragmentManager appFragmentManager;
 
     private NavController mNavController;
-    private DrawerLayout drawer;
     private ActivityMainBinding binding;
-
-    private  NavHeaderMainBinding navHeaderMainBinding;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -43,7 +35,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        //drawer = binding.appDrawer.drawerLayout;
 
         appFragmentManager = getSupportFragmentManager();
         preferencesConfig = new SharedPreferencesConfig(this);
@@ -53,10 +44,6 @@ public class MainActivity extends AppCompatActivity
         // listen to changes when user is logged in or sign out
         FirebaseAuth.getInstance().addAuthStateListener(this::handleAuth);
 
-
-//         navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header_main,
-//                binding.appDrawer.navView, false);
-//        binding.appDrawer.navView.addHeaderView(navHeaderMainBinding.getRoot());
 
         BottomNavigationView navigationView = binding.bttmNav;
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -114,7 +101,6 @@ public class MainActivity extends AppCompatActivity
                     case R.id.addRecipeFragment:
                     case R.id.myRecipesFragment:
                     case R.id.searchFragment:
-                        drawer.open();
                         break;
 
                     default:
@@ -126,53 +112,6 @@ public class MainActivity extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            // navigate to home
-            case R.id.nav_home:
-                mNavController.navigate(R.id.homeFragment);
-                break;
-
-            // navigate to favourites
-            case R.id.nav_favourites:
-                mNavController.navigate(R.id.favoritesFragment2);
-                break;
-
-            // navigate to add a new recipe
-            case R.id.nav_add_recipe:
-                mNavController.navigate(R.id.addRecipeFragment);
-                break;
-
-            case R.id.nav_my_recipes:
-                mNavController.navigate(R.id.myRecipesFragment);
-                break;
-
-            case R.id.nav_search_recipe:
-                mNavController.navigate(R.id.searchFragment);
-                break;
-
-
-            case R.id.nav_logout:
-                FirebaseAuth.getInstance().signOut();
-                break;
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-
-        return true;
     }
 
     /**
