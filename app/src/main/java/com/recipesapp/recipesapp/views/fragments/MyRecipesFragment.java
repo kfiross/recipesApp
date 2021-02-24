@@ -11,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentMyRecipesBinding;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.views.adapters.RecipeAdapter;
 
@@ -93,7 +93,7 @@ public class MyRecipesFragment extends BaseFragment {
     private void setupRecyclerView(ArrayList<Recipe> recipes) {
         RecipeAdapter categoryAdapter = new RecipeAdapter(recipes);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(categoryAdapter);
     }

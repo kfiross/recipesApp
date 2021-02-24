@@ -9,15 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentRecipesBinding;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.views.adapters.RecipeAdapter;
 
 import org.jetbrains.annotations.NotNull;
@@ -100,7 +100,7 @@ public class RecipesFragment extends BaseFragment {
     private void setupRecyclerView(ArrayList<Recipe> recipes){
         RecipeAdapter categoryAdapter = new RecipeAdapter(recipes);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(categoryAdapter);
     }

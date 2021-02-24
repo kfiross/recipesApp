@@ -1,27 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable name="name" type="String" />
-        <variable name="background" type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="image"
+            type="String" />
+
+        <variable
+            name="background"
+            type="android.graphics.drawable.Drawable" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="12dp"
-        android:gravity="center"
-        android:background="@{background}"
-        android:orientation="vertical"
-        android:padding="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#fff"
-            android:text="@{name}"
-            android:textSize="20sp"
-            tools:text="@tools:sample/lorem" />
-    </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="8dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:textSize="40sp"
+                app:civ_border_color="@android:color/black"
+                app:civ_border_width="3dp"
+                app:civ_circle_background_color="#1E88E5"
+                app:error="@{@drawable/not_found}"
+                app:imageUrl="@{image}"
+                app:placeholder="@{@color/colorPlaceholder}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient"
+
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|bottom"
+                android:text="@{name}"
+                android:textColor="#fff"
+                android:padding="12dp"
+                android:textSize="24sp"
+                tools:text="א" />
+
+
+
+        </FrameLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
 </layout>
