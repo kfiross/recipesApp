@@ -14,7 +14,7 @@
 
         <variable
             name="recipe"
-            type="com.recipesapp.recipesapp.model.Recipe" />
+            type="com.foodiz.app.model.Recipe" />
     </data>
 
     <LinearLayout

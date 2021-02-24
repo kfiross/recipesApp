@@ -6,10 +6,10 @@
     <data>
         <variable
             name="login"
-            type="com.recipesapp.recipesapp.utils.LoginData" />
+            type="com.foodiz.app.utils.LoginData" />
         <variable name="isLoading" type="Boolean" />
         <variable name="loginMode" type="Boolean" />
-        <variable name="fragment" type="com.recipesapp.recipesapp.views.fragments.LoginFragment" />
+        <variable name="fragment" type="com.foodiz.app.views.fragments.LoginFragment" />
 
         <import type="android.view.View"/>
     </data>
