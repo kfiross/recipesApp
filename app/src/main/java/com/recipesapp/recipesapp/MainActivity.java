@@ -15,6 +15,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        drawer = binding.appDrawer.drawerLayout;
+        //drawer = binding.appDrawer.drawerLayout;
 
         appFragmentManager = getSupportFragmentManager();
         preferencesConfig = new SharedPreferencesConfig(this);
@@ -53,17 +54,51 @@ public class MainActivity extends AppCompatActivity
         FirebaseAuth.getInstance().addAuthStateListener(this::handleAuth);
 
 
-         navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header_main,
-                binding.appDrawer.navView, false);
-        binding.appDrawer.navView.addHeaderView(navHeaderMainBinding.getRoot());
+//         navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header_main,
+//                binding.appDrawer.navView, false);
+//        binding.appDrawer.navView.addHeaderView(navHeaderMainBinding.getRoot());
 
-        NavigationView navigationView = binding.appDrawer.navView;
-        navigationView.setNavigationItemSelectedListener(this);
+        BottomNavigationView navigationView = binding.bttmNav;
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    // navigate to home
+                    case R.id.nav_home:
+                        mNavController.navigate(R.id.homeFragment);
+                        break;
+
+                    // navigate to favourites
+                    case R.id.nav_favourites:
+                        mNavController.navigate(R.id.favoritesFragment2);
+                        break;
+
+                    // navigate to add a new recipe
+                    case R.id.nav_add_recipe:
+                        mNavController.navigate(R.id.addRecipeFragment);
+                        break;
+
+                    case R.id.nav_my_recipes:
+                        mNavController.navigate(R.id.myRecipesFragment);
+                        break;
+
+                    case R.id.nav_search_recipe:
+                        mNavController.navigate(R.id.searchFragment);
+                        break;
+
+
+//                    case R.id.nav_logout:
+//                        FirebaseAuth.getInstance().signOut();
+//                        break;
+                }
+                return true;
+            }
+        });
 
         preferencesConfig.setLocal("he",this);
         navigationView.getMenu().clear();
-        navigationView.inflateMenu(R.menu.drawer_menu);
-        navigationView.setCheckedItem(R.id.nav_home);
+        navigationView.inflateMenu(R.menu.navigation_menu);
+        navigationView.setSelectedItemId(R.id.nav_home);
 
 
     }
@@ -159,8 +194,8 @@ public class MainActivity extends AppCompatActivity
         if (firebaseAuth.getCurrentUser() != null) {
             initializeLocalData();
 
-            navHeaderMainBinding.setName(firebaseAuth.getCurrentUser().getDisplayName());
-            navHeaderMainBinding.setEmail(firebaseAuth.getCurrentUser().getEmail());
+//            navHeaderMainBinding.setName(firebaseAuth.getCurrentUser().getDisplayName());
+//            navHeaderMainBinding.setEmail(firebaseAuth.getCurrentUser().getEmail());
         }
         // clean cached data
         else {

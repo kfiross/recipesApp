@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutDirection="locale"
@@ -11,9 +12,29 @@
 
         >
 
-        <include
-            android:id="@+id/app_drawer"
-            layout="@layout/drawer" />
+        <FrameLayout
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent">
 
-    </RelativeLayout>
+            <fragment
+                android:id="@+id/nav_host_fragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                app:defaultNavHost="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:navGraph="@navigation/nav_graph" />
+        </FrameLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bttmNav"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="start"
+            tools:menu="@menu/navigation_menu" />
+
+    </LinearLayout>
 </layout>

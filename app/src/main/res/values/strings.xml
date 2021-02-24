@@ -22,7 +22,7 @@
     <string name="login_preferences">kuku</string>
 
     <string name="favourites">Favourites</string>
-    <string name="add_recipe">Add Your Recipe</string>
+    <string name="add_recipe">Add Recipe</string>
     <string name="edit_recipe">Edit Recipe</string>
     <string name="my_recipes">My Recipes</string>
 
@@ -42,7 +42,7 @@
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="hint_enter_name">Enter Name…</string>
     <string name="hint_time_in_minutes">Time in minutes…</string>
-    <string name="search_recipe">Search Recipe By Ingredients</string>
+    <string name="search_recipe">Search</string>
 
     <string name="ingredient_name">Ingredient Name</string>
     <string name="quantity">Quantity</string>
