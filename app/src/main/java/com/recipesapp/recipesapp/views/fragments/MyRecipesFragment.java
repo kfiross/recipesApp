@@ -52,6 +52,9 @@ public class MyRecipesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ((MainActivity)getActivity()).setSupportActionBar(view.findViewById(R.id.toolbar));
+        getActivity().setTitle("");
+
         mRecyclerView = mBinding.recyclerViewRecipes;
         setupRecyclerView(new ArrayList<>());
 

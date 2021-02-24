@@ -2,9 +2,10 @@ package com.recipesapp.recipesapp;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-
         appFragmentManager = getSupportFragmentManager();
         preferencesConfig = new SharedPreferencesConfig(this);
 
@@ -46,39 +46,40 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView navigationView = binding.bttmNav;
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    // navigate to home
-                    case R.id.nav_home:
-                        mNavController.navigate(R.id.homeFragment);
-                        break;
+        navigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                // navigate to home
+                case R.id.nav_home:
+                    mNavController.navigate(R.id.homeFragment);
+                    break;
 
-                    // navigate to favourites
-                    case R.id.nav_favourites:
-                        mNavController.navigate(R.id.favoritesFragment2);
-                        break;
+                // navigate to favourites
+                case R.id.nav_favourites:
+                    mNavController.navigate(R.id.favoritesFragment2);
+                    break;
 
-                    // navigate to add a new recipe
-                    case R.id.nav_add_recipe:
-                        mNavController.navigate(R.id.addRecipeFragment);
-                        break;
+                // navigate to add a new recipe
+                case R.id.nav_add_recipe:
+                    mNavController.navigate(R.id.addRecipeFragment);
+                    break;
 
-                    case R.id.nav_my_recipes:
-                        mNavController.navigate(R.id.myRecipesFragment);
-                        break;
+                case R.id.nav_my_recipes:
+                    mNavController.navigate(R.id.myRecipesFragment);
+                    break;
 
-                    case R.id.nav_search_recipe:
-                        mNavController.navigate(R.id.searchFragment);
-                        break;
+                case R.id.nav_search_recipe:
+                    mNavController.navigate(R.id.searchFragment);
+                    break;
+            }
+            return true;
+        });
 
-
-//                    case R.id.nav_logout:
-//                        FirebaseAuth.getInstance().signOut();
-//                        break;
-                }
-                return true;
+        mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if(destination.getId() == R.id.loginFragment){
+                binding.bttmNav.setVisibility(View.GONE);
+            }
+            else {
+                binding.bttmNav.setVisibility(View.VISIBLE);
             }
         });
 
@@ -95,23 +96,29 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                switch (mNavController.getCurrentDestination().getId()) {
-                    case R.id.homeFragment:
-                    case R.id.favoritesFragment2:
-                    case R.id.addRecipeFragment:
-                    case R.id.myRecipesFragment:
-                    case R.id.searchFragment:
-                        break;
+                mNavController.popBackStack();
+                break;
 
-                    default:
-                        mNavController.popBackStack();
-                        break;
-                }
-                return true;
+            case R.id.action_menu_settings:
+                break;
+
+            case R.id.action_menu_logout:
+                FirebaseAuth.getInstance().signOut();
+                break;
 
             default:
                 return super.onOptionsItemSelected(item);
+
         }
+        return true;
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     /**

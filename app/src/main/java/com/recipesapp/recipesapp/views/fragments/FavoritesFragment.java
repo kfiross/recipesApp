@@ -56,10 +56,11 @@ public class FavoritesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ((MainActivity)getActivity()).setSupportActionBar(view.findViewById(R.id.toolbar));
+        getActivity().setTitle("");
+
         mRecyclerView = mBinding.recyclerViewRecipes;
-
         mBinding.setName(StringUtils.getLocaleString(R.string.favourites, getContext()));
-
         setupRecyclerView(new ArrayList<>());
 
         fetchDocs();

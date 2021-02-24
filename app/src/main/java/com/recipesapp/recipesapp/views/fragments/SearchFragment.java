@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentSearchBinding;
@@ -57,6 +58,9 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ((MainActivity)getActivity()).setSupportActionBar(view.findViewById(R.id.toolbar));
+        getActivity().setTitle("");
 
         initBinding();
         setButtonsClickListeners();

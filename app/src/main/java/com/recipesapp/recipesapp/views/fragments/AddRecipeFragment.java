@@ -76,8 +76,10 @@ public class AddRecipeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // initialize binding variables
+        ((MainActivity)getActivity()).setSupportActionBar(view.findViewById(R.id.toolbar));
+        getActivity().setTitle("");
 
+        // initialize binding variables
         mBinding.setRecipe(new Recipe());
         mBinding.setEditMode(false);
 
