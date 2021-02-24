@@ -38,7 +38,7 @@
             android:rotation="12"
             android:alpha="0.4"
             android:background="@drawable/bg_recipe"
-            android:contentDescription="?" />
+            android:contentDescription="v2" />
 
         <LinearLayout
             android:id="@+id/layout_details"
