@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        // listen to changes in navigation
         mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if(destination.getId() == R.id.loginFragment){
                 binding.bttmNav.setVisibility(View.GONE);
