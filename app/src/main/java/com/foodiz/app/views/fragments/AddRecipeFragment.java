@@ -80,9 +80,7 @@ public class AddRecipeFragment extends BaseFragment {
 
         mBinding.setRecipe(new Recipe());
         mBinding.setEditMode(false);
-
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-
+        
         setUpViews();
         vmRecipe.select(mBinding.getRecipe());
 

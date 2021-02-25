@@ -23,7 +23,7 @@
             android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="@{name}" />
+            android:text="Foodiz" />
 
     </androidx.appcompat.widget.Toolbar>
 </layout>

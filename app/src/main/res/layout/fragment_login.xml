@@ -22,24 +22,6 @@
         tools:context=".views.fragments.LoginFragment">
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FEF1D8"
-            >
-        </View>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="-100dp"
-            android:scaleX="1.7"
-            android:scaleY="0.9"
-            android:rotation="12"
-            android:alpha="0.4"
-            android:background="@drawable/bg_recipe"
-            />
-
         <LinearLayout
             android:id="@+id/layout_details"
             android:padding="16dp"
