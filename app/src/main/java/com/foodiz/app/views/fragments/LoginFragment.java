@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +55,9 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mBinding.btnLoginRegister.btn.setOnClickListener(v -> loginOrRegister());
+        mBinding.btnChangeLoginMode.setOnClickListener(v -> changeMode());
+
         mBinding.setFragment(this);
         mBinding.setIsLoading(false);
         mBinding.setLoginMode(true);
@@ -66,6 +70,10 @@ public class LoginFragment extends Fragment {
         final String email = mBinding.getLogin().getEmail();
         final String password = mBinding.getLogin().getPassword();
 
+        if(email.isEmpty() || password.isEmpty()){
+            Toast.makeText(getContext(), "Please Enter details", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // show progress
         mBinding.setIsLoading(true);
 
