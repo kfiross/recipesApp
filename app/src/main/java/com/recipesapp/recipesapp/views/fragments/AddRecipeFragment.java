@@ -34,7 +34,7 @@ import com.recipesapp.recipesapp.utils.UiUtils;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 import com.recipesapp.recipesapp.views.adapters.MyListAdapter;
 import com.recipesapp.recipesapp.views.fragments.dialogs.IngredientEditDialogFragment;
-import com.recipesapp.recipesapp.views.fragments.dialogs.MyDialogFragment;
+import com.recipesapp.recipesapp.views.fragments.dialogs.StepDialogFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -132,7 +132,6 @@ public class AddRecipeFragment extends BaseFragment {
                         new ArrayList<>(),
                         0,
                         (index) -> {
-                            //openDialog(0, index);
                                 vmRecipe.getSelected().getValue().removeIngredient(index);
                             return true;
                         },
@@ -151,7 +150,12 @@ public class AddRecipeFragment extends BaseFragment {
                         new ArrayList<>(),
                         1,
                         (index) -> {
-                            vmRecipe.getSelected().getValue().removeStep(index);
+                            try {
+                                vmRecipe.getSelected().getValue().removeStep(index);
+                            }
+                            catch (Exception ignored){
+
+                            }
                             return true;
                         },
                         (index) -> {
@@ -201,7 +205,7 @@ public class AddRecipeFragment extends BaseFragment {
             editIngredientDialog.show(MainActivity.appFragmentManager, "editIngredientDialog");
         }
         else if (type == 1){
-            MyDialogFragment editDialog = new MyDialogFragment();
+            StepDialogFragment editDialog = new StepDialogFragment();
             Bundle args = new Bundle();
             args.putInt("type", 1);
             args.putParcelable("recipe", mBinding.getRecipe());

@@ -31,6 +31,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
     private RecipeSharedViewModel vmRecipe;
     private DialogEditIngredientFragmentBinding mBinding;
     private int mType;
+    private int mSelectedIndex = -1;  // -1 means new
 
     private String mIngredientName;
     private int mIngredientQuantity;
@@ -45,6 +46,11 @@ public class IngredientEditDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         vmRecipe = ViewModelProviders.of(getActivity()).get(RecipeSharedViewModel.class);
+
+        Bundle args = getArguments();
+        if(args != null) {
+            mSelectedIndex = args.getInt("index", -1);
+        }
     }
 
     @Override
@@ -66,6 +72,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
      ///   mBinding.setQuantity(100.0);
         mBinding.setType(1);
         mBinding.setIsWithCount(true);
+
 
 
         mBinding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -168,7 +175,15 @@ public class IngredientEditDialogFragment extends DialogFragment {
 
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
 
-        editedRecipe.getIngredients().add(new Ingredient(name, count ,type));
+
+        if(mSelectedIndex == -1){
+            editedRecipe.getIngredients().add(new Ingredient(name, count ,type));
+        }
+        else {
+            editedRecipe.updateIngredient(mSelectedIndex, new Ingredient(name, count ,type));
+        }
+
+
 
         vmRecipe.select(editedRecipe);
         this.dismiss();

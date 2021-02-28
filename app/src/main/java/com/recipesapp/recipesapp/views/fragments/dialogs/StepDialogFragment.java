@@ -22,12 +22,14 @@ import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyDialogFragment extends DialogFragment {
+public class StepDialogFragment extends DialogFragment {
     private RecipeSharedViewModel vmRecipe;
     private MyDialogFragmentBinding mBinding;
     private int mType;
+    private int mSelectedIndex = -1;  // -1 means new
 
-    public MyDialogFragment() {
+
+    public StepDialogFragment() {
         // Required empty public constructor
     }
 
@@ -36,6 +38,12 @@ public class MyDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         vmRecipe = ViewModelProviders.of(getActivity()).get(RecipeSharedViewModel.class);
+
+
+        Bundle args = getArguments();
+        if(args != null) {
+            mSelectedIndex = args.getInt("index", -1);
+        }
     }
 
     @Override
@@ -58,7 +66,14 @@ public class MyDialogFragment extends DialogFragment {
     private void add() {
         String data = mBinding.editTextData.getText().toString();
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
-        editedRecipe.getSteps().add(data);
+
+        if(mSelectedIndex == -1){
+            editedRecipe.addStep(data);
+        }
+        else {
+            editedRecipe.updateStep(mSelectedIndex, data);
+        }
+
 
         vmRecipe.select(editedRecipe);
 

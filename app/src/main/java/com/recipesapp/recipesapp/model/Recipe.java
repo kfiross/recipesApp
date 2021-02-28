@@ -214,7 +214,7 @@ public class Recipe implements Parcelable {
 
     public boolean hasIngredientsWithName(String name){
         for (Ingredient ingredient : mIngredients){
-            if(ingredient.getName().equals(name)){
+            if(ingredient.getName().contains(name)){
                 return true;
             }
         }
@@ -233,5 +233,17 @@ public class Recipe implements Parcelable {
 
     public void removeStep(int index){
         mSteps.remove(index);
+    }
+
+    public void addStep(String step){
+        mSteps.add(step);
+    }
+
+    public void updateIngredient(int index, Ingredient newIngredient){
+        mIngredients.set(index, newIngredient);
+    }
+
+    public void updateStep(int index, String newStep){
+        mSteps.set(index, newStep);
     }
 }

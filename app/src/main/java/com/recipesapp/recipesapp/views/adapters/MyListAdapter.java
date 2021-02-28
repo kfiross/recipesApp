@@ -21,8 +21,7 @@ import java.util.function.Function;
 public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder> {
 
     private List<String> items;
-    private @Nullable
-    Integer mType;
+    private @Nullable Integer mType;
     private @Nullable Boolean inEditMode;
     private Function<Integer, Boolean> onDelete;
     private Function<Integer, Boolean> onEdit;
@@ -120,8 +119,8 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             else {
                 ((ListEditItemContentBinding) mBinding).setItem(item);
                 ((ListEditItemContentBinding) mBinding).btnDeleteItem.setOnClickListener(v -> {
-                    onDelete.apply(position);
                     removeItem(position);
+                    onDelete.apply(position);
                 });
                 ((ListEditItemContentBinding) mBinding).btnEditItem.setOnClickListener(v -> {
                     onEdit.apply(position);
