@@ -56,6 +56,9 @@
 
     <string name="sorry">Sorry</string>
     <string name="error_one_photo_only">You can\'t add more than one photo</string>
+    <string name="greeting">Hi, %1$s!</string>
+    <string name="user">User</string>
+
 
     <plurals name="numberMinutes">
         <item quantity="one">One minute</item>

@@ -107,7 +107,7 @@
                         android:background="@color/placeholder"
                         app:imageUrl="@{recipe.image}"
                         app:error="@{@drawable/not_found}"
-                        app:placeholder="@{@color/purple_700}"
+                        app:placeholder="@{@color/colorPlaceholder}"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_gravity="center_horizontal" />

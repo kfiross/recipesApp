@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:elevation="4dp"
+        android:background="@color/colorPrimaryDark"
         android:theme="@style/ToolBarStyle">
 
         <TextView
@@ -20,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textSize="24sp"
             android:textStyle="bold"
             android:text="@{name}" />

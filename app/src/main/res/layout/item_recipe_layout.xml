@@ -43,7 +43,7 @@
                     android:background="@color/placeholder"
                     app:imageUrl="@{recipe.image}"
                     app:error="@{@drawable/not_found}"
-                    app:placeholder="@{@color/purple_700}" />
+                    app:placeholder="@{@color/colorPlaceholder}" />
 
                 <Space
                     android:layout_width="8dp"

@@ -159,7 +159,8 @@ public class MainActivity extends AppCompatActivity
         if (firebaseAuth.getCurrentUser() != null) {
             initializeLocalData();
 
-            navHeaderMainBinding.setName(firebaseAuth.getCurrentUser().getDisplayName());
+            String name = firebaseAuth.getCurrentUser().getDisplayName();
+            navHeaderMainBinding.setName(name==null || name.isEmpty() ? getString(R.string.user) : name);
             navHeaderMainBinding.setEmail(firebaseAuth.getCurrentUser().getEmail());
         }
         // clean cached data
