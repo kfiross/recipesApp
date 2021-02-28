@@ -3,6 +3,7 @@ package com.foodiz.app;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation;
 import com.foodiz.app.databinding.ActivityMainBinding;
 import com.foodiz.app.utils.FirestoreUtils;
 import com.foodiz.app.utils.SharedPreferencesConfig;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -43,9 +45,41 @@ public class MainActivity extends AppCompatActivity {
         // listen to changes when user is logged in or sign out
         FirebaseAuth.getInstance().addAuthStateListener(this::handleAuth);
 
+        BottomNavigationView navigationView = binding.bttmNav;
+        navigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                // navigate to favourites
+                case R.id.nav_favourites:
+                    mNavController.navigate(R.id.favoritesFragment2);
+                    break;
 
+                // navigate to add a new recipe
+                case R.id.nav_add_recipe:
+                    mNavController.navigate(R.id.addRecipeFragment);
+                    break;
+
+                case R.id.nav_my_recipes:
+                    mNavController.navigate(R.id.homeFragment);
+                    break;
+            }
+            return true;
+        });
+
+
+        // listen to changes in navigation
+        mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if(destination.getId() == R.id.loginFragment){
+                binding.bttmNav.setVisibility(View.GONE);
+            }
+            else {
+                binding.bttmNav.setVisibility(View.VISIBLE);
+            }
+        });
 
         preferencesConfig.setLocal("he",this);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.navigation_menu);
+        navigationView.setSelectedItemId(R.id.nav_my_recipes);
 
 
     }

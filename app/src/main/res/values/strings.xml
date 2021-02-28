@@ -31,7 +31,6 @@
 
     <string name="all_recipes">All Recipes</string>
     <string name="options">Options</string>
-    <string name="making_time">Making Time:</string>
     <string name="difficulty">Difficulty:</string>
     <string name="ingredients">Ingredients:</string>
     <string name="steps">Steps:</string>
@@ -56,6 +55,14 @@
 
     <string name="sorry">Sorry</string>
     <string name="error_one_photo_only">You can\'t add more than one photo</string>
+
+    <string name="appetizers">Appetizers</string>
+    <string name="main_course">Main Courses</string>
+    <string name="deserts">Deserts</string>
+
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_add_recipe">Add Recipe</string>
+    <string name="menu_my_recipes">My Recipes</string>
 
     <plurals name="numberMinutes">
         <item quantity="one">One minute</item>

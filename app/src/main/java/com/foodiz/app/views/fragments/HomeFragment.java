@@ -18,7 +18,6 @@ import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentHomeBinding;
 import com.foodiz.app.model.Category;
 import com.foodiz.app.views.adapters.CategoryAdapter;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -52,35 +51,27 @@ public class HomeFragment extends Fragment {
         NavController navController =
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
 
-        mBinding.btnGotoMyRecipes.setOnClickListener(v -> {
-            navController.navigate(R.id.myRecipesFragment);
-        });
-
-        mBinding.btnGotoNewRecipe.setOnClickListener(v -> {
-            navController.navigate(R.id.addRecipeFragment);
-        });
-
-        mBinding.btnLogout.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-        });
-
-//        mRecyclerView = mBinding.recyclerViewCategories;
-//
-//        setupRecyclerView(new ArrayList<>());
-//
-//        FirebaseFirestore.getInstance().collection("categories").addSnapshotListener(
-//                (documentSnapshots, error) -> {
-//
-//                    List<DocumentSnapshot> docs = documentSnapshots.getDocuments();
-//                    ArrayList<Category> categories = new ArrayList<>();
-//                    for (int i = 0; i < docs.size(); i++) {
-//                        DocumentSnapshot documentSnapshot = docs.get(i);
-//        //                documentSnapshot.toObject(Category.class);
-//                        categories.add(Category.fromDocument(documentSnapshot));
-//                    }
-//                    setupRecyclerView(categories);
-//
+//        mBinding.btnGotoMyRecipes.setOnClickListener(v -> {
+//            navController.navigate(R.id.myRecipesFragment);
 //        });
+//
+//        mBinding.btnGotoNewRecipe.setOnClickListener(v -> {
+//            navController.navigate(R.id.addRecipeFragment);
+//        });
+//
+//        mBinding.btnLogout.setOnClickListener(v -> {
+//            FirebaseAuth.getInstance().signOut();
+//        });
+
+        mRecyclerView = mBinding.recyclerViewCategories;
+
+        String[] categoriesNames = getResources().getStringArray(R.array.categories);
+
+        ArrayList<Category> categories = new ArrayList<>();
+        categories.add(new Category("0", categoriesNames[0]));
+        categories.add(new Category("1", categoriesNames[1]));
+        categories.add(new Category("2", categoriesNames[2]));
+        setupRecyclerView(categories);
     }
 
     private void setupRecyclerView(ArrayList<Category> categories){

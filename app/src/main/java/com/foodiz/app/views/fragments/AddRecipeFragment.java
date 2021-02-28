@@ -169,19 +169,6 @@ public class AddRecipeFragment extends BaseFragment {
             }
         });
 
-        mBinding.formLayout.etTime.addTextChangedListener(new TextChangedListener() {
-            @Override
-            protected void onTextChanged(String before, String old, String aNew, String after) {
-                try {
-                    mBinding.getRecipe().setMakingTime(Integer.parseInt(aNew));
-
-                }
-                catch (Exception ignored){
-
-                }
-                mBinding.setCanAddRecipe(checkForm());
-            }
-        });
 
 
 
@@ -266,7 +253,6 @@ public class AddRecipeFragment extends BaseFragment {
     private void resetForm(){
         // mBinding.setRecipe(new Recipe());
         mBinding.formLayout.etName.setText("");
-        mBinding.formLayout.etTime.setText("");
         vmRecipe.select(new Recipe());
         mBinding.setCanAddRecipe(false);
     }
@@ -317,8 +303,6 @@ public class AddRecipeFragment extends BaseFragment {
     private boolean checkForm(){
         boolean result = true;
         if(mBinding.formLayout.etName.length() == 0)
-            result = false;
-        else if(mBinding.formLayout.etTime.length() == 0)
             result = false;
         else if(mBinding.formLayout.getRecipe().getIngredients().isEmpty())
             result = false;

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutDirection="locale"
@@ -13,7 +14,8 @@
         >
 
         <FrameLayout
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_width="match_parent">
 
             <fragment
@@ -28,5 +30,16 @@
                 app:navGraph="@navigation/nav_graph" />
         </FrameLayout>
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bttmNav"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="start"
+            android:background="@color/colorPrimaryDark"
+            app:itemTextColor="@drawable/bottom_nav_color"
+            app:itemIconTint="@drawable/bottom_nav_color"
+            tools:menu="@menu/navigation_menu" />
+
     </LinearLayout>
 </layout>
+

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="categories">
-        <item>@string/sweets</item>
-        <item>@string/chicken</item>
-        <item>@string/meat</item>
-        <item>@string/fish</item>
-        <item>@string/vegan</item>
+        <item>@string/appetizers</item>
+        <item>@string/main_course</item>
+        <item>@string/deserts</item>
     </array>
 </resources>

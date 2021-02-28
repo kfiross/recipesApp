@@ -8,7 +8,7 @@
     </data>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,55 +17,20 @@
         <include
             layout="@layout/appbar" />
 
-        <LinearLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="110dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/recyclerViewCategories"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-
-            <Button
-                android:id="@+id/btn_goto_my_recipes"
-                android:layout_width="260dp"
-                android:layout_height="80dp"
-                android:text="@string/my_recipes"
-                android:textSize="20sp"
-                app:cornerRadius="12dp"
-
-                />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"/>
-
-            <Button
-                android:id="@+id/btn_goto_new_recipe"
-                android:layout_width="260dp"
-                android:layout_height="80dp"
-                android:text="@string/add_new_recipe"
-                android:textSize="20sp"
-                app:cornerRadius="12dp"
-                />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"/>
-
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="260dp"
-                android:layout_height="80dp"
-                android:text="@string/logout"
-                android:textSize="20sp"
-                app:cornerRadius="12dp"
-                android:backgroundTint="@android:color/holo_red_dark"
-                />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_category_layout"
+            tools:itemCount="4"
+            />
 
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 

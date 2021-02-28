@@ -24,8 +24,6 @@ public class Recipe implements Parcelable {
     @Nullable
     private String mName;
     @Nullable
-    private Integer mMakingTime;
-    @Nullable
     private List<Ingredient> mIngredients;
     @Nullable
     private List<String> mSteps;
@@ -41,7 +39,6 @@ public class Recipe implements Parcelable {
             String id,
             @Nullable Integer category,
             @Nullable  String name,
-            @Nullable  Integer time,
             @Nullable  List<Ingredient> ingredients,
             @Nullable  List<String> steps,
             @Nullable  String image
@@ -49,7 +46,6 @@ public class Recipe implements Parcelable {
         mId = id;
         mCategory = category;
         mName = name;
-        mMakingTime = time;
         mIngredients = ingredients;
         mSteps = steps;
         mImage = image;
@@ -63,11 +59,6 @@ public class Recipe implements Parcelable {
             mCategory = in.readInt();
         }
         mName = in.readString();
-        if (in.readByte() == 0) {
-            mMakingTime = null;
-        } else {
-            mMakingTime = in.readInt();
-        }
         mIngredients = in.createTypedArrayList(Ingredient.CREATOR);
         mSteps = in.createStringArrayList();
         mImage = in.readString();
@@ -99,7 +90,6 @@ public class Recipe implements Parcelable {
                 snapshot.getId(),
                 snapshot.get("category", Integer.class),
                 snapshot.get("name", String.class),
-                snapshot.get("time", Integer.class),
                 ingredientsList,
                 (List<String>) snapshot.get("steps"),
                 (String) snapshot.get("image")
@@ -148,14 +138,6 @@ public class Recipe implements Parcelable {
         this.mCategory = mCategory;
     }
 
-    public int getMakingTime() {
-        return mMakingTime == null ? 0 : mMakingTime;
-    }
-
-    public void setMakingTime(int mMakingTime) {
-        this.mMakingTime = mMakingTime;
-    }
-
     public String getImage() {
         return mImage;
     }
@@ -168,7 +150,6 @@ public class Recipe implements Parcelable {
         Map<String,Object> map = new HashMap<>();
         map.put("category", mCategory);
         map.put("name", mName);
-        map.put("time", mMakingTime);
         map.put("ingredients", mIngredients);
         map.put("steps", mSteps);
         map.put("image", mImage);
@@ -191,12 +172,6 @@ public class Recipe implements Parcelable {
             dest.writeInt(mCategory);
         }
         dest.writeString(mName);
-        if (mMakingTime == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(mMakingTime);
-        }
         dest.writeTypedList(mIngredients);
         dest.writeStringList(mSteps);
         dest.writeString(mImage);
