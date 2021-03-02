@@ -21,10 +21,25 @@
             android:orientation="vertical"
             tools:context=".views.fragments.RecipesFragment">
 
-            <include
-                app:name="@{name}"
-                layout="@layout/appbar"
-                />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize">
+
+                <SearchView
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:queryHint="Search something..."
+                    />
+
+                <include
+                    android:id="@+id/appbar"
+                    app:name="@{name}"
+                    layout="@layout/appbar"
+                    />
+
+
+            </RelativeLayout>
 
             <Space
                 android:layout_width="wrap_content"

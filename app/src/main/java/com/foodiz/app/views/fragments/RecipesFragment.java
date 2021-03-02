@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
-import com.foodiz.app.model.Recipe;
 import com.foodiz.app.databinding.FragmentRecipesBinding;
+import com.foodiz.app.model.Recipe;
 import com.foodiz.app.views.adapters.RecipeAdapter;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecipesFragment extends BaseFragment {
+public class RecipesFragment extends Fragment {
 
     private FragmentRecipesBinding mBinding;
     private RecyclerView mRecyclerView;
@@ -65,11 +66,32 @@ public class RecipesFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
+        ((MainActivity)getActivity()).setSupportActionBar(mBinding.appbar.toolbar);
+        ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("");
         ((MainActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
         mRecyclerView = mBinding.recyclerViewRecipes;
 
         mBinding.setName(mSelectedCategoryName);
+        mBinding.appbar.btnSearch.setVisibility(View.VISIBLE);
+        mBinding.appbar.btnSearch.setOnClickListener(v -> {
+            mBinding.appbar.toolbar.setVisibility(View.GONE);
+
+            // locate "search button" to automatically start to type for search
+            int searchButtonId = mBinding.searchBar.getContext().getResources()
+                    .getIdentifier("android:id/search_button", null, null);
+            ImageView closeButton = mBinding.searchBar.findViewById(searchButtonId);
+            closeButton.callOnClick();
+        });
+
+        mBinding.searchBar.setOnCloseListener(() -> {
+            mBinding.appbar.toolbar.setVisibility(View.VISIBLE);
+            return true;
+        });
 
         setupRecyclerView(new ArrayList<>());
 

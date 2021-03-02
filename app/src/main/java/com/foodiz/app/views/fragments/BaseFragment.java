@@ -17,10 +17,13 @@ public class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
-        ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("");
+
+            ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+            ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+            ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((MainActivity)getActivity()).getSupportActionBar().setTitle("");
+
+
 //        ((MainActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
         MainActivity.preferencesConfig.loadLocal(getActivity());
     }

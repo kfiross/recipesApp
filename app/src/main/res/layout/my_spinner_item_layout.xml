@@ -16,7 +16,8 @@
     android:textColor="@android:color/white"
     android:padding="10dp"
     android:text="[Choose..]"
-    android:background="@android:color/black"
+    android:background="@drawable/bg_edit_text"
+    android:backgroundTint="#22000000"
     android:textSize="20sp"
     >
 
