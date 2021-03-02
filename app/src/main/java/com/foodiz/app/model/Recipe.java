@@ -1,6 +1,5 @@
 package com.foodiz.app.model;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,7 +7,6 @@ import androidx.annotation.Nullable;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,23 +22,22 @@ public class Recipe implements Parcelable {
     @Nullable
     private String mName;
     @Nullable
-    private List<Ingredient> mIngredients;
+    private String mIngredients;
     @Nullable
-    private List<String> mSteps;
+    private String mSteps;
     @Nullable
     private String mImage;
 
     public Recipe(){
-        mIngredients = new ArrayList<>();
-        mSteps = new ArrayList<>();
+        
     }
 
     public Recipe(
             String id,
             @Nullable Integer category,
             @Nullable  String name,
-            @Nullable  List<Ingredient> ingredients,
-            @Nullable  List<String> steps,
+            @Nullable  String ingredients,
+            @Nullable  String steps,
             @Nullable  String image
     ) {
         mId = id;
@@ -59,8 +56,8 @@ public class Recipe implements Parcelable {
             mCategory = in.readInt();
         }
         mName = in.readString();
-        mIngredients = in.createTypedArrayList(Ingredient.CREATOR);
-        mSteps = in.createStringArrayList();
+        mIngredients = in.readString();
+        mSteps = in.readString();
         mImage = in.readString();
     }
 
@@ -77,21 +74,12 @@ public class Recipe implements Parcelable {
     };
 
     public static Recipe fromDocument(DocumentSnapshot snapshot) {
-        List<Map<String, Object>> ingredientsListMap = (List<Map<String, Object>>) snapshot.get("ingredients");
-        List<Ingredient> ingredientsList = new ArrayList<>();
-        if(ingredientsListMap != null){
-            for(Object map : ingredientsListMap){
-                if (map instanceof Map) {
-                    ingredientsList.add(Ingredient.fromMap((Map<String,Object>)map));
-                }
-            }
-        }
         return new Recipe(
                 snapshot.getId(),
                 snapshot.get("category", Integer.class),
                 snapshot.get("name", String.class),
-                ingredientsList,
-                (List<String>) snapshot.get("steps"),
+                snapshot.get("ingredients", String.class),
+                (String) snapshot.get("steps"),
                 (String) snapshot.get("image")
         );
     }
@@ -105,19 +93,19 @@ public class Recipe implements Parcelable {
         this.mId = mId;
     }
 
-    public List<Ingredient> getIngredients() {
+    public String getIngredients() {
         return mIngredients;
     }
 
-    public void setIngredients(List<Ingredient> mIngredients) {
+    public void setIngredients(String mIngredients) {
         this.mIngredients = mIngredients;
     }
 
-    public List<String> getSteps() {
+    public String getSteps() {
         return mSteps;
     }
 
-    public void setSteps(List<String> mSteps) {
+    public void setSteps(String mSteps) {
         this.mSteps = mSteps;
     }
 
@@ -172,28 +160,15 @@ public class Recipe implements Parcelable {
             dest.writeInt(mCategory);
         }
         dest.writeString(mName);
-        dest.writeTypedList(mIngredients);
-        dest.writeStringList(mSteps);
+        dest.writeString(mIngredients);
+        dest.writeString(mSteps);
         dest.writeString(mImage);
     }
 
-    public List<String> getIngredientsStrings(Context context){
-        List<String> items = new ArrayList<>();
-        if(mIngredients != null) {
-            for (Ingredient ingredient : mIngredients) {
-                items.add(ingredient.toString2(context));
-            }
-        }
-        return items;
-    }
+
 
     public boolean hasIngredientsWithName(String name){
-        for (Ingredient ingredient : mIngredients){
-            if(ingredient.getName().equals(name)){
-                return true;
-            }
-        }
-        return false;
+        return mIngredients.contains(name);
     }
 
 
@@ -201,12 +176,4 @@ public class Recipe implements Parcelable {
         return List.of(mImage);
     }
 
-
-    public void removeIngredient(int index){
-        mIngredients.remove(index);
-    }
-
-    public void removeStep(int index){
-        mSteps.remove(index);
-    }
 }

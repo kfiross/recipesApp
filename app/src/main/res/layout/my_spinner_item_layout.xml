@@ -15,8 +15,8 @@
     android:ellipsize="marquee"
     android:textColor="@android:color/white"
     android:padding="10dp"
-    android:text="[Choose]"
-    android:background="#BA68C8"
+    android:text="[Choose..]"
+    android:background="@android:color/black"
     android:textSize="20sp"
     >
 

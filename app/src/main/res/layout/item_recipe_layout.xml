@@ -11,31 +11,33 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:layout_width="match_parent"
         app:cardElevation="6dp"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="12dp"
+        android:layout_marginBottom="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
+
         >
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+
+            >
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white">
+                android:background="@android:color/holo_red_light">
 
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="0dp"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
                     android:textSize="40sp"
                     app:civ_border_color="@android:color/black"
                     app:civ_border_width="3dp"
@@ -43,7 +45,7 @@
                     android:background="@color/placeholder"
                     app:imageUrl="@{recipe.image}"
                     app:error="@{@drawable/not_found}"
-                    app:placeholder="@{@color/purple_700}" />
+                    app:placeholder="@{@color/colorPrimary}" />
 
                 <Space
                     android:layout_width="8dp"
@@ -68,39 +70,13 @@
                         android:textStyle="bold"
                         android:padding="9dp"
                         android:text="@{recipe.name}"
-                        android:textColor="#000"
+                        android:textColor="#fff"
                         android:textSize="20sp"
                         tools:ignore="NestedWeights,RtlCompat" />
 
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="8dp" />
-
-                    <LinearLayout
-                        android:visibility="invisible"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:gravity="center_vertical"
-                            android:text="@string/difficulty"
-                            android:textColor="@android:color/holo_blue_dark"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/txt_item_difficulty"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:gravity="center_vertical"
-                            android:text="Hard"
-                            android:textSize="16sp" />
-
-                    </LinearLayout>
-
 
                 </LinearLayout>
 

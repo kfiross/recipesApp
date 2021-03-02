@@ -11,15 +11,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
-import com.foodiz.app.model.Recipe;
 import com.foodiz.app.databinding.FragmentRecipeDetailsBinding;
-import com.foodiz.app.views.adapters.MyListAdapter;
-
-import java.util.ArrayList;
+import com.foodiz.app.model.Recipe;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,14 +52,6 @@ public class RecipeDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mBinding.listIngredients.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.listIngredients.setHasFixedSize(true);
-        mBinding.listIngredients.setAdapter(new MyListAdapter(getContext(), new ArrayList<>(), 0));
-
-        mBinding.listSteps.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.listSteps.setHasFixedSize(true);
-        mBinding.listSteps.setAdapter(new MyListAdapter(getContext(), new ArrayList<>(), 1));
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         mBinding.setRecipe(mSelectedRecipe);

@@ -21,23 +21,18 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
-import com.foodiz.app.model.Recipe;
 import com.foodiz.app.databinding.FragmentAddRecipeBinding;
+import com.foodiz.app.model.Recipe;
 import com.foodiz.app.utils.FirestoreUtils;
 import com.foodiz.app.utils.TextChangedListener;
 import com.foodiz.app.utils.UiUtils;
 import com.foodiz.app.viewmodels.shared.RecipeSharedViewModel;
-import com.foodiz.app.views.adapters.MyListAdapter;
-import com.foodiz.app.views.fragments.dialogs.IngredientEditDialogFragment;
-import com.foodiz.app.views.fragments.dialogs.MyDialogFragment;
+
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -123,53 +118,53 @@ public class RecipeEditFragment extends BaseFragment {
 
 
     private void setupButtons() {
-        mBinding.formLayout.btnAddIngredient.setOnClickListener(v -> openDialog(0, null));
-        mBinding.formLayout.btnAddStep.setOnClickListener(v -> openDialog(1, null));
+//        mBinding.formLayout.btnAddIngredient.setOnClickListener(v -> openDialog(0, null));
+//        mBinding.formLayout.btnAddStep.setOnClickListener(v -> openDialog(1, null));
         mBinding.btnAddRecipe.setOnClickListener(v -> updateRecipe());
-        mBinding.formLayout.btnAddPhoto.setOnClickListener(v -> addPhoto());
+//        mBinding.formLayout.btnAddPhoto.setOnClickListener(v -> addPhoto());
     }
 
     private void setupLists() {
-        mBinding.formLayout.listIngredients.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.formLayout.listIngredients.setHasFixedSize(true);
-
-        mBinding.formLayout.listIngredients.setAdapter(new MyListAdapter(
-                        getContext(),
-                        new ArrayList<>(),
-                        0,
-                        (index) -> {
-                            //openDialog(0, index);
-
-                            vmRecipe.getSelected().getValue().removeIngredient(index);
-
-                            return true;
-                        },
-                        (index) -> {
-                            openDialog(0, index);
-                            return true;
-                        }
-                )
-        );
-
-        mBinding.formLayout.listSteps.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.formLayout.listSteps.setHasFixedSize(true);
-
-        mBinding.formLayout.listSteps.setAdapter(new MyListAdapter(
-                        getContext(),
-                        new ArrayList<>(),
-                        1,
-                        (index) -> {
-                            vmRecipe.getSelected().getValue().removeStep(index);
-
-
-                            return true;
-                        },
-                        (index) -> {
-                            openDialog(1, index);
-                            return true;
-                        }
-                )
-        );
+//        mBinding.formLayout.listIngredients.setLayoutManager(new LinearLayoutManager(getContext()));
+//        mBinding.formLayout.listIngredients.setHasFixedSize(true);
+//
+//        mBinding.formLayout.listIngredients.setAdapter(new MyListAdapter(
+//                        getContext(),
+//                        new ArrayList<>(),
+//                        0,
+//                        (index) -> {
+//                            //openDialog(0, index);
+//
+//                            vmRecipe.getSelected().getValue().removeIngredient(index);
+//
+//                            return true;
+//                        },
+//                        (index) -> {
+//                            openDialog(0, index);
+//                            return true;
+//                        }
+//                )
+//        );
+//
+//        mBinding.formLayout.listSteps.setLayoutManager(new LinearLayoutManager(getContext()));
+//        mBinding.formLayout.listSteps.setHasFixedSize(true);
+//
+//        mBinding.formLayout.listSteps.setAdapter(new MyListAdapter(
+//                        getContext(),
+//                        new ArrayList<>(),
+//                        1,
+//                        (index) -> {
+//                            vmRecipe.getSelected().getValue().removeStep(index);
+//
+//
+//                            return true;
+//                        },
+//                        (index) -> {
+//                            openDialog(1, index);
+//                            return true;
+//                        }
+//                )
+//        );
     }
 
     private void setupForm() {
@@ -183,30 +178,6 @@ public class RecipeEditFragment extends BaseFragment {
 
     }
 
-    private void openDialog(int type, @Nullable Integer index) {
-        if(type == 0){
-            IngredientEditDialogFragment editIngredientDialog = new IngredientEditDialogFragment();
-            Bundle args = new Bundle();
-            args.putInt("type", type);
-            args.putParcelable("recipe", mBinding.getRecipe());
-            if(index != null) {
-                args.putInt("index", index);
-            }
-            editIngredientDialog.setArguments(args);
-            editIngredientDialog.show(MainActivity.appFragmentManager, "editIngredientDialog");
-        }
-        else if (type == 1){
-            MyDialogFragment editDialog = new MyDialogFragment();
-            Bundle args = new Bundle();
-            args.putInt("type", 1);
-            args.putParcelable("recipe", mBinding.getRecipe());
-            if(index != null) {
-                args.putInt("index", index);
-            }
-            editDialog.setArguments(args);
-            editDialog.show(MainActivity.appFragmentManager, "Dialog");
-        }
-    }
 
     private void updateRecipe(){
         // add to recipes

@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             >
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddRecipe"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
@@ -56,43 +56,19 @@
                 android:layout_marginBottom="-10dp"
                 android:layout_marginLeft="-10dp"
                 android:layout_marginRight="-10dp"
-
-                android:layout_height="60dp"
+                android:textColor="#fff"
+                android:backgroundTint="@color/colorAccent"
+                app:rippleColor="#ededed"
+                android:textSize="18sp"
+                android:layout_height="70dp"
                 android:enabled="@{editMode ? true : canAddRecipe}"
                 android:text="@{editMode ? @string/edit_recipe : @string/add_recipe}"
 
                 >
-            </Button>
+            </androidx.appcompat.widget.AppCompatButton>
 
-<!--            <Button-->
-<!--                android:id="@+id/btnDeleteRecipe"-->
-<!--                android:text="@string/delete_recipe"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginLeft="-10dp"-->
-<!--                android:layout_marginRight="-10dp"-->
-<!--                android:layout_marginBottom="-6dp"-->
-<!--                android:layout_height="56dp"-->
-<!--                android:backgroundTint="@android:color/holo_red_dark"-->
-<!--                android:visibility="@{editMode ? View.VISIBLE : View.GONE}"-->
-<!--                >-->
-<!--            </Button>-->
 
         </LinearLayout>
-
-
-
-
-<!--        <ImageView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginTop="-100dp"-->
-<!--            android:scaleX="1.7"-->
-<!--            android:scaleY="0.9"-->
-<!--            android:rotation="12"-->
-<!--            android:alpha="0.2"-->
-<!--            android:background="@drawable/bg_recipe"-->
-<!--            />-->
     </LinearLayout>
 </layout>
 

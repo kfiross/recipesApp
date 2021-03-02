@@ -15,15 +15,14 @@
         android:elevation="4dp"
         android:theme="@style/ToolBarStyle">
 
-        <TextView
-            android:id="@+id/toolbar_title"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#000"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="Foodiz" />
+            android:src="@drawable/foodiz_logo"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+             />
 
     </androidx.appcompat.widget.Toolbar>
 </layout>
