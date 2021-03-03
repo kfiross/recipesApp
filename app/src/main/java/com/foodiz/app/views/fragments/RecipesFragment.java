@@ -69,8 +69,6 @@ public class RecipesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         ((MainActivity)getActivity()).setSupportActionBar(mBinding.appbar.toolbar);
         ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -81,7 +79,14 @@ public class RecipesFragment extends Fragment {
 
         mBinding.setName(mSelectedCategoryName);
 
+        setupRecyclerView(new ArrayList<>());
+        setupSearchBar();
 
+        fetchDocs();
+    }
+
+    private void setupSearchBar() {
+        // setup binding for show/hiding search bar
         mBinding.appbar.btnSearch.setVisibility(View.VISIBLE);
         mBinding.appbar.btnSearch.setOnClickListener(v -> {
             mBinding.appbar.toolbar.setVisibility(View.GONE);
@@ -93,14 +98,14 @@ public class RecipesFragment extends Fragment {
             closeButton.callOnClick();
         });
 
+        // define close action call
         mBinding.searchBar.setOnCloseListener(() -> {
             mBinding.appbar.toolbar.setVisibility(View.VISIBLE);
             setupRecyclerView(mCategoryRecipes);
             return true;
         });
 
-        setupRecyclerView(new ArrayList<>());
-
+        // listener when query text changed
         mBinding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -126,8 +131,6 @@ public class RecipesFragment extends Fragment {
                 return true;
             }
         });
-
-        fetchDocs();
     }
 
     private void fetchDocs(){

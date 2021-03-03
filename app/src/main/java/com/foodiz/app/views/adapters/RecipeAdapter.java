@@ -82,9 +82,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                     MainActivity.preferencesConfig.removeFavId(recipe.getId());
                     FirestoreUtils.removeFromMyFavs(recipe.getId());
 
-                    UiUtils.showToastLong(
-                            itemView.getContext(),
-                            StringUtils.getLocaleString(R.string.removed_from_fav, itemView.getContext())
+                    UiUtils.showSnackbar(
+                            itemView,
+                            StringUtils.getLocaleString(R.string.removed_from_fav, itemView.getContext()),
+                            null,
+                            StringUtils.getLocaleString(R.string.undo, itemView.getContext()),
+                            view -> {
+                                // add it back
+                                MainActivity.preferencesConfig.addFavId(recipe.getId());
+                                FirestoreUtils.addToMyFavs(recipe.getId());
+                            }
                     );
                 }
                 // if not, add it
@@ -92,9 +99,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                     MainActivity.preferencesConfig.addFavId(recipe.getId());
                     FirestoreUtils.addToMyFavs(recipe.getId());
 
-                    UiUtils.showToastLong(
-                            itemView.getContext(),
-                            StringUtils.getLocaleString(R.string.add_to_fav, itemView.getContext())
+                    UiUtils.showSnackbar(
+                            itemView,
+                            StringUtils.getLocaleString(R.string.add_to_fav, itemView.getContext()),
+                            null
                     );
 
                 }

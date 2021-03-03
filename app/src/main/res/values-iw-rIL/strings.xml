@@ -26,19 +26,12 @@
     <string name="ingredients">מצרכים:</string>
     <string name="steps">אופן הכנה:</string>
 
-    <plurals name="numberMinutes">
-        <item quantity="one">דקה אחת</item>
-        <item quantity="two">2 דקות</item>
-        <item quantity="many">%d דקות</item>
-        <item quantity="other">%d דקות</item>
-    </plurals>
 
     <string name="category">קטגוריה:</string>
     <string name="add">להוספה</string>
     <string name="recipe_name">שם המתכון:</string>
     <string name="add_new_recipe">הוספת מתכון חדש</string>
     <string name="hint_enter_name">הזן שם…</string>
-    <string name="hint_time_in_minutes">זמן בדקות…</string>
     <string name="ingredient_name">שם המצרך</string>
     <string name="quantity">כמות</string>
     <string name="add_ingredient">הוספת מצרך</string>
@@ -54,9 +47,6 @@
     <string name="error_one_photo_only">לא ניתן להוסיף יותר מתמונה אחת</string>
 
     <string name="add_step">הוספת צעד</string>
-    <string name="add_photo">הוספת תמונה</string>
-    <string name="delete_recipe">מחיקת מתכון</string>
-    <string name="enter_step">הזן צעד</string>
 
     <string name="add_to_fav">המתכון הוסף למועדפים</string>
     <string name="removed_from_fav">המתכון הוסר מהמועדפים</string>
@@ -69,37 +59,6 @@
     <string name="menu_add_recipe">הוספת מתכון</string>
     <string name="menu_my_recipes">המתכונים שלי</string>
 
-    <!--    -->
-    <string name="sweets">מתוקים</string>
-    <string name="chicken">עוף</string>
-    <string name="meat">בשר</string>
-    <string name="fish">דגים</string>
-    <string name="vegan">צמחוני</string>
+    <string name="undo">ביטול</string>
 
-    <!-- -->
-    <string name="ml">מ"ל</string>
-    <string name="g">גרם</string>
-    <string name="prompt_name">שם</string>
-
-
-    <plurals name="numberSpoons">
-        <item quantity="one">כף</item>
-        <item quantity="two">2 כפות</item>
-        <item quantity="many">%d כפות</item>
-        <item quantity="other">%d כפות</item>
-    </plurals>
-
-    <plurals name="numberTeaspoons">
-        <item quantity="one">כפית</item>
-        <item quantity="two">2 כפיות</item>
-        <item quantity="many">%d כפיות</item>
-        <item quantity="other">%d כפיות</item>
-    </plurals>
-
-    <plurals name="numberGlasses">
-        <item quantity="one">כוס</item>
-        <item quantity="two">2 כוסות</item>
-        <item quantity="many">%d כוסות</item>
-        <item quantity="other">%f כוסות</item>
-    </plurals>
 </resources>

@@ -3,7 +3,10 @@ package com.foodiz.app.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class UiUtils {
     public static void showAlertYesNo(
@@ -45,5 +48,27 @@ public class UiUtils {
 
     public static void showToastLong(Context context, String title){
         Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showSnackbar(View view, String title, Integer duration){
+        if(duration == null)
+            duration = 5000;
+
+        Snackbar.make(view, title, duration).show();
+    }
+
+    public static void showSnackbar(
+            View view,
+            String title,
+            Integer duration,
+            String actionName,
+            View.OnClickListener actionListener
+    ){
+        if(duration == null)
+            duration = 5000;
+
+        Snackbar.make(view, title, duration)
+                .setAction(actionName, actionListener)
+                .show();
     }
 }

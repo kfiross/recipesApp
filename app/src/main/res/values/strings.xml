@@ -40,7 +40,6 @@
     <string name="add">Add</string>
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="hint_enter_name">Enter Name…</string>
-    <string name="hint_time_in_minutes">Time in minutes…</string>
     <string name="search_recipe">Search Recipe By Ingredients</string>
 
     <string name="ingredient_name">Ingredient Name</string>
@@ -53,6 +52,9 @@
     <string name="photos">Photos:</string>
     <string name="add_step">Add Step</string>
 
+    <string name="add_to_fav">Added to favourites</string>
+    <string name="removed_from_fav">Removed from favourites</string>
+
     <string name="sorry">Sorry</string>
     <string name="error_one_photo_only">You can\'t add more than one photo</string>
 
@@ -64,48 +66,6 @@
     <string name="menu_add_recipe">Add Recipe</string>
     <string name="menu_my_recipes">My Recipes</string>
 
-    <plurals name="numberMinutes">
-        <item quantity="one">One minute</item>
-        <item quantity="two">2 minutes</item>
-        <item quantity="many">%d minutes</item>
-        <item quantity="other">%d minutes</item>
-    </plurals>
-
-    <!--    -->
-    <string name="sweets">Sweets</string>
-    <string name="chicken">Chicken</string>
-    <string name="meat">Meat</string>
-    <string name="fish">Fish</string>
-    <string name="vegan">Vegan</string>
-
-    <!--  Ingredients  -->
-    <string name="ml">ml</string>
-    <string name="g">g</string>
-    <string name="add_photo">Add Photo</string>
-    <string name="delete_recipe">Delete Recipe</string>
-    <string name="enter_step">Enter Step</string>
-    <string name="add_to_fav">Added To Favourites</string>
-    <string name="removed_from_fav">Removed From Favourites</string>
-    <string name="prompt_name">Name</string>
-
-
-    <plurals name="numberSpoons">
-        <item quantity="one">One spoon</item>
-        <item quantity="many">%d spoons</item>
-        <item quantity="other">%f spoons</item>
-    </plurals>
-
-    <plurals name="numberTeaspoons">
-        <item quantity="one">One teaspoon</item>
-        <item quantity="many">%d teaspoons</item>
-        <item quantity="other">%f teaspoons</item>
-    </plurals>
-
-    <plurals name="numberGlasses">
-        <item quantity="one">One glass</item>
-        <item quantity="many">%d glasses</item>
-        <item quantity="other">%f glasses</item>
-    </plurals>
-
+    <string name="undo">Undo</string>
 
 </resources>
