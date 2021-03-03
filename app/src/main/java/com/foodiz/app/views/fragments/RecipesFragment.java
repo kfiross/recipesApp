@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +36,8 @@ public class RecipesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private int mSelectedCategoryId;
     private String mSelectedCategoryName;
+
+    private ArrayList<Recipe> mCategoryRecipes;
 
     public RecipesFragment() {
         // Required empty public constructor
@@ -77,6 +80,8 @@ public class RecipesFragment extends Fragment {
         mRecyclerView = mBinding.recyclerViewRecipes;
 
         mBinding.setName(mSelectedCategoryName);
+
+
         mBinding.appbar.btnSearch.setVisibility(View.VISIBLE);
         mBinding.appbar.btnSearch.setOnClickListener(v -> {
             mBinding.appbar.toolbar.setVisibility(View.GONE);
@@ -90,10 +95,37 @@ public class RecipesFragment extends Fragment {
 
         mBinding.searchBar.setOnCloseListener(() -> {
             mBinding.appbar.toolbar.setVisibility(View.VISIBLE);
+            setupRecyclerView(mCategoryRecipes);
             return true;
         });
 
         setupRecyclerView(new ArrayList<>());
+
+        mBinding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<Recipe> resultsRecipes = new ArrayList<>();
+                for(Recipe recipe : mCategoryRecipes){
+                    // case query is part of a recipe's name
+                    if(recipe.getName().contains(newText)){
+                        resultsRecipes.add(recipe);
+                    }
+
+                    // case query is an ingredient name that a recipe has
+                    else if(recipe.containsIngredient(newText)){
+                        resultsRecipes.add(recipe);
+                    }
+                }
+
+                setupRecyclerView(resultsRecipes);
+                return true;
+            }
+        });
 
         fetchDocs();
     }
@@ -105,16 +137,16 @@ public class RecipesFragment extends Fragment {
                 (documentSnapshots, error) -> {
 
                     List<DocumentSnapshot> docs = documentSnapshots.getDocuments();
-                    ArrayList<Recipe> recipes = new ArrayList<>();
+                    mCategoryRecipes = new ArrayList<>();
                     for (int i = 0; i < docs.size(); i++) {
                         DocumentSnapshot documentSnapshot = docs.get(i);
                         // documentSnapshot.toObject(Recipe.class);
 
                         Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
 
-                        recipes.add(newRecipe);
+                        mCategoryRecipes.add(newRecipe);
                     }
-                    setupRecyclerView(recipes);
+                    setupRecyclerView(mCategoryRecipes);
 
                 });
     }

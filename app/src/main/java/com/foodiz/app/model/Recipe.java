@@ -176,4 +176,11 @@ public class Recipe implements Parcelable {
         return List.of(mImage);
     }
 
+    public boolean containsIngredient(String ingredientName) {
+        if(mIngredients==null || mIngredients.isEmpty()){
+            return false;
+        }
+
+        return this.mIngredients.contains(ingredientName);
+    }
 }

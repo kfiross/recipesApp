@@ -9,64 +9,59 @@
             type="String" />
     </data>
 
-    <RelativeLayout
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".views.fragments.RecipesFragment">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/actionBarSize">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".views.fragments.RecipesFragment">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="?android:attr/actionBarSize">
-
-                <SearchView
-                    android:id="@+id/search_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:queryHint="Search something..."
-                    />
-
-                <include
-                    android:id="@+id/appbar"
-                    app:name="@{name}"
-                    layout="@layout/appbar"
-                    />
-
-
-            </RelativeLayout>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="12dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{name}"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#000"
-                />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="12dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewRecipes"
+            <SearchView
+                android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_recipe_layout" />
+                android:queryHint="Search something..."
+                />
 
-        </LinearLayout>
+            <include
+                android:id="@+id/appbar"
+                app:name="@{name}"
+                layout="@layout/appbar"
+                />
 
-    </RelativeLayout>
+
+        </RelativeLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{name}"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000"
+            />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_recipe_layout" />
+
+    </LinearLayout>
+
 
 </layout>
