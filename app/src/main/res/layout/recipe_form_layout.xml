@@ -37,7 +37,7 @@
                 <TextView
                     android:gravity="center"
                     android:text="@string/recipe_name"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
 
                 <TextView
                     android:text="@string/category"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:layout_width="90dp"
@@ -105,35 +105,19 @@
             </LinearLayout>
 
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"/>
 
-
-            <LinearLayout
-                android:orientation="horizontal"
+            <TextView
+                android:text="@string/ingredients"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:paddingStart="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="@string/ingredients"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:paddingStart="4dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
-
-<!--                <Button-->
-<!--                    android:id="@+id/btn_add_ingredient"-->
-<!--                    android:text="@string/add_ingredient"-->
-<!--                    android:textColor="#fff"-->
-<!--                    android:layout_width="130dp"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:drawableLeft="@drawable/ic_add_white"-->
-<!--                    android:drawableStart="@drawable/ic_add_white"/>-->
-
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"/>
 
             <Space
                 android:layout_width="wrap_content"
@@ -155,33 +139,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="4dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
+             <TextView
                     android:text="@string/steps"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:paddingStart="4dp"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
 
-<!--                <Button-->
-<!--                    android:id="@+id/btn_add_step"-->
-<!--                    android:text="@string/add_step"-->
-<!--                    android:textColor="#fff"-->
-<!--                    android:layout_width="130dp"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:drawableLeft="@drawable/ic_add_white"-->
-<!--                    android:drawableStart="@drawable/ic_add_white"/>-->
-
-            </LinearLayout>
 
             <Space
                 android:layout_width="wrap_content"
@@ -211,33 +178,15 @@
 <!--                items="@{recipe.steps}"-->
 <!--                />-->
 
-
-            <LinearLayout
-                android:orientation="horizontal"
+            <TextView
+                android:text="@string/photo"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:text="@string/photo"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
-
-<!--                <Button-->
-<!--                    android:id="@+id/btn_add_photo"-->
-<!--                    android:text="@string/add_photo"-->
-<!--                    android:textColor="#fff"-->
-<!--                    android:layout_width="130dp"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:drawableLeft="@drawable/ic_add_white"-->
-<!--                    android:drawableStart="@drawable/ic_add_white"/>-->
-
-            </LinearLayout>
 
             <Space
                 android:layout_width="wrap_content"

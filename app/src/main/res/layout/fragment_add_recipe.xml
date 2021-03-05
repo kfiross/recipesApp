@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/back_design"
+        android:background="@drawable/bg_login"
         >
 
         <include
@@ -56,10 +56,11 @@
                 android:layout_marginBottom="-10dp"
                 android:layout_marginLeft="-10dp"
                 android:layout_marginRight="-10dp"
-                android:textColor="@color/colorPrimary"
-                android:backgroundTint="#fff"
+                android:textColor="#000"
+                android:textStyle="bold|italic"
+                android:backgroundTint="@android:color/transparent"
                 app:rippleColor="#ededed"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:layout_height="70dp"
                 android:enabled="@{editMode ? true : canAddRecipe}"
                 android:text="@{editMode ? @string/edit_recipe : @string/add_recipe}"

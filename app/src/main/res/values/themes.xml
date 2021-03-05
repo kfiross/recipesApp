@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#E57373</item>
-        <item name="colorPrimaryDark">#F44336</item>
+        <item name="colorPrimaryDark">#E57373</item>
         <item name="colorAccent">#000</item>
 
         <!--  font for the app -->

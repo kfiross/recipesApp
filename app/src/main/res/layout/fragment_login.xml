@@ -28,7 +28,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_login"
+        android:background="@drawable/back_design"
         android:padding="4dp"
         tools:context=".views.fragments.LoginFragment">
 
@@ -52,7 +52,7 @@
                 android:gravity="center"
                 android:text="@{loginMode ? @string/sign_in_ : @string/register_}"
                 android:textSize="36sp"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
 
@@ -78,6 +78,7 @@
                 android:background="@drawable/bg_edit_text"
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
+                android:backgroundTint="#44ffffff"
                 android:layout_height="48dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
@@ -107,6 +108,7 @@
                 android:background="@drawable/bg_edit_text"
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
+                android:backgroundTint="#44ffffff"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:paddingStart="16dp"
@@ -148,27 +150,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <include
+<!--            <include-->
+<!--                android:id="@+id/btn_loginRegister"-->
+<!--                layout="@layout/app_button"-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="48dp"-->
+
+
+<!--                app:btnText="@{loginMode ? @string/sign_in : @string/register}"-->
+<!--                />-->
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_loginRegister"
-                layout="@layout/app_button"
                 android:layout_width="300dp"
-                android:layout_height="48dp"
-
-
-                app:btnText="@{loginMode ? @string/sign_in : @string/register}"
-                />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ripple"
+                app:cornerRadius="20dp"
+                android:text="@{loginMode ? @string/sign_in : @string/register}"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textStyle="bold"
+                app:backgroundTint="#eeffffff"
+                app:rippleColor="#222" />
 
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnChangeLoginMode"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/ripple"
                 app:cornerRadius="20dp"
                 android:text="@{loginMode ? @string/goto_register : @string/goto_sign_in}"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="18sp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"

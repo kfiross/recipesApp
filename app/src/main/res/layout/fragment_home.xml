@@ -20,6 +20,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="110dp"
+            android:overScrollMode="never"
             android:layout_centerInParent="true"
             android:id="@+id/recyclerViewCategories"
             android:layout_width="match_parent"

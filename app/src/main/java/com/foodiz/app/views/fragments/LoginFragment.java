@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mBinding.btnLoginRegister.btn.setOnClickListener(v -> loginOrRegister());
+        mBinding.btnLoginRegister.setOnClickListener(v -> loginOrRegister());
         mBinding.btnChangeLoginMode.setOnClickListener(v -> changeMode());
 
         mBinding.setFragment(this);
