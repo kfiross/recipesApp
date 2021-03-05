@@ -60,10 +60,9 @@ public class FirestoreUtils {
     }
 
     public static Task<DocumentReference> addRecipe(Recipe recipe) {
-        return FirebaseFirestore.getInstance().collection("recipes").add(
-//                recipe
-                recipe.toJson()
-        );
+        return FirebaseFirestore.getInstance()
+                .collection("recipes")
+                .add(recipe.toJson());
     }
 
     public static Task<Void> addToMyRecipes(String recipeId){

@@ -90,7 +90,7 @@ public class SharedPreferencesConfig {
      */
     public void addIdToMyRecipes(String id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Set<String> ids = readFavsIds();
+        Set<String> ids = readMyRecipesIds();
         ids.add(id);
         editor.putStringSet("my_recipes_ids", ids);
         editor.apply();
@@ -101,7 +101,7 @@ public class SharedPreferencesConfig {
      */
     public void removeIdFromMyRecipes(String id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Set<String> ids = readFavsIds();
+        Set<String> ids = readMyRecipesIds();
         ids.remove(id);
         editor.putStringSet("my_recipes_ids", ids);
         editor.apply();

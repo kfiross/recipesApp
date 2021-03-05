@@ -80,8 +80,6 @@ public class FavoritesFragment extends BaseFragment {
                 for (String id : favsIds) {
                     try {
                         DocumentSnapshot documentSnapshot = FirestoreUtils.getRecipe(id);
-//                        // documentSnapshot.toObject(Recipe.class);
-//
 
                         Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
                         recipes.add(newRecipe);
