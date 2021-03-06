@@ -17,6 +17,7 @@ import com.recipesapp.recipesapp.R;
 import com.recipesapp.recipesapp.databinding.MyDialogFragmentBinding;
 import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.utils.ScreenSize;
+import com.recipesapp.recipesapp.utils.TextChangedListener;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 
 /**
@@ -27,6 +28,7 @@ public class StepDialogFragment extends DialogFragment {
     private MyDialogFragmentBinding mBinding;
     private int mType;
     private int mSelectedIndex = -1;  // -1 means new
+    private String mName;
 
 
     public StepDialogFragment() {
@@ -61,10 +63,25 @@ public class StepDialogFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mBinding.btnAdd.setOnClickListener(v -> add());
+        if(mSelectedIndex != -1){
+            mBinding.setName(vmRecipe.getSelected().getValue().getSteps().get(mSelectedIndex));
+        }
+        else{
+            mBinding.setName("");
+        }
+        mBinding.setInEdit(mSelectedIndex != -1);
+
+        mBinding.etName.addTextChangedListener(new TextChangedListener() {
+            @Override
+            protected void onTextChanged(String before, String old, String aNew, String after) {
+                mBinding.setName(aNew.trim());
+                mBinding.btnAdd.setEnabled(!aNew.trim().isEmpty());
+            }
+        });
     }
 
     private void add() {
-        String data = mBinding.editTextData.getText().toString();
+        String data = mBinding.getName();
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
 
         if(mSelectedIndex == -1){

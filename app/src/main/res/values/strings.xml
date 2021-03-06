@@ -39,6 +39,7 @@
     <string name="category">Category</string>
     <string name="recipe_name">Recipe\'s Name</string>
     <string name="add">Add</string>
+    <string name="save">Save</string>
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="hint_enter_name">Enter Name…</string>
     <string name="hint_time_in_minutes">Time in minutes…</string>

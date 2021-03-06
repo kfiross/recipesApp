@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable name="name" type="String" />
+        <variable name="inEdit" type="boolean" />
     </data>
 
     <FrameLayout
@@ -27,7 +29,8 @@
                 android:layout_height="wrap_content"/>
 
             <EditText
-                android:id="@+id/edit_text_data"
+                android:id="@+id/etName"
+                android:text="@{name}"
                 android:lines="4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -39,8 +42,9 @@
                 android:layout_height="12dp"/>
 
             <Button
+                android:enabled="@{name.trim().empty ? false : true}"
                 android:id="@+id/btn_add"
-                android:text="@string/add"
+                android:text="@{inEdit ? @string/save : @string/add}"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

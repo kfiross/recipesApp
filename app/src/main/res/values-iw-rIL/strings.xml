@@ -36,6 +36,7 @@
 
     <string name="category">קטגוריה:</string>
     <string name="add">להוספה</string>
+    <string name="save">שמירת שינויים</string>
     <string name="recipe_name">שם המתכון:</string>
     <string name="add_new_recipe">הוספת מתכון חדש</string>
     <string name="hint_enter_name">הזן שם…</string>

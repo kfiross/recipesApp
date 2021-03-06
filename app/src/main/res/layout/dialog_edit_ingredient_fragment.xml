@@ -6,13 +6,13 @@
     <data>
         <import type="com.recipesapp.recipesapp.utils.StringUtils"/>
         <import type="android.view.View"/>
-<!--        <variable name="ingredient" type="com.recipesapp.recipesapp.model.Ingredient" />-->
         <variable name="title" type="String" />
 
         <variable name="name" type="String" />
-        <variable name="quantity" type="Double" />
+        <variable name="quantity" type="Number" />
         <variable name="type" type="int" />
         <variable name="isWithCount" type="Boolean" />
+        <variable name="inEdit" type="boolean" />
     </data>
 
     <FrameLayout
@@ -141,8 +141,9 @@
                 android:layout_height="12dp"/>
 
             <Button
+                android:enabled="@{name.trim().empty ? false : true}"
                 android:id="@+id/btn_add"
-                android:text="@string/add"
+                android:text="@{inEdit ? @string/save : @string/add}"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

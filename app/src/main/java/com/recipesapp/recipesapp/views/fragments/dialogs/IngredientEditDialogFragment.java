@@ -34,9 +34,8 @@ public class IngredientEditDialogFragment extends DialogFragment {
     private int mType;
     private int mSelectedIndex = -1;  // -1 means new
 
-    private String mIngredientName;
-    private int mIngredientQuantity;
-    private int mIngredientQuantityType;
+
+    private boolean first0=true, first1=true, flag = false;
 
     public IngredientEditDialogFragment() {
         // Required empty public constructor
@@ -68,19 +67,26 @@ public class IngredientEditDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        ingredient = new Ingredient("", 0 , 0);
-//        mBinding.setIngredient(ingredient);
-     ///   mBinding.setQuantity(100.0);
-        mBinding.setType(1);
-        mBinding.setIsWithCount(true);
 
-
+        mBinding.setInEdit(mSelectedIndex != -1);
 
         mBinding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(mBinding.getInEdit() && first1){
+                    mBinding.spinnerType.setSelection(mBinding.getType());
+                    first1 = false;
+                    return;
+                }
                 mBinding.setType(position);
-                switch (mBinding.getType()){
+
+
+                if(mBinding.getInEdit() && !first1 && !flag){
+                    flag = true;
+                    return;
+                }
+                switch (position){
                     case 0:
                     case 1:
                         mBinding.setQuantity(100.0);
@@ -97,11 +103,12 @@ public class IngredientEditDialogFragment extends DialogFragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
         mBinding.btnAddQuantity.setOnClickListener(v -> {
-            double prevQuantity = mBinding.getQuantity();
+            double prevQuantity = mBinding.getQuantity().doubleValue();
 
             switch (mBinding.getType()){
                 case 0:
@@ -130,7 +137,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
         });
 
         mBinding.btnSubstructQuantity.setOnClickListener(v -> {
-            double prevQuantity = mBinding.getQuantity();
+            double prevQuantity = mBinding.getQuantity().doubleValue();
 
 
             switch (mBinding.getType()){
@@ -165,6 +172,10 @@ public class IngredientEditDialogFragment extends DialogFragment {
         mBinding.btnAdd.setOnClickListener(v -> add());
 
         mBinding.checkWithCount.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(mBinding.getInEdit() && first0){
+                first0 = false;
+                return;
+            }
             mBinding.setType(isChecked ? 0 : -1);
             mBinding.setQuantity(isChecked ? 100D : 0);
             mBinding.setIsWithCount(isChecked);
@@ -174,14 +185,32 @@ public class IngredientEditDialogFragment extends DialogFragment {
         mBinding.etName.addTextChangedListener(new TextChangedListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-                mBinding.btnAdd.setEnabled(!aNew.isEmpty());
+                mBinding.btnAdd.setEnabled(!aNew.trim().isEmpty());
             }
         });
+
+        if(mSelectedIndex != -1){
+            Ingredient ingredient = vmRecipe.getSelected().getValue().getIngredients().get(mSelectedIndex);
+            mBinding.setName(ingredient.getName());
+
+            if(ingredient.getType() != null) {
+                mBinding.setIsWithCount(true);
+                mBinding.setType(ingredient.getType());
+                //mBinding.spinnerType.setSelection(mBinding.getType());
+            }
+            mBinding.setQuantity(ingredient.getCount());
+
+        }
+        else{
+            mBinding.setIsWithCount(true);
+            mBinding.setType(1);
+            mBinding.setName("");
+        }
     }
 
     private void add() {
         String name = mBinding.etName.getText().toString();
-        double count = mBinding.getQuantity();
+        Number count = mBinding.getQuantity();
         Integer type = mBinding.getType() == -1 ? null : mBinding.getType();
 
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
