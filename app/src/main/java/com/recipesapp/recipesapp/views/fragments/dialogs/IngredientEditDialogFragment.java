@@ -20,6 +20,7 @@ import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.DialogEditIngredientFragmentBinding;
 import com.recipesapp.recipesapp.utils.Constants;
 import com.recipesapp.recipesapp.utils.ScreenSize;
+import com.recipesapp.recipesapp.utils.TextChangedListener;
 import com.recipesapp.recipesapp.viewmodels.shared.RecipeSharedViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -88,6 +89,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
                     case 2:
                     case 3:
                     case 4:
+                    case 5:
                         mBinding.setQuantity(1.0);
                         break;
                 }
@@ -109,6 +111,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
 
                 case 2:
                 case 3:
+                case 5:
                     mBinding.setQuantity(prevQuantity+0.5);
                     break;
 
@@ -119,6 +122,7 @@ public class IngredientEditDialogFragment extends DialogFragment {
 
                     mBinding.setQuantity(Constants.SPOON_UNITS[prevPos + 1]);
                     break;
+
             }
 
 
@@ -139,9 +143,9 @@ public class IngredientEditDialogFragment extends DialogFragment {
 
                 case 2:
                 case 3:
+                case 5:
                     if(prevQuantity > 0) {
                         mBinding.setQuantity(prevQuantity-0.5);
-
                     }
                     break;
 
@@ -166,10 +170,17 @@ public class IngredientEditDialogFragment extends DialogFragment {
             mBinding.setIsWithCount(isChecked);
 
         });
+
+        mBinding.etName.addTextChangedListener(new TextChangedListener() {
+            @Override
+            protected void onTextChanged(String before, String old, String aNew, String after) {
+                mBinding.btnAdd.setEnabled(!aNew.isEmpty());
+            }
+        });
     }
 
     private void add() {
-        String name = mBinding.editTextData.getText().toString();
+        String name = mBinding.etName.getText().toString();
         double count = mBinding.getQuantity();
         Integer type = mBinding.getType() == -1 ? null : mBinding.getType();
 

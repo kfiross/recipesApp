@@ -77,6 +77,8 @@
     <!--  Ingredients  -->
     <string name="ml">ml</string>
     <string name="g">g</string>
+    <string name="kg">kg</string>
+
     <string name="add_photo">Add Photo</string>
     <string name="delete_recipe">Delete Recipe</string>
     <string name="enter_step">Enter Step</string>
@@ -97,10 +99,10 @@
         <item quantity="other">%f teaspoons</item>
     </plurals>
 
-    <plurals name="numberGlasses">
-        <item quantity="one">One glass</item>
-        <item quantity="many">%d glasses</item>
-        <item quantity="other">%f glasses</item>
+    <plurals name="numberCups">
+        <item quantity="one">One cups</item>
+        <item quantity="many">%d cups</item>
+        <item quantity="other">%f cups</item>
     </plurals>
 
 

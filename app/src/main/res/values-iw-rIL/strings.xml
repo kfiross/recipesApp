@@ -73,8 +73,10 @@
     <string name="vegan">צמחוני</string>
 
     <!-- -->
-    <string name="ml">מ"ל</string>
+    <string name="ml">מ"\ל</string>
     <string name="g">גרם</string>
+    <string name="kg">ק"\ג</string>
+
     <string name="prompt_name">שם</string>
 
 
@@ -92,7 +94,7 @@
         <item quantity="other">%d כפיות</item>
     </plurals>
 
-    <plurals name="numberGlasses">
+    <plurals name="numberCups">
         <item quantity="one">כוס</item>
         <item quantity="two">2 כוסות</item>
         <item quantity="many">%d כוסות</item>

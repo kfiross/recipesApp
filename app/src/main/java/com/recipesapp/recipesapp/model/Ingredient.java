@@ -121,7 +121,7 @@ public class Ingredient implements Parcelable {
         if(mType == null) {
             return mCount.intValue() == 0 ? mName : String.format("%d %s", mCount, mName);
         }
-        String typeName = StringUtils.getIngredientTypeName(context, mType, mCount.doubleValue());
+        String typeName = StringUtils.getIngredientTypeName(context, IngredientUnit.fromInt(mType), mCount.doubleValue());
         return String.format("%s %s", typeName, mName);
     }
 

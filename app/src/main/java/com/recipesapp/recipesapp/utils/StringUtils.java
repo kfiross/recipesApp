@@ -3,6 +3,8 @@ package com.recipesapp.recipesapp.utils;
 import android.content.Context;
 
 import com.recipesapp.recipesapp.R;
+import com.recipesapp.recipesapp.model.IngredientUnit;
+
 
 public class StringUtils {
     public static String getLocaleString(
@@ -16,22 +18,28 @@ public class StringUtils {
         return result;
     }
 
-    public static String getIngredientTypeName(Context context, int type, double count){
+    public static String getIngredientTypeName(Context context, IngredientUnit type, double count){
+        if(count % 1.0 != 0){
+            return beautifyNum(context, count) + " " + getIngredientTypeName(context, type, 1);
+        }
         switch (type){
-            case 0:
+            case ML:
                 return (int)count + " " + getLocaleString(R.string.ml, context);
-            case 1:
+            case GRAMS:
                 return (int)count + " " + getLocaleString(R.string.g, context);
 
+            case KG:
+                return (int)count + " " + getLocaleString(R.string.kg, context);
+
                 // todo: fix .5f units
-            case 2:
+            case SPOONS:
                 return context.getResources().getQuantityString(R.plurals.numberSpoons, (int)count);
 
-            case 3:
+            case TEASPOONS:
                 return context.getResources().getQuantityString(R.plurals.numberTeaspoons, (int)count);
 
-            case 4:
-                return context.getResources().getQuantityString(R.plurals.numberGlasses, (int)count);
+            case CUPS:
+                return context.getResources().getQuantityString(R.plurals.numberCups, (int)count);
         }
 
         return "";
@@ -39,11 +47,12 @@ public class StringUtils {
 
     public static String[] getIngredientsTypesName(Context context) {
         return new String[]{
-                getIngredientTypeName(context, 0, 0).split(" ")[1],
-                getIngredientTypeName(context, 1, 0).split(" ")[1],
-                getIngredientTypeName(context, 2, 10).split(" ")[1],
-                getIngredientTypeName(context, 3, 10).split(" ")[1],
-                getIngredientTypeName(context, 4, 10).split(" ")[1],
+                getIngredientTypeName(context, IngredientUnit.values()[0], 0).split(" ")[1],
+                getIngredientTypeName(context, IngredientUnit.values()[1], 0).split(" ")[1],
+                getIngredientTypeName(context, IngredientUnit.values()[2], 10).split(" ")[1],
+                getIngredientTypeName(context, IngredientUnit.values()[3], 10).split(" ")[1],
+                getIngredientTypeName(context, IngredientUnit.values()[4], 10).split(" ")[1],
+                getIngredientTypeName(context, IngredientUnit.values()[5], 0).split(" ")[1],
         };
     }
 
