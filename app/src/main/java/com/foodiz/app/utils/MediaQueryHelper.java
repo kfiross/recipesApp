@@ -7,7 +7,7 @@ import android.util.DisplayMetrics;
 /**
  * Helper class to get percentage of sizes easily (used as MediaQuery)
  */
-public class ScreenSize {
+public class MediaQueryHelper {
     /**
      * @param context the app context
      * @param percents how much height of the side, in percents

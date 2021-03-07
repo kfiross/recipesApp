@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_gravity="start"
+            app:labelVisibilityMode="labeled"
             android:background="@color/colorPrimaryDark"
             app:itemTextColor="@drawable/bottom_nav_color"
             app:itemIconTint="@drawable/bottom_nav_color"

@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Foodiz</string>
+
+    <string name="english">English</string>
+    <string name="hebrew">Hebrew</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings related to login -->
@@ -68,5 +72,8 @@
 
     <string name="undo">Undo</string>
     <string name="add_photo">Add Photo</string>
+    <string name="menu_settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="choose_language">Choose Language</string>
 
 </resources>

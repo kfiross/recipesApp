@@ -1,8 +1,8 @@
 package com.foodiz.app.model;
 
 /**
- * Class represents a recipe's category such
- * ex.: 'Meat', 'Fish'
+ * Class represents a category of recipe
+ * ex.: 'Dinner', 'Breakfast'
  */
 public class Category {
     private String mId;

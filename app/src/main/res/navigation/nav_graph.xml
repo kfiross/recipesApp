@@ -45,4 +45,9 @@
         android:id="@+id/recipeEditFragment"
         android:name="com.foodiz.app.views.fragments.RecipeEditFragment"
         android:label="RecipeEditFragment" />
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.foodiz.app.views.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

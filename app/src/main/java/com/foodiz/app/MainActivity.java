@@ -48,18 +48,24 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView = binding.bttmNav;
         navigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                // navigate to favourites
+                // navigate to favourites page
                 case R.id.nav_favourites:
                     mNavController.navigate(R.id.favoritesFragment2);
                     break;
 
-                // navigate to add a new recipe
+                // navigate to add a new recipe page
                 case R.id.nav_add_recipe:
                     mNavController.navigate(R.id.addRecipeFragment);
                     break;
 
+                // navigate to categories page
                 case R.id.nav_my_recipes:
                     mNavController.navigate(R.id.homeFragment);
+                    break;
+
+                // navigate to settings page
+                case R.id.nav_settings:
+                    mNavController.navigate(R.id.settingsFragment2);
                     break;
             }
             return true;
@@ -76,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        preferencesConfig.setLocal("he",this);
+        preferencesConfig.loadLocal(this);
+        // refresh bottom navigation menu
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.navigation_menu);
         navigationView.setSelectedItemId(R.id.nav_my_recipes);
+
 
 
     }

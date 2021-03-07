@@ -6,6 +6,9 @@
     <string name="sign_in">לכניסה</string>
     <string name="register">לרישום</string>
 
+    <string name="english">אנגלית</string>
+    <string name="hebrew">עברית</string>
+
     <string name="goto_sign_in">משתמש קיים? לכניסה כאן</string>
     <string name="goto_register">אין לך חשבון? להרשמה</string>
 
@@ -61,5 +64,8 @@
 
     <string name="undo">ביטול</string>
     <string name="add_photo">הוסף תמונה</string>
+    <string name="menu_settings">הגדרות</string>
+    <string name="language">שפה</string>
+    <string name="choose_language">בחר שפה</string>
 
 </resources>

@@ -5,4 +5,9 @@
         <item>@string/main_course</item>
         <item>@string/deserts</item>
     </array>
+
+    <array name="langs">
+        <item>@string/english</item>
+        <item>@string/hebrew</item>
+    </array>
 </resources>
