@@ -88,9 +88,6 @@ public class AddRecipeFragment extends BaseFragment {
         observer = (Observer<Recipe>) recipe -> {
             mBinding.setRecipe(recipe);
             mBinding.setCanAddRecipe(checkForm());
-//            mBinding.getFormData().setIngredientList(recipe.getIngredients());
-//            mBinding.getFormData().setStepsList(recipe.getSteps());
-
         };
         vmRecipe.getSelected().observe(getActivity(), observer);
 
@@ -169,10 +166,6 @@ public class AddRecipeFragment extends BaseFragment {
         mBinding.formLayout.etName.addTextChangedListener(new TextChangedListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-//                Recipe recipe = vmRecipe.getSelected().getValue();
-//                recipe.setName(aNew);
-//                vmRecipe.select(recipe);
-
                 mBinding.setCanAddRecipe(checkForm());
             }
         });
@@ -180,15 +173,9 @@ public class AddRecipeFragment extends BaseFragment {
         mBinding.formLayout.etTime.addTextChangedListener(new TextChangedListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-//                Recipe recipe = vmRecipe.getSelected().getValue();
-//                recipe.setMakingTime(Integer.parseInt(aNew));
-//                vmRecipe.select(recipe);
-
                 mBinding.setCanAddRecipe(checkForm());
             }
         });
-
-
 
     }
 

@@ -60,7 +60,6 @@ public class HomeFragment extends BaseFragment {
                     ArrayList<Category> categories = new ArrayList<>();
                     for (int i = 0; i < docs.size(); i++) {
                         DocumentSnapshot documentSnapshot = docs.get(i);
-        //                documentSnapshot.toObject(Category.class);
                         categories.add(Category.fromDocument(documentSnapshot));
                     }
                     setupRecyclerView(categories);
