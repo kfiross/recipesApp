@@ -24,13 +24,12 @@ import androidx.navigation.Navigation;
 
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
-import com.foodiz.app.databinding.FragmentAddRecipeBinding;
+import com.foodiz.app.databinding.FragmentAddingRecipeBinding;
 import com.foodiz.app.model.Recipe;
 import com.foodiz.app.utils.FirestoreUtils;
 import com.foodiz.app.utils.TextChangedListener;
 import com.foodiz.app.utils.UiUtils;
 import com.foodiz.app.viewmodels.shared.RecipeSharedViewModel;
-
 
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +40,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class RecipeEditFragment extends BaseFragment {
 
-    private FragmentAddRecipeBinding mBinding;
+    private FragmentAddingRecipeBinding mBinding;
     private RecipeSharedViewModel vmRecipe;
     private Recipe mRecipeData;
     private Observer<Recipe> observer;
@@ -71,7 +70,7 @@ public class RecipeEditFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_add_recipe, container, false);
+                inflater, R.layout.fragment_adding_recipe, container, false);
         // Inflate the layout for this fragment
         return mBinding.getRoot();
     }

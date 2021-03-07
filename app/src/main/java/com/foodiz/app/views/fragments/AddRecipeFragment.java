@@ -21,7 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
-import com.foodiz.app.databinding.FragmentAddRecipeBinding;
+import com.foodiz.app.databinding.FragmentAddingRecipeBinding;
 import com.foodiz.app.model.Recipe;
 import com.foodiz.app.utils.FirestoreUtils;
 import com.foodiz.app.utils.TextChangedListener;
@@ -40,7 +40,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class AddRecipeFragment extends Fragment {
 
-    private FragmentAddRecipeBinding mBinding;
+    private FragmentAddingRecipeBinding mBinding;
     private RecipeSharedViewModel vmRecipe;
     private Observer<Recipe> observer;
 
@@ -60,7 +60,7 @@ public class AddRecipeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_add_recipe, container, false);
+                inflater, R.layout.fragment_adding_recipe, container, false);
         // Inflate the layout for this fragment
         return mBinding.getRoot();
     }

@@ -31,7 +31,7 @@
         android:id="@+id/addRecipeFragment"
         android:name="com.foodiz.app.views.fragments.AddRecipeFragment"
         android:label="fragment_add_recipe"
-        tools:layout="@layout/fragment_add_recipe" />
+        tools:layout="@layout/fragment_adding_recipe" />
     <fragment
         android:id="@+id/myRecipesFragment"
         android:name="com.foodiz.app.views.fragments.MyRecipesFragment"
