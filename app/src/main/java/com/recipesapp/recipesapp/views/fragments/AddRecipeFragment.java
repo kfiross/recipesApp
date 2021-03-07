@@ -182,8 +182,13 @@ public class AddRecipeFragment extends BaseFragment {
     private void openDialog(int type, @Nullable Integer index) {
         // updating the changed values of name and time
         Recipe recipe = vmRecipe.getSelected().getValue();
-        recipe.setName(mBinding.formLayout.etName.getText().toString());
-        recipe.setMakingTime(Integer.parseInt(mBinding.formLayout.etTime.getText().toString()));
+        try {
+            recipe.setName(mBinding.formLayout.etName.getText().toString());
+            recipe.setMakingTime(Integer.parseInt(mBinding.formLayout.etTime.getText().toString()));
+        }
+        catch (Exception ignored){
+
+        }
         vmRecipe.select(recipe);
 
         if(type == 0){
