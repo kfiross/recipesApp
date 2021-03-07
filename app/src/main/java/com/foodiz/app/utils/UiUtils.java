@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -40,14 +39,6 @@ public class UiUtils {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    public static void showToastShort(Context context, String title){
-        Toast.makeText(context, title, Toast.LENGTH_LONG).show();
-    }
-
-    public static void showToastLong(Context context, String title){
-        Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
     }
 
     public static void showSnackbar(View view, String title, Integer duration){

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +106,8 @@ public class AddRecipeFragment extends Fragment {
     private void setupButtons() {
         mBinding.btnAddRecipe.setOnClickListener(v -> addRecipe());
 
-        mBinding.formLayout.imgRecipe.setOnClickListener(v -> uploadPhoto());
+        mBinding.formLayout.btnAddPhoto.setOnClickListener(v -> uploadPhoto());
+//        mBinding.formLayout.imgRecipe.setOnClickListener(v -> uploadPhoto());
     }
 
 
@@ -173,22 +173,19 @@ public class AddRecipeFragment extends Fragment {
                 // also update the user's document
                 FirestoreUtils.addToMyRecipes(newRecipeId).addOnCompleteListener(task2 -> {
                     if(task2.isSuccessful()){
-                        UiUtils.showAlertOk(
-                                getContext(),
-                                "Hooray!",
+                        UiUtils.showSnackbar(
+                                this.getView(),
                                 "We added your Recipe!",
-                                (dialog, which) -> {}
+                                2500
                         );
                     }
                     else{
-                        UiUtils.showAlertOk(
-                                getContext(),
-                                "Oops! something went wrong",
+                        UiUtils.showSnackbar(
+                                this.getView(),
                                 "We couldn't add your Recipe...",
-                                (dialog, which) -> {}
+                                2500
                         );
                     }
-
                 });
             }
         });
@@ -227,11 +224,9 @@ public class AddRecipeFragment extends Fragment {
     }
 
     private void openGallery() {
-        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        cameraIntent.setType("image/*");
-        if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(cameraIntent, 1000);
-        }
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1000);
     }
 
     @Override

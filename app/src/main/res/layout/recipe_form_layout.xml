@@ -32,7 +32,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="48dp">
 
                 <TextView
                     android:gravity="center"
@@ -76,7 +76,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="48dp">
 
                 <TextView
                     android:text="@string/category"
@@ -130,7 +130,7 @@
                 android:backgroundTint="#22000000"
                 android:layout_height="180dp"
                 android:gravity="start"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:padding="8dp"
                 />
 
@@ -161,22 +161,10 @@
                 android:backgroundTint="#22000000"
                 android:layout_height="180dp"
                 android:gravity="start"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:padding="8dp"
                 />
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/list_steps"-->
-<!--                android:layout_width="match_parent"-->
-<!--                tools:listitem="@layout/list_edit_item_content"-->
-<!--                android:scrollbarSize="3dp"-->
-<!--                android:scrollbarStyle="outsideOverlay"-->
-<!--                android:scrollbars="vertical"-->
-<!--                android:scrollingCache="true"-->
-<!--                android:smoothScrollbar="true"-->
-<!--                android:layout_height="250dp"-->
-<!--                items="@{recipe.steps}"-->
-<!--                />-->
 
             <TextView
                 android:text="@string/photo"
@@ -192,39 +180,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="6dp" />
 
-
-            <!--                    <ListView-->
-            <!--                        android:id="@+id/list_photos"-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        tools:listitem="@layout/list_photo_item"-->
-            <!--                        android:layout_height="200dp"-->
-            <!--                        items="@{recipe.photos}"-->
-            <!--                        />-->
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
+                <androidx.appcompat.widget.AppCompatButton
+                android:visibility="@{imageUri != null ? View.GONE : View.VISIBLE}"
+                android:id="@+id/btn_add_photo"
+                    android:layout_width="260dp"
+                    android:layout_height="200dp"
+                    android:text="@string/add_photo"
+                    android:padding="50dp"
+                    android:background="@drawable/ripple"
+                    android:textSize="20sp"
+                    android:drawableTint="@android:color/black"
+                    android:drawableTop="@drawable/ic_add_photo"
+                    >
+                </androidx.appcompat.widget.AppCompatButton>
+
                 <ImageView
+                    android:visibility="@{imageUri == null ? View.GONE : View.VISIBLE}"
                     android:id="@+id/img_recipe"
                     android:layout_width="260dp"
                     android:layout_height="200dp"
                     imageSrc="@{imageUri}" />
 
-                <ImageButton
-                    android:visibility="@{imageUri == null ? View.GONE : View.VISIBLE}"
-                    android:id="@+id/btn_remove_image"
-                    android:src="@drawable/ic_delete"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp" />
+<!--                <ImageButton-->
+<!--                    android:visibility="@{imageUri == null ? View.GONE : View.VISIBLE}"-->
+<!--                    android:id="@+id/btn_remove_image"-->
+<!--                    android:src="@drawable/ic_delete"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp" />-->
 
             </RelativeLayout>
-
-
         </LinearLayout>
-
-
     </LinearLayout>
 
 </layout>
