@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +23,9 @@ public class Recipe implements Parcelable {
     @Nullable
     private String mName;
     @Nullable
-    private String mIngredients;
+    private List<String> mIngredients;
     @Nullable
-    private String mSteps;
+    private List<String> mSteps;
     @Nullable
     private String mImage;
 
@@ -36,8 +37,8 @@ public class Recipe implements Parcelable {
             String id,
             @Nullable Integer category,
             @Nullable  String name,
-            @Nullable  String ingredients,
-            @Nullable  String steps,
+            @Nullable  List<String> ingredients,
+            @Nullable  List<String> steps,
             @Nullable  String image
     ) {
         mId = id;
@@ -56,8 +57,8 @@ public class Recipe implements Parcelable {
             mCategory = in.readInt();
         }
         mName = in.readString();
-        mIngredients = in.readString();
-        mSteps = in.readString();
+        mIngredients = in.createStringArrayList();
+        mSteps = in.createStringArrayList();
         mImage = in.readString();
     }
 
@@ -78,8 +79,8 @@ public class Recipe implements Parcelable {
                 snapshot.getId(),
                 snapshot.get("category", Integer.class),
                 snapshot.get("name", String.class),
-                snapshot.get("ingredients", String.class),
-                (String) snapshot.get("steps"),
+                (List<String>) snapshot.get("ingredients"),
+                (List<String>) snapshot.get("steps"),
                 (String) snapshot.get("image")
         );
     }
@@ -93,19 +94,19 @@ public class Recipe implements Parcelable {
         this.mId = mId;
     }
 
-    public String getIngredients() {
+    public List<String> getIngredients() {
         return mIngredients;
     }
 
-    public void setIngredients(String mIngredients) {
+    public void setIngredients(List<String> mIngredients) {
         this.mIngredients = mIngredients;
     }
 
-    public String getSteps() {
+    public List<String> getSteps() {
         return mSteps;
     }
 
-    public void setSteps(String mSteps) {
+    public void setSteps(List<String> mSteps) {
         this.mSteps = mSteps;
     }
 
@@ -145,27 +146,6 @@ public class Recipe implements Parcelable {
         return map;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mId);
-        if (mCategory == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(mCategory);
-        }
-        dest.writeString(mName);
-        dest.writeString(mIngredients);
-        dest.writeString(mSteps);
-        dest.writeString(mImage);
-    }
-
-
 
     public boolean hasIngredientsWithName(String name){
         return mIngredients.contains(name);
@@ -182,5 +162,60 @@ public class Recipe implements Parcelable {
         }
 
         return this.mIngredients.contains(ingredientName);
+    }
+
+    public void addIngredient(String ingredient) {
+        if(mIngredients == null){
+            mIngredients = new ArrayList<>();
+        }
+
+        mIngredients.add(ingredient);
+    }
+
+    public void addStep(String step) {
+        if(mSteps == null){
+            mSteps = new ArrayList<>();
+        }
+        mSteps.add(step);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mId);
+        if (mCategory == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(mCategory);
+        }
+        dest.writeString(mName);
+        dest.writeStringList(mIngredients);
+        dest.writeStringList(mSteps);
+        dest.writeString(mImage);
+    }
+
+    public String getIngredientsString(){
+        StringBuilder builder = new StringBuilder();
+        for(String ingredients: mIngredients){
+            builder.append(" - ").append(ingredients).append("\n");
+        }
+
+        return builder.toString();
+    }
+
+    public String getStepsString(){
+        StringBuilder builder = new StringBuilder();
+        int index = 1;
+        for(String step: mSteps){
+            builder.append(index).append(") ").append(step).append("\n");
+            index++;
+        }
+
+        return builder.toString();
     }
 }

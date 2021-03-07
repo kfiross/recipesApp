@@ -25,9 +25,8 @@
     <string name="logout">להתנתקות</string>
 
     <string name="options">אפשרויות</string>
-    <string name="difficulty">דרגת קושי:</string>
-    <string name="ingredients">מצרכים:</string>
-    <string name="steps">אופן הכנה:</string>
+    <string name="ingredients">מצרכים</string>
+    <string name="steps">אופן הכנה</string>
 
 
     <string name="category">קטגוריה:</string>

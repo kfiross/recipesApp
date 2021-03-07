@@ -17,144 +17,158 @@
             type="com.foodiz.app.model.Recipe" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_login"
+        android:background="#fff"
         >
 
-        <LinearLayout
-            android:id="@+id/layout_bar"
-            android:background="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="56dp"
-
-                android:background="@android:color/transparent"
-                android:onClick="@{(v)-> navController.popBackStack()}"
-                android:src="@drawable/ic_back" />
-
-            <ImageButton
-                android:id="@+id/btn_goto_edit"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_edit"
-                android:visibility="@{isMy ? View.VISIBLE : View.GONE}"
-                android:backgroundTint="@android:color/transparent"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:layout_marginStart="-4dp"
-                android:textAlignment="textStart"
-                android:text="@{recipe.name}"
-                android:textColor="#fff"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
-
-        <ScrollView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:background="@drawable/bg_login"
+            android:alpha="0.4"
+            />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/layout_bar"
+                android:background="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layoutDirection="locale"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="56dp"
+
+                    android:background="@android:color/transparent"
+                    android:onClick="@{(v)-> navController.popBackStack()}"
+                    android:src="@drawable/ic_back" />
+
+                <ImageButton
+                    android:id="@+id/btn_goto_edit"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit"
+                    android:visibility="@{isMy ? View.VISIBLE : View.GONE}"
+                    android:backgroundTint="@android:color/transparent"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginStart="-4dp"
+                    android:textAlignment="textStart"
+                    android:text="@{recipe.name}"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
                 >
 
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    tools:context=".views.fragments.RecipeDetailsFragment"
-                    tools:ignore="RtlHardcoded">
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="locale"
+                    >
 
-                    <ImageView
-                        android:background="@color/placeholder"
-                        app:imageUrl="@{recipe.image}"
-                        app:error="@{@drawable/not_found}"
-                        app:placeholder="@{@color/colorPrimary}"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_gravity="center_horizontal" />
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="8dp" />
 
                     <LinearLayout
-                        android:padding="12dp"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        tools:context=".views.fragments.RecipeDetailsFragment"
+                        tools:ignore="RtlHardcoded">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ingredients"
-                            android:textColor="#000"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                        <ImageView
+                            android:background="@color/placeholder"
+                            app:imageUrl="@{recipe.image}"
+                            app:error="@{@drawable/not_found}"
+                            app:placeholder="@{@color/colorPrimary}"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center_horizontal" />
 
                         <Space
                             android:layout_width="wrap_content"
-                            android:layout_height="10dp" />
+                            android:layout_height="8dp" />
 
-                        <TextView
-                            android:paddingStart="12sp"
+                        <LinearLayout
+                            android:padding="12dp"
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:layout_height="150dip"
-                            android:textColor="#000"
-                            android:textSize="18sp"
-                            android:text="@{recipe.ingredients}"
-                            />
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ingredients"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="10dp" />
+
+                            <TextView
+                                android:paddingStart="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:layout_height="150dip"
+                                android:textColor="#000"
+                                android:textSize="18sp"
+                                android:text="@{recipe.ingredientsString}"
+                                />
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/steps"
-                            android:textColor="#000"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/steps"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
 
 
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="24dp" />
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp" />
 
-                        <TextView
-                            android:paddingStart="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:layout_height="150dip"
-                            android:textColor="#000"
-                            android:textSize="18sp"
-                            android:text="@{recipe.steps}"
-                            />
+                            <TextView
+                                android:paddingStart="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:layout_height="150dip"
+                                android:textColor="#000"
+                                android:textSize="18sp"
+                                android:text="@{recipe.stepsString}"
+                                />
+                        </LinearLayout>
+
+
+
                     </LinearLayout>
+                </RelativeLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
 
 
-
-                </LinearLayout>
-            </RelativeLayout>
-        </ScrollView>
-    </LinearLayout>
 
 
 

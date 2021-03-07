@@ -35,9 +35,8 @@
 
     <string name="all_recipes">All Recipes</string>
     <string name="options">Options</string>
-    <string name="difficulty">Difficulty:</string>
     <string name="ingredients">Ingredients:</string>
-    <string name="steps">Steps:</string>
+    <string name="steps">Steps</string>
 
     <string name="category">Category</string>
     <string name="recipe_name">Recipe\'s Name</string>

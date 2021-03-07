@@ -123,16 +123,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="12dp"/>
 
-            <EditText
-                android:id="@+id/et_ingredients"
+            <LinearLayout
+                android:id="@+id/layout_ingredients"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:background="@drawable/bg_edit_text"
-                android:backgroundTint="#22000000"
-                android:layout_height="180dp"
-                android:gravity="start"
-                android:textColor="#000"
-                android:padding="8dp"
-                />
+                android:layout_height="wrap_content">
+
+<!--                <EditText-->
+<!--                    android:id="@+id/et_ingredients"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:background="@drawable/bg_edit_text"-->
+<!--                    android:backgroundTint="#22000000"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="start"-->
+<!--                    android:textColor="#000"-->
+<!--                    android:padding="8dp"-->
+<!--                    />-->
+
+            </LinearLayout>
+
 
 
             <Space
@@ -154,16 +163,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="12dp"/>
 
-            <EditText
-                android:id="@+id/etSteps"
+<!--            <EditText-->
+<!--                android:id="@+id/etSteps"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:background="@drawable/bg_edit_text"-->
+<!--                android:backgroundTint="#22000000"-->
+<!--                android:layout_height="180dp"-->
+<!--                android:gravity="start"-->
+<!--                android:textColor="#000"-->
+<!--                android:padding="8dp"-->
+<!--                />-->
+
+
+            <LinearLayout
+                android:id="@+id/layout_steps"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:background="@drawable/bg_edit_text"
-                android:backgroundTint="#22000000"
-                android:layout_height="180dp"
-                android:gravity="start"
-                android:textColor="#000"
-                android:padding="8dp"
-                />
+                android:layout_height="wrap_content">
+
+                <!--                <EditText-->
+                <!--                    android:id="@+id/et_ingredients"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:background="@drawable/bg_edit_text"-->
+                <!--                    android:backgroundTint="#22000000"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:gravity="start"-->
+                <!--                    android:textColor="#000"-->
+                <!--                    android:padding="8dp"-->
+                <!--                    />-->
+
+            </LinearLayout>
 
 
             <TextView

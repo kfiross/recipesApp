@@ -87,7 +87,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
-                android:src="@{isFav ? @drawable/ic_in_fav : @drawable/ic_not_fav}"
+                android:src="@{isFav ? @drawable/ic_favorite : @drawable/ic_not_favorite}"
                 />
 
         </RelativeLayout>

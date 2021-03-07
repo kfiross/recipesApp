@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -83,6 +86,38 @@ public class AddRecipeFragment extends Fragment {
         };
         vmRecipe.getSelected().observe(getActivity(), observer);
 
+        for(int i=0; i<9; i++) {
+            EditText child = new EditText(getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 120
+            );
+            params.setMargins(0,12,0,12);
+            child.setLayoutParams(params);
+            child.setPadding(24,0,24,0);
+            child.setBackgroundResource(R.drawable.bg_edit_text);
+
+            child.setBackgroundTintList(
+                    ContextCompat.getColorStateList(getContext(), R.color.bgEditColor)
+            );
+            mBinding.formLayout.layoutIngredients.addView(child);
+        }
+
+        for(int i=0; i<9; i++) {
+            EditText child = new EditText(getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 120
+            );
+            params.setMargins(0,12,0,12);
+            child.setLayoutParams(params);
+            child.setPadding(24,0,24,0);
+            child.setBackgroundResource(R.drawable.bg_edit_text);
+
+            child.setBackgroundTintList(
+                    ContextCompat.getColorStateList(getContext(), R.color.bgEditColor)
+            );
+            mBinding.formLayout.layoutSteps.addView(child);
+        }
+
     }
 
     private void setUpViews() {
@@ -120,21 +155,21 @@ public class AddRecipeFragment extends Fragment {
             }
         });
 
-        mBinding.formLayout.etIngredients.addTextChangedListener(new TextChangedListener() {
-            @Override
-            protected void onTextChanged(String before, String old, String aNew, String after) {
-                mBinding.getRecipe().setIngredients(aNew);
-                mBinding.setCanAddRecipe(checkForm());
-            }
-        });
+//        mBinding.formLayout.etIngredients.addTextChangedListener(new TextChangedListener() {
+//            @Override
+//            protected void onTextChanged(String before, String old, String aNew, String after) {
+//                mBinding.getRecipe().setIngredients(aNew);
+//                mBinding.setCanAddRecipe(checkForm());
+//            }
+//        });
 
-        mBinding.formLayout.etSteps.addTextChangedListener(new TextChangedListener() {
-            @Override
-            protected void onTextChanged(String before, String old, String aNew, String after) {
-                mBinding.getRecipe().setSteps(aNew);
-                mBinding.setCanAddRecipe(checkForm());
-            }
-        });
+//        mBinding.formLayout.etSteps.addTextChangedListener(new TextChangedListener() {
+//            @Override
+//            protected void onTextChanged(String before, String old, String aNew, String after) {
+//                mBinding.getRecipe().setSteps(aNew);
+//                mBinding.setCanAddRecipe(checkForm());
+//            }
+//        });
 
 
 
@@ -144,8 +179,32 @@ public class AddRecipeFragment extends Fragment {
     }
 
     private void addRecipe(){
+        Recipe recipe = mBinding.getRecipe();
+        if(recipe == null){
+            recipe = new Recipe();
+        }
+
+        // update ingredients
+        for(int i=0; i<9;i++){
+            EditText etIngredient = (EditText) mBinding.formLayout.layoutIngredients.getChildAt(i);
+            String ingredient = etIngredient.getText().toString();
+            if(!ingredient.isEmpty()){
+                recipe.addIngredient(ingredient);
+            }
+
+        }
+
+        // updating steps
+        for(int i=0; i<9;i++){
+            EditText etStep = (EditText) mBinding.formLayout.layoutSteps.getChildAt(i);
+            String step = etStep.getText().toString();
+            if(!step.isEmpty()){
+                recipe.addStep(step);
+            }
+        }
+
         // add to recipes
-        FirestoreUtils.addRecipe(mBinding.getRecipe())
+        FirestoreUtils.addRecipe(recipe)
 
                 .addOnCompleteListener(task1 -> {
             if(task1.isSuccessful()) {
@@ -194,8 +253,16 @@ public class AddRecipeFragment extends Fragment {
 
     private void cleanForm(){
         mBinding.formLayout.etName.setText("");
-        mBinding.formLayout.etIngredients.setText("");
-        mBinding.formLayout.etSteps.setText("");
+//        mBinding.formLayout.etIngredients.setText("");
+//        mBinding.formLayout.etSteps.setText("");
+
+        for(int i=0; i<mBinding.formLayout.layoutIngredients.getChildCount(); i++){
+            ((EditText)(mBinding.formLayout.layoutIngredients.getChildAt(i))).setText("");
+        }
+
+        for(int i=0; i<mBinding.formLayout.layoutSteps.getChildCount(); i++){
+            ((EditText)(mBinding.formLayout.layoutSteps.getChildAt(i))).setText("");
+        }
 
         vmRecipe.select(new Recipe());
         mBinding.setCanAddRecipe(false);
@@ -246,10 +313,10 @@ public class AddRecipeFragment extends Fragment {
         boolean result = true;
         if(mBinding.formLayout.etName.length() == 0)
             result = false;
-        else if(mBinding.formLayout.etIngredients.length() == 0)
-            result = false;
-        else if(mBinding.formLayout.etSteps.length() == 0)
-            result = false;
+//        else if(mBinding.formLayout.etIngredients.length() == 0)
+//            result = false;
+//        else if(mBinding.formLayout.etSteps.length() == 0)
+//            result = false;
 
         Log.d("checkForm", String.valueOf(result));
 
