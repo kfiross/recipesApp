@@ -15,9 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.recipesapp.recipesapp.R;
+import com.recipesapp.recipesapp.databinding.DialogEditIngredientFragmentBinding;
 import com.recipesapp.recipesapp.model.Ingredient;
 import com.recipesapp.recipesapp.model.Recipe;
-import com.recipesapp.recipesapp.databinding.DialogEditIngredientFragmentBinding;
 import com.recipesapp.recipesapp.utils.Constants;
 import com.recipesapp.recipesapp.utils.ScreenSize;
 import com.recipesapp.recipesapp.utils.TextChangedListener;
@@ -107,6 +107,47 @@ public class IngredientEditDialogFragment extends DialogFragment {
             }
         });
 
+        setupButtons();
+
+        mBinding.checkWithCount.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(mBinding.getInEdit() && first0){
+                first0 = false;
+                return;
+            }
+            mBinding.setType(isChecked ? 0 : -1);
+            mBinding.setQuantity(isChecked ? 100D : 0);
+            mBinding.setIsWithCount(isChecked);
+
+        });
+
+        mBinding.etName.addTextChangedListener(new TextChangedListener() {
+            @Override
+            protected void onTextChanged(String before, String old, String aNew, String after) {
+                mBinding.btnAdd.setEnabled(!aNew.trim().isEmpty());
+            }
+        });
+
+
+        if(mSelectedIndex != -1){
+            Ingredient ingredient = vmRecipe.getSelected().getValue().getIngredients().get(mSelectedIndex);
+            mBinding.setName(ingredient.getName());
+
+            if(ingredient.getType() != null) {
+                mBinding.setIsWithCount(true);
+                mBinding.setType(ingredient.getType());
+                //mBinding.spinnerType.setSelection(mBinding.getType());
+            }
+            mBinding.setQuantity(ingredient.getCount());
+
+        }
+        else{
+            mBinding.setIsWithCount(true);
+            mBinding.setType(1);
+            mBinding.setName("");
+        }
+    }
+
+    private void setupButtons(){
         mBinding.btnAddQuantity.setOnClickListener(v -> {
             double prevQuantity = mBinding.getQuantity().doubleValue();
 
@@ -170,42 +211,6 @@ public class IngredientEditDialogFragment extends DialogFragment {
         });
 
         mBinding.btnAdd.setOnClickListener(v -> add());
-
-        mBinding.checkWithCount.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(mBinding.getInEdit() && first0){
-                first0 = false;
-                return;
-            }
-            mBinding.setType(isChecked ? 0 : -1);
-            mBinding.setQuantity(isChecked ? 100D : 0);
-            mBinding.setIsWithCount(isChecked);
-
-        });
-
-        mBinding.etName.addTextChangedListener(new TextChangedListener() {
-            @Override
-            protected void onTextChanged(String before, String old, String aNew, String after) {
-                mBinding.btnAdd.setEnabled(!aNew.trim().isEmpty());
-            }
-        });
-
-        if(mSelectedIndex != -1){
-            Ingredient ingredient = vmRecipe.getSelected().getValue().getIngredients().get(mSelectedIndex);
-            mBinding.setName(ingredient.getName());
-
-            if(ingredient.getType() != null) {
-                mBinding.setIsWithCount(true);
-                mBinding.setType(ingredient.getType());
-                //mBinding.spinnerType.setSelection(mBinding.getType());
-            }
-            mBinding.setQuantity(ingredient.getCount());
-
-        }
-        else{
-            mBinding.setIsWithCount(true);
-            mBinding.setType(1);
-            mBinding.setName("");
-        }
     }
 
     private void add() {

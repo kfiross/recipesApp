@@ -79,6 +79,10 @@
     <string name="kg">ק"\ג</string>
 
     <string name="prompt_name">שם</string>
+    <string name="hooray">הידד</string>
+    <string name="msg_added_recipe">הוספנו את המתכון שלך!</string>
+    <string name="oops"> אוף, משהו השתבש</string>
+    <string name="msg_cant_add_recipe">לא יכולנו להוסיף את המתכון שלך</string>
 
 
     <plurals name="numberSpoons">

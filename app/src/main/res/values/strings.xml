@@ -86,6 +86,10 @@
     <string name="add_to_fav">Added To Favourites</string>
     <string name="removed_from_fav">Removed From Favourites</string>
     <string name="prompt_name">Name</string>
+    <string name="hooray">Hooray!</string>
+    <string name="msg_added_recipe">We added your Recipe!</string>
+    <string name="oops">Oops! something went wrong</string>
+    <string name="msg_cant_add_recipe">We couldn\'t add your Recipe…</string>
 
 
     <plurals name="numberSpoons">

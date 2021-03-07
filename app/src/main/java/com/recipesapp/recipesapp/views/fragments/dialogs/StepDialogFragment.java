@@ -74,14 +74,14 @@ public class StepDialogFragment extends DialogFragment {
         mBinding.etName.addTextChangedListener(new TextChangedListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-                mBinding.setName(aNew.trim());
+//                mBinding.setName(aNew.trim());
                 mBinding.btnAdd.setEnabled(!aNew.trim().isEmpty());
             }
         });
     }
 
     private void add() {
-        String data = mBinding.getName();
+        String data = mBinding.etName.getText().toString();
         Recipe editedRecipe = vmRecipe.getSelected().getValue();
 
         if(mSelectedIndex == -1){

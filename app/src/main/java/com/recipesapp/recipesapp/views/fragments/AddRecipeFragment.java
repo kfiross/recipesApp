@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +25,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.recipesapp.recipesapp.MainActivity;
 import com.recipesapp.recipesapp.R;
-import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.databinding.FragmentAddRecipeBinding;
+import com.recipesapp.recipesapp.model.Recipe;
 import com.recipesapp.recipesapp.utils.FirestoreUtils;
 import com.recipesapp.recipesapp.utils.TextChangedListener;
 import com.recipesapp.recipesapp.utils.UiUtils;
@@ -170,7 +169,10 @@ public class AddRecipeFragment extends BaseFragment {
         mBinding.formLayout.etName.addTextChangedListener(new TextChangedListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-                mBinding.getRecipe().setName(aNew);
+//                Recipe recipe = vmRecipe.getSelected().getValue();
+//                recipe.setName(aNew);
+//                vmRecipe.select(recipe);
+
                 mBinding.setCanAddRecipe(checkForm());
             }
         });
@@ -178,13 +180,10 @@ public class AddRecipeFragment extends BaseFragment {
         mBinding.formLayout.etTime.addTextChangedListener(new TextChangedListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
-                try {
-                    mBinding.getRecipe().setMakingTime(Integer.parseInt(aNew));
+//                Recipe recipe = vmRecipe.getSelected().getValue();
+//                recipe.setMakingTime(Integer.parseInt(aNew));
+//                vmRecipe.select(recipe);
 
-                }
-                catch (Exception ignored){
-
-                }
                 mBinding.setCanAddRecipe(checkForm());
             }
         });
@@ -194,10 +193,15 @@ public class AddRecipeFragment extends BaseFragment {
     }
 
     private void openDialog(int type, @Nullable Integer index) {
+        // updating the changed values of name and time
+        Recipe recipe = vmRecipe.getSelected().getValue();
+        recipe.setName(mBinding.formLayout.etName.getText().toString());
+        recipe.setMakingTime(Integer.parseInt(mBinding.formLayout.etTime.getText().toString()));
+        vmRecipe.select(recipe);
+
         if(type == 0){
             IngredientEditDialogFragment editIngredientDialog = new IngredientEditDialogFragment();
             Bundle args = new Bundle();
-            args.putParcelable("recipe", mBinding.getRecipe());
             if(index != null) {
                 args.putInt("index", index);
             }
@@ -249,16 +253,16 @@ public class AddRecipeFragment extends BaseFragment {
                     if(task2.isSuccessful()){
                         UiUtils.showAlertOk(
                                 getContext(),
-                                "Hooray!",
-                                "We added your Recipe!",
+                                getString(R.string.hooray),
+                                getString(R.string.msg_added_recipe),
                                 (dialog, which) -> {}
                         );
                     }
                     else{
                         UiUtils.showAlertOk(
                                 getContext(),
-                                "Oops! something went wrong",
-                                "We couldn't add your Recipe...",
+                                getString(R.string.oops),
+                                getString(R.string.msg_cant_add_recipe),
                                 (dialog, which) -> {}
                         );
                     }
@@ -270,7 +274,6 @@ public class AddRecipeFragment extends BaseFragment {
     }
 
     private void resetForm(){
-        // mBinding.setRecipe(new Recipe());
         mBinding.formLayout.etName.setText("");
         mBinding.formLayout.etTime.setText("");
         vmRecipe.select(new Recipe());
@@ -300,20 +303,17 @@ public class AddRecipeFragment extends BaseFragment {
     }
 
     private void openGallery() {
-        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        cameraIntent.setType("image/*");
-        if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(cameraIntent, 1000);
-        }
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, 101);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1000) {
-                Uri returnUri = data.getData();
-                mBinding.setImageUri(returnUri);
-            }
+        if (resultCode == RESULT_OK && requestCode == 101) {
+            Uri returnUri = data.getData();
+            mBinding.setImageUri(returnUri);
         }
     }
 
