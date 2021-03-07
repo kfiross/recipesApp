@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:layoutDirection="locale"
         tools:context=".MainActivity"
-        android:background="@drawable/bg_login"
+        android:background="@drawable/bg_app"
 
         >
 
