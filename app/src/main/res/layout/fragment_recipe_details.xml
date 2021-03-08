@@ -97,7 +97,7 @@
                         <ImageView
                             android:background="@color/placeholder"
                             app:imageUrl="@{recipe.image}"
-                            app:error="@{@drawable/not_found}"
+                            app:error="@{@drawable/error}"
                             app:placeholder="@{@color/colorPrimary}"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"

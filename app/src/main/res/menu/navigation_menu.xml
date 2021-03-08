@@ -23,6 +23,4 @@
         android:icon="@drawable/ic_my"
         android:title="@string/menu_my_recipes"
         />
-
-
 </menu>

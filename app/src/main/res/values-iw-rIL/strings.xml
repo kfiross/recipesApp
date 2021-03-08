@@ -2,9 +2,8 @@
 <resources>
     <string name="prompt_email">מייל</string>
     <string name="prompt_password">סיסמא</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="sign_in">לכניסה</string>
-    <string name="register">לרישום</string>
+    <string name="register">להרשמה</string>
 
     <string name="english">אנגלית</string>
     <string name="hebrew">עברית</string>

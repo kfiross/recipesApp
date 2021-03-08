@@ -41,7 +41,7 @@
                     android:textSize="40sp"
                     android:background="@color/placeholder"
                     app:imageUrl="@{recipe.image}"
-                    app:error="@{@drawable/not_found}"
+                    app:error="@{@drawable/error}"
                     app:placeholder="@{@color/colorPrimary}" />
 
                 <Space
