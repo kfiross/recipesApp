@@ -36,10 +36,12 @@
     <string name="all_recipes">All Recipes</string>
     <string name="options">Options</string>
     <string name="ingredients">Ingredients:</string>
+    <string name="making_process">Making Process</string>
     <string name="steps">Steps</string>
 
     <string name="category">Category</string>
     <string name="recipe_name">Recipe\'s Name</string>
+    <string name="name">Name:</string>
     <string name="add">Add</string>
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="hint_enter_name">Enter Name…</string>
@@ -51,7 +53,7 @@
     <string name="and">and</string>
     <string name="search_recipes">Find me recipes</string>
     <string name="selected_ingredients">Selected Ingredients</string>
-    <string name="photo">Photo:</string>
+    <string name="photo">Photo</string>
     <string name="photos">Photos:</string>
     <string name="add_step">Add Step</string>
 

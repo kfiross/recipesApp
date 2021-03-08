@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
@@ -29,7 +26,6 @@ import com.foodiz.app.model.Recipe;
 import com.foodiz.app.utils.FirestoreUtils;
 import com.foodiz.app.utils.TextChangedListener;
 import com.foodiz.app.utils.UiUtils;
-import com.foodiz.app.viewmodels.shared.RecipeSharedViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -41,21 +37,12 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddRecipeFragment extends Fragment {
+public class AddingRecipeFragment extends Fragment {
 
     private FragmentAddingRecipeBinding mBinding;
-    private RecipeSharedViewModel vmRecipe;
-    private Observer<Recipe> observer;
 
-    public AddRecipeFragment() {
+    public AddingRecipeFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        vmRecipe = ViewModelProviders.of(getActivity()).get(RecipeSharedViewModel.class);
     }
 
     @Override
@@ -76,46 +63,17 @@ public class AddRecipeFragment extends Fragment {
 
         mBinding.setRecipe(new Recipe());
         mBinding.setEditMode(false);
+        mBinding.formLayout.setStepsCount(5);
+        mBinding.formLayout.setIngredientsCount(5);
         
         setUpViews();
-        vmRecipe.select(mBinding.getRecipe());
 
-        observer = recipe -> {
-            mBinding.setRecipe(recipe);
-            mBinding.setCanAddRecipe(checkForm());
-        };
-        vmRecipe.getSelected().observe(getActivity(), observer);
-
-        for(int i=0; i<9; i++) {
-            EditText child = new EditText(getContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 120
-            );
-            params.setMargins(0,12,0,12);
-            child.setLayoutParams(params);
-            child.setPadding(24,0,24,0);
-            child.setBackgroundResource(R.drawable.bg_edit_text);
-
-            child.setBackgroundTintList(
-                    ContextCompat.getColorStateList(getContext(), R.color.bgEditColor)
-            );
-            mBinding.formLayout.layoutIngredients.addView(child);
+        for(int i=0; i<5; i++) {
+            addEditTextToLayout(mBinding.formLayout.layoutIngredients);
         }
 
-        for(int i=0; i<9; i++) {
-            EditText child = new EditText(getContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 120
-            );
-            params.setMargins(0,12,0,12);
-            child.setLayoutParams(params);
-            child.setPadding(24,0,24,0);
-            child.setBackgroundResource(R.drawable.bg_edit_text);
-
-            child.setBackgroundTintList(
-                    ContextCompat.getColorStateList(getContext(), R.color.bgEditColor)
-            );
-            mBinding.formLayout.layoutSteps.addView(child);
+        for(int i=0; i<5; i++) {
+            addEditTextToLayout(mBinding.formLayout.layoutSteps);
         }
 
     }
@@ -142,7 +100,37 @@ public class AddRecipeFragment extends Fragment {
         mBinding.btnAddRecipe.setOnClickListener(v -> addRecipe());
 
         mBinding.formLayout.btnAddPhoto.setOnClickListener(v -> uploadPhoto());
+
+        mBinding.formLayout.btnAddIngredient.setOnClickListener(v -> addIngredient());
+        mBinding.formLayout.btnRemoveIngredient.setOnClickListener(v -> removedIngredient());
+        mBinding.formLayout.btnAddStep.setOnClickListener(v -> addStep());
+        mBinding.formLayout.btnRemoveStep.setOnClickListener(v -> removeStep());
+
 //        mBinding.formLayout.imgRecipe.setOnClickListener(v -> uploadPhoto());
+    }
+
+    private void addIngredient(){
+        addEditTextToLayout(mBinding.formLayout.layoutIngredients);
+        mBinding.formLayout.setIngredientsCount(mBinding.formLayout.layoutIngredients.getChildCount());
+    }
+
+    private void removedIngredient(){
+        if(mBinding.formLayout.getIngredientsCount() >= 3) {
+            removeLastChildFromLayout(mBinding.formLayout.layoutIngredients);
+            mBinding.formLayout.setIngredientsCount(mBinding.formLayout.layoutIngredients.getChildCount());
+        }
+    }
+
+    private void addStep(){
+        addEditTextToLayout(mBinding.formLayout.layoutSteps);
+        mBinding.formLayout.setStepsCount(mBinding.formLayout.layoutSteps.getChildCount());
+    }
+
+    private void removeStep(){
+        if(mBinding.formLayout.getStepsCount() >= 3) {
+            removeLastChildFromLayout(mBinding.formLayout.layoutSteps);
+            mBinding.formLayout.setStepsCount(mBinding.formLayout.layoutSteps.getChildCount());
+        }
     }
 
 
@@ -151,41 +139,28 @@ public class AddRecipeFragment extends Fragment {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 mBinding.getRecipe().setName(aNew);
-                mBinding.setCanAddRecipe(checkForm());
             }
         });
-
-//        mBinding.formLayout.etIngredients.addTextChangedListener(new TextChangedListener() {
-//            @Override
-//            protected void onTextChanged(String before, String old, String aNew, String after) {
-//                mBinding.getRecipe().setIngredients(aNew);
-//                mBinding.setCanAddRecipe(checkForm());
-//            }
-//        });
-
-//        mBinding.formLayout.etSteps.addTextChangedListener(new TextChangedListener() {
-//            @Override
-//            protected void onTextChanged(String before, String old, String aNew, String after) {
-//                mBinding.getRecipe().setSteps(aNew);
-//                mBinding.setCanAddRecipe(checkForm());
-//            }
-//        });
-
-
-
-
-
-
     }
 
     private void addRecipe(){
+        if(!checkForm()){
+            UiUtils.showSnackbar(
+                    this.getView(),
+                    "Please enter all data!",
+                    2500
+            );
+            return;
+        }
+
+
         Recipe recipe = mBinding.getRecipe();
         if(recipe == null){
             recipe = new Recipe();
         }
 
         // update ingredients
-        for(int i=0; i<9;i++){
+        for(int i=0; i<mBinding.formLayout.layoutIngredients.getChildCount();i++){
             EditText etIngredient = (EditText) mBinding.formLayout.layoutIngredients.getChildAt(i);
             String ingredient = etIngredient.getText().toString();
             if(!ingredient.isEmpty()){
@@ -195,7 +170,7 @@ public class AddRecipeFragment extends Fragment {
         }
 
         // updating steps
-        for(int i=0; i<9;i++){
+        for(int i=0; i<mBinding.formLayout.layoutSteps.getChildCount();i++){
             EditText etStep = (EditText) mBinding.formLayout.layoutSteps.getChildAt(i);
             String step = etStep.getText().toString();
             if(!step.isEmpty()){
@@ -234,14 +209,14 @@ public class AddRecipeFragment extends Fragment {
                     if(task2.isSuccessful()){
                         UiUtils.showSnackbar(
                                 this.getView(),
-                                "We added your Recipe!",
+                                "Recipe Added!",
                                 2500
                         );
                     }
                     else{
                         UiUtils.showSnackbar(
                                 this.getView(),
-                                "We couldn't add your Recipe...",
+                                "Recipe insert Failed",
                                 2500
                         );
                     }
@@ -253,8 +228,7 @@ public class AddRecipeFragment extends Fragment {
 
     private void cleanForm(){
         mBinding.formLayout.etName.setText("");
-//        mBinding.formLayout.etIngredients.setText("");
-//        mBinding.formLayout.etSteps.setText("");
+
 
         for(int i=0; i<mBinding.formLayout.layoutIngredients.getChildCount(); i++){
             ((EditText)(mBinding.formLayout.layoutIngredients.getChildAt(i))).setText("");
@@ -263,9 +237,6 @@ public class AddRecipeFragment extends Fragment {
         for(int i=0; i<mBinding.formLayout.layoutSteps.getChildCount(); i++){
             ((EditText)(mBinding.formLayout.layoutSteps.getChildAt(i))).setText("");
         }
-
-        vmRecipe.select(new Recipe());
-        mBinding.setCanAddRecipe(false);
     }
 
     private void uploadPhoto(){
@@ -313,24 +284,53 @@ public class AddRecipeFragment extends Fragment {
         boolean result = true;
         if(mBinding.formLayout.etName.length() == 0)
             result = false;
-//        else if(mBinding.formLayout.etIngredients.length() == 0)
-//            result = false;
-//        else if(mBinding.formLayout.etSteps.length() == 0)
-//            result = false;
-
-        Log.d("checkForm", String.valueOf(result));
+        else if(!isIngredientsValid())
+            result = false;
+        else if(!isStepsValid())
+            result = false;
 
         return result;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        vmRecipe.getSelected().removeObserver(observer);
+    private boolean isIngredientsValid(){
+        for(int i=0; i<mBinding.formLayout.layoutIngredients.getChildCount(); i++){
+            EditText etStep = (EditText) mBinding.formLayout.layoutIngredients.getChildAt(i);
+            if(etStep.length() == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    private boolean isStepsValid(){
+        for(int i=0; i<mBinding.formLayout.layoutSteps.getChildCount(); i++){
+            EditText etStep = (EditText) mBinding.formLayout.layoutSteps.getChildAt(i);
+            if(etStep.length() == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private void addEditTextToLayout(LinearLayout layout){
+        EditText child = new EditText(getContext());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 120
+        );
+        params.setMargins(0,12,0,12);
+        child.setLayoutParams(params);
+        child.setPadding(24,0,24,0);
+        child.setBackgroundResource(R.drawable.bg_edit_text);
+
+        child.setBackgroundTintList(
+                ContextCompat.getColorStateList(getContext(), R.color.bgEditColor)
+        );
+
+        layout.addView(child);
+    }
+
+    private void removeLastChildFromLayout(LinearLayout layout){
+        layout.removeViewAt(layout.getChildCount()-1);
     }
 }

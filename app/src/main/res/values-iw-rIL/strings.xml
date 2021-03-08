@@ -26,12 +26,13 @@
 
     <string name="options">אפשרויות</string>
     <string name="ingredients">מצרכים</string>
-    <string name="steps">אופן הכנה</string>
-
+    <string name="making_process">אופן הכנה</string>
+    <string name="steps">צעדים</string>
 
     <string name="category">קטגוריה:</string>
     <string name="add">להוספה</string>
     <string name="recipe_name">שם המתכון:</string>
+    <string name="name">שם:</string>
     <string name="add_new_recipe">הוספת מתכון חדש</string>
     <string name="hint_enter_name">הזן שם…</string>
     <string name="ingredient_name">שם המצרך</string>
@@ -42,7 +43,7 @@
     <string name="search_recipe">חיפוש מתכון לפי רכיבים</string>
     <string name="search_recipes">חפשו לי מתכונים</string>
     <string name="selected_ingredients">מצרכים שנבחרו:</string>
-    <string name="photo">תמונה:</string>
+    <string name="photo">תמונה</string>
     <string name="photos">תמונות:</string>
 
     <string name="sorry">מצטערים</string>
