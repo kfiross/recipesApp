@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import com.foodiz.app.databinding.ActivityMainBinding;
 import com.foodiz.app.utils.FirestoreUtils;
 import com.foodiz.app.utils.SharedPreferencesConfig;
+import com.foodiz.app.utils.UiUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -74,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
         // listen to changes in navigation
         mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(destination.getId() == R.id.loginFragment){
+            if(destination.getId() == R.id.loginFragment) {
                 binding.bttmNav.setVisibility(View.GONE);
+                UiUtils.enableFullyTransparentStatusBar(this);
             }
             else {
                 binding.bttmNav.setVisibility(View.VISIBLE);
+                UiUtils.disableFullyTransparentStatusBar(this);
             }
         });
 
