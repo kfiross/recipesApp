@@ -78,7 +78,7 @@ public class FavoritesFragment extends Fragment {
                 ArrayList<Recipe> recipes = new ArrayList<>();
                 for (String id : favsIds) {
                     try {
-                        DocumentSnapshot documentSnapshot = FirestoreUtils.getRecipe(id);
+                        DocumentSnapshot documentSnapshot = FirestoreUtils.recipeFromDb(id);
 //                        // documentSnapshot.toObject(Recipe.class);
 //
 

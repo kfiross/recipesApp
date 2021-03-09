@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentHomeBinding;
-import com.foodiz.app.model.Category;
+import com.foodiz.app.model.Group;
 import com.foodiz.app.views.adapters.CategoryAdapter;
 
 import java.util.ArrayList;
@@ -67,14 +67,14 @@ public class HomeFragment extends Fragment {
 
         String[] categoriesNames = getResources().getStringArray(R.array.categories);
 
-        ArrayList<Category> categories = new ArrayList<>();
-        categories.add(new Category("0", categoriesNames[0]));
-        categories.add(new Category("1", categoriesNames[1]));
-        categories.add(new Category("2", categoriesNames[2]));
+        ArrayList<Group> categories = new ArrayList<>();
+        categories.add(new Group("0", categoriesNames[0]));
+        categories.add(new Group("1", categoriesNames[1]));
+        categories.add(new Group("2", categoriesNames[2]));
         setupRecyclerView(categories);
     }
 
-    private void setupRecyclerView(ArrayList<Category> categories){
+    private void setupRecyclerView(ArrayList<Group> categories){
         CategoryAdapter categoryAdapter = new CategoryAdapter(categories);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -32,69 +32,78 @@ import java.util.concurrent.Executors;
  */
 public class MyRecipesFragment extends BaseFragment {
 
-    private FragmentMyRecipesBinding mBinding;
-    private RecyclerView mRecyclerView;
+    //------------DATA MEMBERS----------------------
+    private RecyclerView recyclerView;
+    private FragmentMyRecipesBinding recipesBinding;
+    //---------------------------------------------
+
+
 
     public MyRecipesFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(
+        recipesBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_my_recipes, container, false);
-        // Inflate the layout for this fragment
-        return mBinding.getRoot();
+
+        return recipesBinding.getRoot();
+    }
+
+
+    private void getDocuments() {
+
+        final ArrayList<String> idOfMyFevs = new ArrayList<>(MainActivity.preferencesConfig.readMyRecipesIds());
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler myHandle = new Handler(Looper.getMainLooper());
+
+        executor.execute(() ->
+        {
+
+
+            ArrayList<Recipe> recipes = new ArrayList<>();
+            for (String singleId : idOfMyFevs) {
+                try {
+                    DocumentSnapshot documentSnapshot = FirestoreUtils.recipeFromDb(singleId);
+
+                    Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
+                    recipes.add(newRecipe);
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            myHandle.post(() -> {
+
+                initialRecyclerView(recipes);
+            });
+        });
+    }
+
+
+
+    private void initialRecyclerView(ArrayList<Recipe> recipes) {
+        RecipeAdapter categoryAdapter = new RecipeAdapter(recipes);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(categoryAdapter);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mRecyclerView = mBinding.recyclerViewRecipes;
-        setupRecyclerView(new ArrayList<>());
+        recyclerView = recipesBinding.recyclerViewRecipes;
+        initialRecyclerView(new ArrayList<>());
 
-        fetchDocs();
+        getDocuments();
     }
 
-    private void fetchDocs() {
-
-        final ArrayList<String> favsIds = new ArrayList<>(MainActivity.preferencesConfig.readMyRecipesIds());
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        executor.execute(() -> {
-
-            // Background work here
-            ArrayList<Recipe> recipes = new ArrayList<>();
-            for (String id : favsIds) {
-                try {
-                    DocumentSnapshot documentSnapshot = FirestoreUtils.getRecipe(id);
-
-                    Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
-                    recipes.add(newRecipe);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
 
 
-            handler.post(() -> {
-                //UI Thread work here
-                setupRecyclerView(recipes);
-            });
-        });
-    }
-
-    private void setupRecyclerView(ArrayList<Recipe> recipes) {
-        RecipeAdapter categoryAdapter = new RecipeAdapter(recipes);
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(categoryAdapter);
-    }
 }

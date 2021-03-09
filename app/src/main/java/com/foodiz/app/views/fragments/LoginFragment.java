@@ -95,7 +95,7 @@ public class LoginFragment extends Fragment {
                         updateName();
                         mBinding.setIsLoading(false);
                         if (registerTask.isSuccessful()) {
-                            FirestoreUtils.initUserData(registerTask.getResult().getUser().getUid());
+                            FirestoreUtils.initalizinguserdata(registerTask.getResult().getUser().getUid());
                         } else {
                             // showAlertDialog();
                         }

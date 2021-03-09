@@ -5,23 +5,31 @@ import androidx.databinding.Bindable;
 
 import com.foodiz.app.BR;
 
+
+
+
 public class LoginData extends BaseObservable {
+
+    private final int MIN_LEN_PASS = 6;
+    private final int MIN_LEN_EMAIL = 0;
+    //------------DATA MEMBERS-------------------
     private String name;
-    private String email;
+    private String mail;
     private String password;
     private boolean correct;
+    //--------------------------------------------
 
 
-    public LoginData(String email, String password, String name) {
+    public LoginData(String mail, String password, String name) {
         this.name = name;
-        this.email = email;
+        this.mail = mail;
         this.password = password;
         this.correct = false;
     }
 
     @Bindable
     public String getEmail() {
-        return email;
+        return mail;
     }
 
     @Bindable
@@ -40,8 +48,8 @@ public class LoginData extends BaseObservable {
     }
 
     public void setEmail(String email){
-        this.email = email;
-        this.correct = isEnabled();
+        this.mail = email;
+        this.correct = valid();
         notifyPropertyChanged(BR.email);
         notifyPropertyChanged(BR.password);
         notifyPropertyChanged(BR.correct);
@@ -49,7 +57,7 @@ public class LoginData extends BaseObservable {
 
     public void setPassword(String password) {
         this.password = password;
-        this.correct = isEnabled();
+        this.correct = valid();
         notifyPropertyChanged(BR.email);
         notifyPropertyChanged(BR.password);
         notifyPropertyChanged(BR.correct);
@@ -57,7 +65,7 @@ public class LoginData extends BaseObservable {
 
     public void setName(String name) {
         this.name = name;
-        this.correct = isEnabled();
+        this.correct = valid();
         notifyPropertyChanged(BR.name);
         notifyPropertyChanged(BR.correct);
     }
@@ -67,8 +75,11 @@ public class LoginData extends BaseObservable {
         notifyPropertyChanged(BR.correct);
     }
 
-    private boolean isEnabled() {
-        return getEmail().length() !=0  && getPassword().length() >= 6;
+    private boolean valid()
+    {
+        boolean res1 = getEmail().length() !=MIN_LEN_EMAIL;
+        boolean res2 = getPassword().length() >= MIN_LEN_PASS;
+        return (res1 && res2);
     }
 
 }

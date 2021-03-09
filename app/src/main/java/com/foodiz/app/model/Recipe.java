@@ -1,9 +1,11 @@
 package com.foodiz.app.model;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -12,54 +14,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Class represents a recipe
- */
+
 public class Recipe implements Parcelable {
-    private String mId;
 
-    @Nullable
-    private Integer mCategory;
-    @Nullable
-    private String mName;
-    @Nullable
-    private List<String> mIngredients;
-    @Nullable
-    private List<String> mSteps;
-    @Nullable
-    private String mImage;
+    //-------DATA MEMBERS----------------------
+    private String id;
+    private Integer group;
+    private String name;
+    private List<String> ingredients;
+    private List<String> steps;
+    private String photo;
+    //-----------------------------------------
+    public Recipe(){ }
 
-    public Recipe(){
-        
-    }
-
-    public Recipe(
-            String id,
-            @Nullable Integer category,
-            @Nullable  String name,
-            @Nullable  List<String> ingredients,
-            @Nullable  List<String> steps,
-            @Nullable  String image
+    public Recipe(String id, Integer group, String name, List<String> ingredients, List<String> steps, String photo
     ) {
-        mId = id;
-        mCategory = category;
-        mName = name;
-        mIngredients = ingredients;
-        mSteps = steps;
-        mImage = image;
+        this.id = id;
+        this.group = group;
+        this.name = name;
+        this.ingredients = ingredients;
+        this.steps = steps;
+        this.photo = photo;
     }
 
     protected Recipe(Parcel in) {
-        mId = in.readString();
+        id = in.readString();
         if (in.readByte() == 0) {
-            mCategory = null;
+            this.group = null;
         } else {
-            mCategory = in.readInt();
+            this.group = in.readInt();
         }
-        mName = in.readString();
-        mIngredients = in.createStringArrayList();
-        mSteps = in.createStringArrayList();
-        mImage = in.readString();
+        this.name = in.readString();
+        this.ingredients = in.createStringArrayList();
+        this.steps = in.createStringArrayList();
+        this.photo = in.readString();
     }
 
     public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
@@ -87,96 +75,105 @@ public class Recipe implements Parcelable {
 
 
     public String getId() {
-        return mId;
+        return this.id;
     }
 
-    public void setId(String mId) {
-        this.mId = mId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<String> getIngredients() {
-        return mIngredients;
+        return this.ingredients;
     }
 
-    public void setIngredients(List<String> mIngredients) {
-        this.mIngredients = mIngredients;
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public List<String> getSteps() {
-        return mSteps;
+        return this.steps;
     }
 
-    public void setSteps(List<String> mSteps) {
-        this.mSteps = mSteps;
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
     }
 
     public String getName() {
-        return mName == null ? "" : mName;
+        if(this.name != null )
+            return this.name;
+        return "";
+
+
+
     }
 
     public void setName(String mName) {
-        this.mName = mName;
+        this.name = mName;
     }
 
 
-    public int getCategory() {
-        return mCategory == null ? -1 : mCategory;
+    public int getGroup() {
+        if( this.group != null)
+            return this.group;
+        return -1;
+
     }
 
-    public void setCategory(int mCategory) {
-        this.mCategory = mCategory;
+    public void setCategory(int group) {
+        this.group = group;
     }
 
     public String getImage() {
-        return mImage;
+        return this.photo;
     }
 
-    public void setImage(String mImage) {
-        this.mImage = mImage;
+    public void setImage(String photo) {
+        this.photo = photo;
     }
 
     public Map<String,Object> toJson() {
         Map<String,Object> map = new HashMap<>();
-        map.put("category", mCategory);
-        map.put("name", mName);
-        map.put("ingredients", mIngredients);
-        map.put("steps", mSteps);
-        map.put("image", mImage);
+        map.put("category", group);
+        map.put("name", name);
+        map.put("ingredients", ingredients);
+        map.put("steps", steps);
+        map.put("image", photo);
 
         return map;
     }
 
 
     public boolean hasIngredientsWithName(String name){
-        return mIngredients.contains(name);
+        return ingredients.contains(name);
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     public List<String> getPhotos(){
-        return List.of(mImage);
+        return List.of(photo);
     }
 
     public boolean containsIngredient(String ingredientName) {
-        if(mIngredients==null || mIngredients.isEmpty()){
+        if(ingredients==null || ingredients.isEmpty()){
             return false;
         }
 
-        return this.mIngredients.contains(ingredientName);
+        return this.ingredients.contains(ingredientName);
     }
 
     public void addIngredient(String ingredient) {
-        if(mIngredients == null){
-            mIngredients = new ArrayList<>();
+        if(ingredient == null){
+            ingredients = new ArrayList<>();
         }
 
-        mIngredients.add(ingredient);
+        ingredients.add(ingredient);
     }
 
     public void addStep(String step) {
-        if(mSteps == null){
-            mSteps = new ArrayList<>();
+        if(steps == null){
+            steps = new ArrayList<>();
         }
-        mSteps.add(step);
+        steps.add(step);
     }
 
     @Override
@@ -186,22 +183,22 @@ public class Recipe implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mId);
-        if (mCategory == null) {
+        dest.writeString(id);
+        if (group == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(mCategory);
+            dest.writeInt(group);
         }
-        dest.writeString(mName);
-        dest.writeStringList(mIngredients);
-        dest.writeStringList(mSteps);
-        dest.writeString(mImage);
+        dest.writeString(name);
+        dest.writeStringList(ingredients);
+        dest.writeStringList(steps);
+        dest.writeString(photo);
     }
 
     public String getIngredientsString(){
         StringBuilder builder = new StringBuilder();
-        for(String ingredients: mIngredients){
+        for(String ingredients: ingredients){
             builder.append(" - ").append(ingredients).append("\n");
         }
 
@@ -210,10 +207,10 @@ public class Recipe implements Parcelable {
 
     public String getStepsString(){
         StringBuilder builder = new StringBuilder();
-        int index = 1;
-        for(String step: mSteps){
-            builder.append(index).append(") ").append(step).append("\n");
-            index++;
+        int count = 1;
+        for(String step: steps){
+            builder.append(count).append(") ").append(step).append("\n");
+            count++;
         }
 
         return builder.toString();

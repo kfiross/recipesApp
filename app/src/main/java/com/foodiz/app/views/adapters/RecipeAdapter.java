@@ -80,7 +80,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                 // remove if already in favourites
                 if(mItemBinding.getIsFav()){
                     MainActivity.preferencesConfig.removeFavId(recipe.getId());
-                    FirestoreUtils.removeFromMyFavs(recipe.getId());
+                    FirestoreUtils.delRecipeFromFev(recipe.getId());
 
                     UiUtils.showSnackbar(
                             itemView,
@@ -90,14 +90,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                             view -> {
                                 // add it back
                                 MainActivity.preferencesConfig.addFavId(recipe.getId());
-                                FirestoreUtils.addToMyFavs(recipe.getId());
+                                FirestoreUtils.addRecipeToFev(recipe.getId());
                             }
                     );
                 }
                 // if not, add it
                 else{
                     MainActivity.preferencesConfig.addFavId(recipe.getId());
-                    FirestoreUtils.addToMyFavs(recipe.getId());
+                    FirestoreUtils.addRecipeToFev(recipe.getId());
 
                     UiUtils.showSnackbar(
                             itemView,

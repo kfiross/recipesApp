@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.ItemCategoryLayoutBinding;
-import com.foodiz.app.model.Category;
+import com.foodiz.app.model.Group;
 
 import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemViewHolder>{
 
-    private ArrayList<Category> mCategories;
+    private ArrayList<Group> mCategories;
 
-    public CategoryAdapter(ArrayList<Category> categories) {
+    public CategoryAdapter(ArrayList<Group> categories) {
         mCategories = categories;
     }
 
@@ -56,14 +56,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
                     (MainActivity) itemBinding.getRoot().getContext(), R.id.nav_host_fragment);
         }
 
-        public void bind(Category category) {
-            itemBinding.setName(category.getName());
+        public void bind(Group Group) {
+            itemBinding.setName(Group.getName());
 
 
             itemBinding.btn.setOnClickListener(v -> {
                 Bundle args = new Bundle();
-                args.putInt("category_id", Integer.parseInt(category.getId()));
-                args.putString("category_name", category.getName());
+                args.putInt("category_id", Integer.parseInt(Group.getId()));
+                args.putString("category_name", Group.getName());
                 mNavController.navigate(R.id.recipesFragment, args);
             });
         }

@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeLocalData() {
-        FirestoreUtils.fetchUser().addOnCompleteListener(task -> {
+        FirestoreUtils.getUser().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if(task.getResult() == null){
                     preferencesConfig.writeFavsIds(null);
