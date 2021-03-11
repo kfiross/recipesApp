@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentHomeBinding;
 import com.foodiz.app.model.Category;
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        MainActivity.preferencesConfig.loadLocal(getContext());
         NavController navController =
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
 

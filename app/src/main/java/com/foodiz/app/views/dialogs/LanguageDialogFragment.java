@@ -104,6 +104,7 @@ public class LanguageDialogFragment extends DialogFragment {
         MainActivity.preferencesConfig.setLocal(locale, getContext());
 
         refreshScreen();
+
         dismiss();
     }
 

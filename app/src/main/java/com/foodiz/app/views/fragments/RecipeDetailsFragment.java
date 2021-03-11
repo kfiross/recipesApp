@@ -1,6 +1,7 @@
 package com.foodiz.app.views.fragments;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentRecipeDetailsBinding;
 import com.foodiz.app.model.Recipe;
+import com.foodiz.app.utils.FirestoreUtils;
+import com.foodiz.app.utils.UiUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,14 +58,38 @@ public class RecipeDetailsFragment extends Fragment {
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         mBinding.setRecipe(mSelectedRecipe);
-        mBinding.setIsRTL(true);
         mBinding.setIsMy(MainActivity.preferencesConfig.readMyRecipesIds().contains(mSelectedRecipe.getId()));
         mBinding.setNavController(navController);
 
         mBinding.btnGotoEdit.setOnClickListener(v -> {
             Bundle args = new Bundle();
             args.putParcelable("recipe", mSelectedRecipe);
-            navController.navigate(R.id.recipeEditFragment, args);
+            navController.navigate(R.id.addRecipeFragment, args);
+        });
+
+        mBinding.btnRemove.setOnClickListener(v -> {
+
+            UiUtils.showAlertYesNo(
+                    getContext(),
+                    getString(R.string.title_remove_recipe),
+                    getString(R.string.subtitle_remove_recipe),
+                    (dialog, which) -> {
+                        CountDownTimer timer = new CountDownTimer(5 * 1000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+                            }
+
+                            public void onFinish() {
+                                FirestoreUtils.removeFromMyFavs(mSelectedRecipe.getId());
+
+                            }
+                        };
+                        timer.start();
+
+                        UiUtils.showSnackbar(getView(), "Recipe removed!", 4800, "Undo", (_v) -> {
+                            timer.cancel();
+                        });
+                    });
         });
     }
 }

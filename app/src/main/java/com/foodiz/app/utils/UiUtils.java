@@ -23,8 +23,8 @@ public class UiUtils {
         builder.setTitle(title);
         builder.setMessage(message);
 
-        builder.setPositiveButton("Yes", yesListener);
-        builder.setPositiveButton("No", null);
+        builder.setPositiveButton(context.getString(R.string.yes), yesListener);
+        builder.setNegativeButton(context.getString(R.string.no), null);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -40,7 +40,7 @@ public class UiUtils {
         builder.setTitle(title);
         builder.setMessage(message);
 
-        builder.setPositiveButton("OK", okListener);
+        builder.setPositiveButton(context.getString(R.string.ok), okListener);
 
         AlertDialog dialog = builder.create();
         dialog.show();

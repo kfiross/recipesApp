@@ -160,8 +160,13 @@ public class Recipe implements Parcelable {
         if(mIngredients==null || mIngredients.isEmpty()){
             return false;
         }
+        for(String ingredient : mIngredients){
+            if(ingredient.contains(ingredientName)){
+                return true;
+            }
+        }
 
-        return this.mIngredients.contains(ingredientName);
+        return false;
     }
 
     public void addIngredient(String ingredient) {

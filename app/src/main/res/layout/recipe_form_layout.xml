@@ -99,9 +99,6 @@
                     android:layout_weight="1"
                     android:padding="-10dp"
                     android:layout_height="wrap_content"
-                    app:items="@{@stringArray/categories}"
-                    app:itemLayout="@{@layout/my_spinner_item_layout}"
-                    app:dropDownLayout="@{@layout/my_spinner_item_dropdown_layout}"
                     tools:listitem="@layout/my_spinner_item_layout" />
 
 

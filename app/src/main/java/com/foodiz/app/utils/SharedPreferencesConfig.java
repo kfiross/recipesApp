@@ -160,7 +160,7 @@ public class SharedPreferencesConfig {
      */
     public void loadLocal(Context context){
         String lang = readLangStatus();
-        setLocal("he", context);
+        setLocal(lang, context);
     }
 
     /**

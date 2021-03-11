@@ -1,6 +1,8 @@
 package com.foodiz.app.views.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +20,16 @@ import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentRecipesBinding;
 import com.foodiz.app.model.Recipe;
+import com.foodiz.app.utils.FirestoreUtils;
 import com.foodiz.app.views.adapters.RecipeAdapter;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +78,8 @@ public class RecipesFragment extends Fragment {
         ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((MainActivity)getActivity()).getSupportActionBar().setTitle("");
         ((MainActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+        MainActivity.preferencesConfig.loadLocal(getContext());
+
 
         mRecyclerView = mBinding.recyclerViewRecipes;
 
@@ -134,24 +140,38 @@ public class RecipesFragment extends Fragment {
     }
 
     private void fetchDocs(){
-        FirebaseFirestore.getInstance().collection("recipes")
-                .whereEqualTo("category", mSelectedCategoryId)
-                .addSnapshotListener(
-                (documentSnapshots, error) -> {
+        final ArrayList<String> myRecipesIds = new ArrayList<>(MainActivity.preferencesConfig.readMyRecipesIds());
 
-                    List<DocumentSnapshot> docs = documentSnapshots.getDocuments();
-                    mCategoryRecipes = new ArrayList<>();
-                    for (int i = 0; i < docs.size(); i++) {
-                        DocumentSnapshot documentSnapshot = docs.get(i);
-                        // documentSnapshot.toObject(Recipe.class);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
 
-                        Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
+        executor.execute(() -> {
 
+            //Background work here
+            mCategoryRecipes = new ArrayList<>();
+            for (String recipeId : myRecipesIds) {
+                try {
+                    DocumentSnapshot documentSnapshot = FirestoreUtils.getRecipe(recipeId);
+                    Recipe newRecipe = Recipe.fromDocument(documentSnapshot);
+
+                    // only add my recipes that are on the current category
+                    if(newRecipe.getCategory() == mSelectedCategoryId){
                         mCategoryRecipes.add(newRecipe);
                     }
-                    setupRecyclerView(mCategoryRecipes);
 
-                });
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            handler.post(() -> {
+                //UI Thread work here
+                setupRecyclerView(mCategoryRecipes);
+            });
+        });
     }
 
     private void setupRecyclerView(ArrayList<Recipe> recipes){

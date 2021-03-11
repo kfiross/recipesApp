@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -40,9 +41,19 @@ import static android.app.Activity.RESULT_OK;
 public class AddingRecipeFragment extends Fragment {
 
     private FragmentAddingRecipeBinding mBinding;
-
+    private Recipe mRecipe;
     public AddingRecipeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if(args != null){
+             mRecipe = args.getParcelable("recipe");
+        }
     }
 
     @Override
@@ -61,21 +72,29 @@ public class AddingRecipeFragment extends Fragment {
 
         // initialize binding variables
 
-        mBinding.setRecipe(new Recipe());
-        mBinding.setEditMode(false);
-        mBinding.formLayout.setStepsCount(5);
-        mBinding.formLayout.setIngredientsCount(5);
+        mBinding.setRecipe(mRecipe==null ? new Recipe() : mRecipe);
+        mBinding.setEditMode(mRecipe != null);
+
+        mBinding.formLayout.setStepsCount(mRecipe==null ? 5 : mRecipe.getSteps().size());
+        mBinding.formLayout.setIngredientsCount(mRecipe==null ? 5 : mRecipe.getIngredients().size());
         
         setUpViews();
 
-        for(int i=0; i<5; i++) {
-            addEditTextToLayout(mBinding.formLayout.layoutIngredients);
-        }
+        // fill in the ingredients & steps of the recipe we about to edit
+        if(mRecipe != null){
+            for(int i=0; i< mBinding.formLayout.getIngredientsCount(); i++) {
+                EditText etIngredient = (EditText) mBinding.formLayout.layoutIngredients.getChildAt(i);
+                etIngredient.setText(mBinding.getRecipe().getIngredients().get(i));
+            }
 
-        for(int i=0; i<5; i++) {
-            addEditTextToLayout(mBinding.formLayout.layoutSteps);
-        }
+            for(int i=0; i<mBinding.formLayout.getStepsCount(); i++) {
+                EditText etStep = (EditText) mBinding.formLayout.layoutSteps.getChildAt(i);
+                etStep.setText(mBinding.getRecipe().getSteps().get(i));
+            }
 
+            // also the category
+            mBinding.formLayout.spinnerCategory.setSelection(mBinding.getRecipe().getCategory());
+        }
     }
 
     private void setUpViews() {
@@ -93,6 +112,17 @@ public class AddingRecipeFragment extends Fragment {
                 mBinding.getRecipe().setCategory(0);
             }
         });
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getContext(),
+                R.layout.my_spinner_item_layout,
+                getResources().getStringArray(R.array.categories)
+        );
+
+        adapter.setDropDownViewResource(R.layout.my_spinner_item_dropdown_layout);
+
+        mBinding.formLayout.spinnerCategory.setAdapter(adapter);
     }
 
 
@@ -135,12 +165,24 @@ public class AddingRecipeFragment extends Fragment {
 
 
     private void setupForm() {
+        // listener to update name
         mBinding.formLayout.etName.addTextChangedListener(new TextChangedListener() {
             @Override
             protected void onTextChanged(String before, String old, String aNew, String after) {
                 mBinding.getRecipe().setName(aNew);
             }
         });
+
+        // add places to enter ingredients
+        for(int i=0; i< mBinding.formLayout.getIngredientsCount(); i++) {
+            addEditTextToLayout(mBinding.formLayout.layoutIngredients);
+        }
+
+        // add places to enter steps
+        for(int i=0; i<mBinding.formLayout.getStepsCount(); i++) {
+            addEditTextToLayout(mBinding.formLayout.layoutSteps);
+        }
+
     }
 
     private void addRecipe(){
@@ -316,16 +358,19 @@ public class AddingRecipeFragment extends Fragment {
     private void addEditTextToLayout(LinearLayout layout){
         EditText child = new EditText(getContext());
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, 120
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
         );
         params.setMargins(0,12,0,12);
+        child.setMinHeight(120);
         child.setLayoutParams(params);
-        child.setPadding(24,0,24,0);
+        child.setPadding(28,0,28,0);
         child.setBackgroundResource(R.drawable.bg_edit_text);
 
         child.setBackgroundTintList(
                 ContextCompat.getColorStateList(getContext(), R.color.bgEditColor)
         );
+
+        child.setMaxLines(3);
 
         layout.addView(child);
     }

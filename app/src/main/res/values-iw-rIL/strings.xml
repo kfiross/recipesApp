@@ -53,7 +53,7 @@
     <string name="add_to_fav">המתכון הוסף למועדפים</string>
     <string name="removed_from_fav">המתכון הוסר מהמועדפים</string>
 
-    <string name="appetizers">ראשוניות</string>
+    <string name="appetizers">ראשונות</string>
     <string name="main_course">עיקריות</string>
     <string name="deserts">קינוחים</string>
 
@@ -66,5 +66,12 @@
     <string name="menu_settings">הגדרות</string>
     <string name="language">שפה</string>
     <string name="choose_language">בחר שפה</string>
+
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="ok">אוקיי</string>
+
+    <string name="title_remove_recipe">הסרת מתכון</string>
+    <string name="subtitle_remove_recipe">האם אתה בטוח שברצונך למחוק את המתכון לצמיתות?</string>
 
 </resources>

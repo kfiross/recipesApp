@@ -6,7 +6,6 @@
     <data>
 
         <import type="android.view.View"/>
-        <variable name="isRTL" type="Boolean" />
         <variable name="isMy" type="boolean" />
         <variable
             name="navController"
@@ -18,6 +17,7 @@
     </data>
 
     <RelativeLayout
+        android:layoutDirection="locale"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff"
@@ -56,11 +56,13 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_edit"
                     android:visibility="@{isMy ? View.VISIBLE : View.GONE}"
-                    android:backgroundTint="@android:color/transparent"
+                    android:background="@drawable/ripple"
                     />
 
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
@@ -71,6 +73,14 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
+                <ImageButton
+                    android:id="@+id/btn_remove"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete"
+                    android:visibility="@{isMy ? View.VISIBLE : View.GONE}"
+                    android:background="@drawable/ripple"
+                    />
 
             </LinearLayout>
 
