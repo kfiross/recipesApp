@@ -7,7 +7,7 @@
 
         <variable
             name="login"
-            type="com.foodiz.app.utils.LoginData" />
+            type="com.foodiz.app.helper.LoginData" />
 
         <variable
             name="isLoading"

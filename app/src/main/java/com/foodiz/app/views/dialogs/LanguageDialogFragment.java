@@ -18,7 +18,7 @@ import androidx.navigation.Navigation;
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.DialogLanguageFragmentBinding;
-import com.foodiz.app.utils.MediaQueryHelper;
+import com.foodiz.app.helper.MediaQueryHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class LanguageDialogFragment extends DialogFragment {

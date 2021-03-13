@@ -19,8 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentLoginBinding;
-import com.foodiz.app.utils.FirestoreUtils;
-import com.foodiz.app.utils.LoginData;
+import com.foodiz.app.helper.FirestoreUtils;
+import com.foodiz.app.helper.LoginData;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,4 +1,4 @@
-package com.foodiz.app.utils;
+package com.foodiz.app.helper;
 
 import android.text.Editable;
 import android.text.TextWatcher;

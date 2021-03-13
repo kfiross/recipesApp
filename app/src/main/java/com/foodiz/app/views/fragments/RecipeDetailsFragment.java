@@ -17,8 +17,8 @@ import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentRecipeDetailsBinding;
 import com.foodiz.app.model.Recipe;
-import com.foodiz.app.utils.FirestoreUtils;
-import com.foodiz.app.utils.UiUtils;
+import com.foodiz.app.helper.FirestoreUtils;
+import com.foodiz.app.helper.UiUtils;
 
 /**
  * A simple {@link Fragment} subclass.

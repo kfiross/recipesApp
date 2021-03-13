@@ -1,4 +1,4 @@
-package com.foodiz.app.utils.data_binding;
+package com.foodiz.app.helper.data_binding;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,7 +10,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.foodiz.app.utils.GlideApp;
+import com.foodiz.app.helper.GlideApp;
 
 
 public class GlideBindingAdapter {

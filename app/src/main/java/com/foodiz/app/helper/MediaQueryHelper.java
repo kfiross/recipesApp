@@ -1,4 +1,4 @@
-package com.foodiz.app.utils;
+package com.foodiz.app.helper;
 
 import android.app.Activity;
 import android.content.Context;

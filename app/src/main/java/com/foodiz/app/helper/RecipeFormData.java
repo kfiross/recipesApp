@@ -1,4 +1,4 @@
-package com.foodiz.app.utils;
+package com.foodiz.app.helper;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;

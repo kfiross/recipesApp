@@ -14,9 +14,9 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.foodiz.app.databinding.ActivityMainBinding;
-import com.foodiz.app.utils.FirestoreUtils;
-import com.foodiz.app.utils.SharedPreferencesConfig;
-import com.foodiz.app.utils.UiUtils;
+import com.foodiz.app.helper.FirestoreUtils;
+import com.foodiz.app.helper.SharedPreferencesConfig;
+import com.foodiz.app.helper.UiUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;

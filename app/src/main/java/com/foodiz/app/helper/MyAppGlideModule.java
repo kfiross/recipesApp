@@ -1,4 +1,4 @@
-package com.foodiz.app.utils;
+package com.foodiz.app.helper;
 
 //Class *MUST* be exist in project inorder to make upload image to WORK
 
