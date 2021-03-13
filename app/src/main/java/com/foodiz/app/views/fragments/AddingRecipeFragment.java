@@ -265,7 +265,6 @@ public class AddingRecipeFragment extends Fragment {
     private void cleanForm(){
         mBinding.formLayout.etName.setText("");
 
-
         for(int i=0; i<mBinding.formLayout.layoutIngredients.getChildCount(); i++){
             ((EditText)(mBinding.formLayout.layoutIngredients.getChildAt(i))).setText("");
         }
