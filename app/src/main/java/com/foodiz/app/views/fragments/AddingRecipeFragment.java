@@ -25,7 +25,6 @@ import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentAddingRecipeBinding;
 import com.foodiz.app.model.Recipe;
 import com.foodiz.app.utils.FirestoreUtils;
-import com.foodiz.app.utils.TextChangedListener;
 import com.foodiz.app.utils.UiUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -165,14 +164,6 @@ public class AddingRecipeFragment extends Fragment {
 
 
     private void setupForm() {
-        // listener to update name
-        mBinding.formLayout.etName.addTextChangedListener(new TextChangedListener() {
-            @Override
-            protected void onTextChanged(String before, String old, String aNew, String after) {
-                mBinding.getRecipe().setName(aNew);
-            }
-        });
-
         // add places to enter ingredients
         for(int i=0; i< mBinding.formLayout.getIngredientsCount(); i++) {
             addEditTextToLayout(mBinding.formLayout.layoutIngredients);
@@ -200,6 +191,9 @@ public class AddingRecipeFragment extends Fragment {
         if(recipe == null){
             recipe = new Recipe();
         }
+
+        // update name
+        recipe.setName(mBinding.formLayout.etName.getText().toString());
 
         // update ingredients
         for(int i=0; i<mBinding.formLayout.layoutIngredients.getChildCount();i++){
@@ -229,7 +223,7 @@ public class AddingRecipeFragment extends Fragment {
 
                 // upload an image in case user added one
                 if(mBinding.getImageUri() != null){
-                    final String imagePath = String.format("images/%s.jpg", newRecipeId);
+                    final String imagePath = String.format("photos/recipes/%s.jpg", newRecipeId);
                     FirestoreUtils.uploadPhoto(mBinding.getImageUri(), imagePath)
                             .addOnCompleteListener(task -> {
                                 StorageReference imageStorageRef =
@@ -251,14 +245,14 @@ public class AddingRecipeFragment extends Fragment {
                     if(task2.isSuccessful()){
                         UiUtils.showSnackbar(
                                 this.getView(),
-                                "Recipe Added!",
+                                getString(R.string.reciped_added),
                                 2500
                         );
                     }
                     else{
                         UiUtils.showSnackbar(
                                 this.getView(),
-                                "Recipe insert Failed",
+                                getString(R.string.recipe_insert_failed),
                                 2500
                         );
                     }

@@ -80,7 +80,20 @@ public class RecipeDetailsFragment extends Fragment {
                             }
 
                             public void onFinish() {
-                                FirestoreUtils.removeFromMyFavs(mSelectedRecipe.getId());
+                                FirestoreUtils.removeFromMyFavs(mSelectedRecipe.getId()).addOnSuccessListener(
+                                        command -> {
+                                            // pop back because this recipe doesn't exist anymore
+                                            NavController navController =
+                                                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+                                            navController.popBackStack();
+
+                                            // clear from local ids
+                                            MainActivity.preferencesConfig.removeIdFromMyRecipes(mSelectedRecipe.getId());
+
+                                            // remove from database
+                                            FirestoreUtils.deleteRecipe(mSelectedRecipe.getId());
+                                        }
+                                );
 
                             }
                         };

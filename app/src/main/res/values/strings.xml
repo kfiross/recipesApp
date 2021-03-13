@@ -83,7 +83,9 @@
 
     <string name="title_remove_recipe">Removing a recipe</string>
     <string name="subtitle_remove_recipe">Are you sure to remove this recipe?</string>
-
+    <string name="search_hint">Search for recipe or ingredient…</string>
+    <string name="reciped_added">Recipe Added!</string>
+    <string name="recipe_insert_failed">Recipe insert Failed</string>
 
 
 </resources>

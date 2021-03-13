@@ -73,5 +73,8 @@
 
     <string name="title_remove_recipe">הסרת מתכון</string>
     <string name="subtitle_remove_recipe">האם אתה בטוח שברצונך למחוק את המתכון לצמיתות?</string>
+    <string name="search_hint">חפשו שם של מתכון או מרכיב…</string>
+    <string name="reciped_added">המתכון הוסף!</string>
+    <string name="recipe_insert_failed">הכנסת המתכון נכשלה..</string>
 
 </resources>
