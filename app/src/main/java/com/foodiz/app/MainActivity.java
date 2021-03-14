@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private NavController mNavController;
     private ActivityMainBinding binding;
 
-
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.navigation_menu);
         navigationView.setSelectedItemId(R.id.nav_my_recipes);
-
-
-
     }
 
     @SuppressLint("NonConstantResourceId")

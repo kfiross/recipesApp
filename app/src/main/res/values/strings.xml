@@ -86,6 +86,8 @@
     <string name="search_hint">Search for recipe or ingredient…</string>
     <string name="reciped_added">Recipe Added!</string>
     <string name="recipe_insert_failed">Recipe insert Failed</string>
+    <string name="recipe_updated">Recipe updated!</string>
+    <string name="recipe_update_failed">Recipe update failed</string>
 
 
 </resources>

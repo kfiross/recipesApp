@@ -76,5 +76,7 @@
     <string name="search_hint">חפשו שם של מתכון או מרכיב…</string>
     <string name="reciped_added">המתכון הוסף!</string>
     <string name="recipe_insert_failed">הכנסת המתכון נכשלה..</string>
+    <string name="recipe_updated">המתכון עודכן!</string>
+    <string name="recipe_update_failed">עדכון המתכון נכשל...</string>
 
 </resources>

@@ -104,7 +104,7 @@ public class FirestoreUtils {
     public static Task<Void> updateRecipe(Recipe recipe){
         return FirebaseFirestore.getInstance().collection("recipes")
                 .document(recipe.getId())
-                .update(recipe.toJson());
+                .set(recipe.toJson());
     }
 
     public static Task<Void> deleteRecipe(String recipeId){

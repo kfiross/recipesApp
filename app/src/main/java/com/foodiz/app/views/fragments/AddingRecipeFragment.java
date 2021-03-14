@@ -23,9 +23,9 @@ import androidx.fragment.app.Fragment;
 import com.foodiz.app.MainActivity;
 import com.foodiz.app.R;
 import com.foodiz.app.databinding.FragmentAddingRecipeBinding;
-import com.foodiz.app.model.Recipe;
 import com.foodiz.app.helper.FirestoreUtils;
 import com.foodiz.app.helper.UiUtils;
+import com.foodiz.app.model.Recipe;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -126,7 +126,7 @@ public class AddingRecipeFragment extends Fragment {
 
 
     private void setupButtons() {
-        mBinding.btnAddRecipe.setOnClickListener(v -> addRecipe());
+        mBinding.btnAddRecipe.setOnClickListener(v -> addOrUpdateRecipe());
 
         mBinding.formLayout.btnAddPhoto.setOnClickListener(v -> uploadPhoto());
 
@@ -176,7 +176,8 @@ public class AddingRecipeFragment extends Fragment {
 
     }
 
-    private void addRecipe(){
+
+    private void addOrUpdateRecipe(){
         if(!checkForm()){
             UiUtils.showSnackbar(
                     this.getView(),
@@ -186,11 +187,7 @@ public class AddingRecipeFragment extends Fragment {
             return;
         }
 
-
-        Recipe recipe = mBinding.getRecipe();
-        if(recipe == null){
-            recipe = new Recipe();
-        }
+        Recipe recipe = new Recipe();
 
         // update name
         recipe.setName(mBinding.formLayout.etName.getText().toString());
@@ -214,52 +211,76 @@ public class AddingRecipeFragment extends Fragment {
             }
         }
 
-        // add to recipes
-        FirestoreUtils.addRecipe(recipe)
+        // adding a new recipe
+        if(!mBinding.getEditMode()) {
+            // add to recipes
+            FirestoreUtils.addRecipe(recipe)
 
-                .addOnCompleteListener(task1 -> {
-            if(task1.isSuccessful()) {
-                final String newRecipeId = task1.getResult().getId();
+                    .addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            final String newRecipeId = task1.getResult().getId();
 
-                // upload an image in case user added one
-                if(mBinding.getImageUri() != null){
-                    final String imagePath = String.format("photos/recipes/%s.jpg", newRecipeId);
-                    FirestoreUtils.uploadPhoto(mBinding.getImageUri(), imagePath)
-                            .addOnCompleteListener(task -> {
-                                StorageReference imageStorageRef =
-                                        FirebaseStorage.getInstance().getReference(imagePath);
-                                imageStorageRef.getDownloadUrl().addOnCompleteListener(taskUrl -> {
-                                    if(taskUrl.isSuccessful()){
-                                        FirebaseFirestore.getInstance().collection("recipes").document(newRecipeId)
-                                                .update("image", taskUrl.getResult().toString());
-                                    }
-                                });
+                            // upload an image in case user added one
+                            if (mBinding.getImageUri() != null) {
+                                final String imagePath = String.format("photos/recipes/%s.jpg", newRecipeId);
+                                FirestoreUtils.uploadPhoto(mBinding.getImageUri(), imagePath)
+                                        .addOnCompleteListener(task -> {
+                                            StorageReference imageStorageRef =
+                                                    FirebaseStorage.getInstance().getReference(imagePath);
+                                            imageStorageRef.getDownloadUrl().addOnCompleteListener(taskUrl -> {
+                                                if (taskUrl.isSuccessful()) {
+                                                    FirebaseFirestore.getInstance().collection("recipes").document(newRecipeId)
+                                                            .update("image", taskUrl.getResult().toString());
+                                                }
+                                            });
+                                        });
+                            }
+
+                            // keep cached updated
+                            MainActivity.preferencesConfig.addIdToMyRecipes(newRecipeId);
+
+                            // also update the user's document
+                            FirestoreUtils.addToMyRecipes(newRecipeId).addOnCompleteListener(task2 -> {
+                                if (task2.isSuccessful()) {
+                                    UiUtils.showSnackbar(
+                                            this.getView(),
+                                            getString(R.string.reciped_added),
+                                            2500
+                                    );
+                                } else {
+                                    UiUtils.showSnackbar(
+                                            this.getView(),
+                                            getString(R.string.recipe_insert_failed),
+                                            2500
+                                    );
+                                }
                             });
+                        }
+                    });
+
+            cleanForm();
+        }
+        // updating existing recipe
+        else{
+            recipe.setId(mBinding.getRecipe().getId());
+            recipe.setCategory(mBinding.getRecipe().getCategory());
+            FirestoreUtils.updateRecipe(recipe).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    UiUtils.showSnackbar(
+                            this.getView(),
+                            getString(R.string.recipe_updated),
+                            2500
+                    );
+                } else {
+                    UiUtils.showSnackbar(
+                            this.getView(),
+                            getString(R.string.recipe_update_failed),
+                            2500
+                    );
                 }
-
-                // keep cached updated
-                MainActivity.preferencesConfig.addIdToMyRecipes(newRecipeId);
-
-                // also update the user's document
-                FirestoreUtils.addToMyRecipes(newRecipeId).addOnCompleteListener(task2 -> {
-                    if(task2.isSuccessful()){
-                        UiUtils.showSnackbar(
-                                this.getView(),
-                                getString(R.string.reciped_added),
-                                2500
-                        );
-                    }
-                    else{
-                        UiUtils.showSnackbar(
-                                this.getView(),
-                                getString(R.string.recipe_insert_failed),
-                                2500
-                        );
-                    }
-                });
-            }
-        });
-        cleanForm();
+            });
+            mBinding.setRecipe(recipe);
+        }
     }
 
     private void cleanForm(){
