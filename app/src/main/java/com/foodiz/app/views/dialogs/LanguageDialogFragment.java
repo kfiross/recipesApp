@@ -114,7 +114,7 @@ public class LanguageDialogFragment extends DialogFragment {
         WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
 
         params.width = MediaQueryHelper.wp(getContext(), 90);
-        params.height = MediaQueryHelper.hp(getContext(), 33);
+        params.height = MediaQueryHelper.hp(getContext(), 37);
 
         getDialog().getWindow().setAttributes(params);
     }

@@ -211,6 +211,8 @@ public class AddingRecipeFragment extends Fragment {
             }
         }
 
+        recipe.setCategory(mBinding.getRecipe().getCategory());
+
         // adding a new recipe
         if(!mBinding.getEditMode()) {
             // add to recipes
@@ -263,7 +265,6 @@ public class AddingRecipeFragment extends Fragment {
         // updating existing recipe
         else{
             recipe.setId(mBinding.getRecipe().getId());
-            recipe.setCategory(mBinding.getRecipe().getCategory());
             FirestoreUtils.updateRecipe(recipe).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     UiUtils.showSnackbar(

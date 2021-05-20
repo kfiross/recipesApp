@@ -51,6 +51,7 @@ public class FirestoreUtils {
         if(uid == null) {
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
+
         HashMap<String, Object> map = new HashMap<>();
         map.put("favourites", new ArrayList<String>());
         return FirebaseFirestore.getInstance()
